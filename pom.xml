@@ -6,11 +6,16 @@
 
     <groupId>me.hao0</groupId>
     <artifactId>wechat</artifactId>
-    <version>1.9.2</version>
+    <version>1.9.2.WMEIMOB.1</version>
 
     <name>wechat</name>
     <description>A Lightweight Wechat Component</description>
     <url>https://github.com/ihaolin/wechat</url>
+
+<properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+</properties>
 
     <dependencies>
 

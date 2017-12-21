@@ -3,6 +3,7 @@ package me.hao0.wechat.model.data.user;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import me.hao0.wechat.serializer.UserSourceDeserializer;
+
 import java.io.Serializable;
 
 /**

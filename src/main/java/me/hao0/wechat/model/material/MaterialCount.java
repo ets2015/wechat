@@ -1,6 +1,7 @@
 package me.hao0.wechat.model.material;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 
 /**

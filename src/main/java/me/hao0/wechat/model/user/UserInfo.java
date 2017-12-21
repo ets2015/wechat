@@ -1,6 +1,7 @@
 package me.hao0.wechat.model.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 import java.util.Arrays;
 

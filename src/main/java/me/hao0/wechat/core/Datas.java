@@ -2,12 +2,8 @@ package me.hao0.wechat.core;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.google.common.collect.Maps;
-import me.hao0.wechat.model.data.article.ArticleDailySummary;
-import me.hao0.wechat.model.data.article.ArticleShare;
-import me.hao0.wechat.model.data.article.ArticleShareHour;
-import me.hao0.wechat.model.data.article.ArticleSummary;
-import me.hao0.wechat.model.data.article.ArticleSummaryHour;
-import me.hao0.wechat.model.data.article.ArticleTotal;
+import me.hao0.common.json.Jsons;
+import me.hao0.wechat.model.data.article.*;
 import me.hao0.wechat.model.data.interfaces.InterfaceSummary;
 import me.hao0.wechat.model.data.interfaces.InterfaceSummaryHour;
 import me.hao0.wechat.model.data.msg.MsgSendDist;
@@ -15,11 +11,12 @@ import me.hao0.wechat.model.data.msg.MsgSendSummary;
 import me.hao0.wechat.model.data.msg.MsgSendSummaryHour;
 import me.hao0.wechat.model.data.user.UserCumulate;
 import me.hao0.wechat.model.data.user.UserSummary;
-import me.hao0.common.json.Jsons;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import static me.hao0.common.util.Preconditions.*;
+
+import static me.hao0.common.util.Preconditions.checkNotNullAndEmpty;
 
 /**
  * 数据统计组件

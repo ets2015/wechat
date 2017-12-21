@@ -1,4 +1,6 @@
-package me.hao0.wechat.model.message.receive.event;
+package me.hao0.wechat.model.message.receive.event.menu;
+
+import me.hao0.wechat.model.message.receive.event.RecvEvent;
 
 /**
  * 菜单事件
@@ -16,15 +18,7 @@ public class RecvMenuEvent extends RecvEvent {
 
     public RecvMenuEvent(RecvEvent e){
         super(e);
-        this.eventType = e.eventType;
-    }
-
-    @Override
-    public String getEventType() {
-        if ("CLICK".equalsIgnoreCase(eventType)){
-            return RecvEventType.MENU_CLICK.value();
-        }
-        return RecvEventType.MENU_VIEW.value();
+        this.eventType = e.getEventType();
     }
 
     public String getEventKey() {

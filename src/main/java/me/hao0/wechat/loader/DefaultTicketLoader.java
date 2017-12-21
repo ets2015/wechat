@@ -3,6 +3,7 @@ package me.hao0.wechat.loader;
 import com.google.common.base.Strings;
 import me.hao0.wechat.model.js.Ticket;
 import me.hao0.wechat.model.js.TicketType;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 

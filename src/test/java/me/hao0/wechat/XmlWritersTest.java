@@ -2,7 +2,8 @@ package me.hao0.wechat;
 
 import me.hao0.wechat.utils.XmlWriters;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Author: haolin

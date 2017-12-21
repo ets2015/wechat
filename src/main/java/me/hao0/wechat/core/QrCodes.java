@@ -1,18 +1,18 @@
 package me.hao0.wechat.core;
 
 import com.google.common.collect.Maps;
-
+import me.hao0.common.json.Jsons;
+import me.hao0.common.util.Strings;
 import me.hao0.wechat.exception.WechatException;
 import me.hao0.wechat.model.qrcode.Qrcode;
 import me.hao0.wechat.model.qrcode.QrcodeType;
-import me.hao0.common.json.Jsons;
-import me.hao0.common.util.Strings;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Map;
 
-import static me.hao0.common.util.Preconditions.*;
+import static me.hao0.common.util.Preconditions.checkArgument;
+import static me.hao0.common.util.Preconditions.checkNotNullAndEmpty;
 
 /**
  * 二维码组件

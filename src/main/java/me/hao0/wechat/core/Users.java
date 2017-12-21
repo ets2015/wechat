@@ -9,9 +9,11 @@ import me.hao0.wechat.model.user.Group;
 import me.hao0.wechat.model.user.User;
 import me.hao0.wechat.model.user.UserInfo;
 import me.hao0.wechat.model.user.UserList;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import static me.hao0.common.util.Preconditions.checkArgument;
 import static me.hao0.common.util.Preconditions.checkNotNullAndEmpty;
 

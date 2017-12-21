@@ -5,8 +5,11 @@ import com.google.common.hash.Hashing;
 import me.hao0.wechat.model.js.Config;
 import me.hao0.wechat.model.js.Ticket;
 import me.hao0.wechat.model.js.TicketType;
+
 import java.util.Map;
-import static me.hao0.common.util.Preconditions.*;
+
+import static me.hao0.common.util.Preconditions.checkNotNull;
+import static me.hao0.common.util.Preconditions.checkNotNullAndEmpty;
 
 /**
  * JS-SDK组件

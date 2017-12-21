@@ -1,6 +1,7 @@
 package me.hao0.wechat.utils;
 
 import me.hao0.wechat.exception.XmlException;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;

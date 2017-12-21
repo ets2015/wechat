@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import me.hao0.wechat.model.data.article.ArticleSource;
+
 import java.io.IOException;
 
 /**

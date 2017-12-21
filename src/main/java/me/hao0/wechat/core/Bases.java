@@ -5,11 +5,13 @@ import me.hao0.wechat.exception.WechatException;
 import me.hao0.wechat.model.base.AccessToken;
 import me.hao0.wechat.model.base.AuthAccessToken;
 import me.hao0.wechat.model.base.AuthType;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
-import static me.hao0.common.util.Preconditions.*;
+
+import static me.hao0.common.util.Preconditions.checkNotNullAndEmpty;
 
 /**
  * 基础组件

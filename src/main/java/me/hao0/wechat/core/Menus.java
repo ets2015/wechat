@@ -1,12 +1,14 @@
 package me.hao0.wechat.core;
 
 import com.fasterxml.jackson.databind.JavaType;
-import me.hao0.wechat.model.menu.Menu;
 import me.hao0.common.json.Jsons;
+import me.hao0.wechat.model.menu.Menu;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import static me.hao0.common.util.Preconditions.*;
+
+import static me.hao0.common.util.Preconditions.checkNotNullAndEmpty;
 
 /**
  * 菜单组件

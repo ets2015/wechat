@@ -5,35 +5,19 @@ import com.google.common.collect.Maps;
 import me.hao0.common.xml.XmlReaders;
 import me.hao0.wechat.model.message.receive.RecvMessage;
 import me.hao0.wechat.model.message.receive.RecvMessageType;
-import me.hao0.wechat.model.message.receive.event.RecvEvent;
-import me.hao0.wechat.model.message.receive.event.RecvEventType;
-import me.hao0.wechat.model.message.receive.event.RecvLocationEvent;
-import me.hao0.wechat.model.message.receive.event.RecvMenuEvent;
-import me.hao0.wechat.model.message.receive.event.RecvScanEvent;
-import me.hao0.wechat.model.message.receive.event.RecvSubscribeEvent;
-import me.hao0.wechat.model.message.receive.event.RecvTemplateSendJobFinishEvent;
-import me.hao0.wechat.model.message.receive.event.RecvUnSubscribeEvent;
-import me.hao0.wechat.model.message.receive.event.RecvUnknownEvent;
-import me.hao0.wechat.model.message.receive.msg.RecvImageMessage;
-import me.hao0.wechat.model.message.receive.msg.RecvLinkMessage;
-import me.hao0.wechat.model.message.receive.msg.RecvLocationMessage;
-import me.hao0.wechat.model.message.receive.msg.RecvMsg;
-import me.hao0.wechat.model.message.receive.msg.RecvShortVideoMessage;
-import me.hao0.wechat.model.message.receive.msg.RecvTextMessage;
-import me.hao0.wechat.model.message.receive.msg.RecvVideoMessage;
-import me.hao0.wechat.model.message.receive.msg.RecvVoiceMessage;
+import me.hao0.wechat.model.message.receive.event.*;
+import me.hao0.wechat.model.message.receive.event.menu.RecvMenuEvent;
+import me.hao0.wechat.model.message.receive.msg.*;
 import me.hao0.wechat.model.message.resp.Article;
 import me.hao0.wechat.model.message.resp.RespMessageType;
-import me.hao0.wechat.model.message.send.SendMessage;
-import me.hao0.wechat.model.message.send.SendMessageScope;
-import me.hao0.wechat.model.message.send.SendMessageType;
-import me.hao0.wechat.model.message.send.SendPreviewMessage;
-import me.hao0.wechat.model.message.send.TemplateField;
+import me.hao0.wechat.model.message.send.*;
 import me.hao0.wechat.utils.XmlWriters;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import static me.hao0.common.util.Preconditions.*;
 
 /**

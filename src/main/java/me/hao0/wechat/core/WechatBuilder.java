@@ -2,8 +2,11 @@ package me.hao0.wechat.core;
 
 import me.hao0.wechat.loader.AccessTokenLoader;
 import me.hao0.wechat.loader.TicketLoader;
+
 import java.util.concurrent.ExecutorService;
-import static me.hao0.common.util.Preconditions.*;
+
+import static me.hao0.common.util.Preconditions.checkNotNull;
+import static me.hao0.common.util.Preconditions.checkNotNullAndEmpty;
 
 /**
  * 微信组件库配置构建器

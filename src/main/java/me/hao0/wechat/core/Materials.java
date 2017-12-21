@@ -6,24 +6,14 @@ import me.hao0.common.http.Http;
 import me.hao0.common.json.Jsons;
 import me.hao0.common.model.Page;
 import me.hao0.wechat.exception.WechatException;
-import me.hao0.wechat.model.material.CommonMaterial;
-import me.hao0.wechat.model.material.MaterialCount;
-import me.hao0.wechat.model.material.MaterialType;
-import me.hao0.wechat.model.material.MaterialUploadType;
-import me.hao0.wechat.model.material.NewsContentItem;
-import me.hao0.wechat.model.material.NewsMaterial;
-import me.hao0.wechat.model.material.PermMaterial;
-import me.hao0.wechat.model.material.TempMaterial;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import me.hao0.wechat.model.material.*;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
 import static me.hao0.common.util.Preconditions.*;
 
 /**

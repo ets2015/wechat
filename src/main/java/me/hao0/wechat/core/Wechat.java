@@ -16,6 +16,7 @@ import me.hao0.wechat.loader.TicketLoader;
 import me.hao0.wechat.model.base.AccessToken;
 import me.hao0.wechat.model.js.Ticket;
 import me.hao0.wechat.model.js.TicketType;
+
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.Map;

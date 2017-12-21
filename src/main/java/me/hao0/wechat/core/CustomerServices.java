@@ -8,17 +8,12 @@ import me.hao0.wechat.model.customer.CsSession;
 import me.hao0.wechat.model.customer.MsgRecord;
 import me.hao0.wechat.model.customer.UserSession;
 import me.hao0.wechat.model.customer.WaitingSession;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import static me.hao0.common.util.Preconditions.*;
+
+import java.io.*;
+import java.util.*;
+
+import static me.hao0.common.util.Preconditions.checkNotNull;
+import static me.hao0.common.util.Preconditions.checkNotNullAndEmpty;
 
 /**
  * 多客服组件
