@@ -9,7 +9,7 @@ package me.hao0.wechat.model.message.receive.event;
 public class RecvUnSubscribeEvent extends RecvEvent {
 
 
-    public RecvUnSubscribeEvent(RecvEvent e){
+    public RecvUnSubscribeEvent(RecvEvent e) {
         super(e);
         this.eventType = e.eventType;
     }

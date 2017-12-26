@@ -17,18 +17,19 @@ public class RecvMsg extends RecvMessage {
      */
     protected Long msgId;
 
+    public RecvMsg() {
+    }
+
+    public RecvMsg(RecvMessage e) {
+        super(e);
+    }
+
     public Long getMsgId() {
         return msgId;
     }
 
     public void setMsgId(Long msgId) {
         this.msgId = msgId;
-    }
-
-    public RecvMsg(){}
-
-    public RecvMsg(RecvMessage e){
-        super(e);
     }
 
     @Override

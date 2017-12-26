@@ -3,7 +3,7 @@ package me.hao0.wechat.model.base;
 /**
  * 授权类型
  */
-public enum AuthType{
+public enum AuthType {
 
     BASE("snsapi_base"),
 
@@ -11,11 +11,11 @@ public enum AuthType{
 
     private String scope;
 
-    private AuthType(String scope){
+    private AuthType(String scope) {
         this.scope = scope;
     }
 
-    public String scope(){
+    public String scope() {
         return scope;
     }
 }

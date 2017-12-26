@@ -54,6 +54,16 @@ public class UserList {
         this.data = data;
     }
 
+    @Override
+    public String toString() {
+        return "Users{" +
+                "total=" + total +
+                ", count=" + count +
+                ", data=" + data +
+                ", nextOpenId='" + nextOpenId + '\'' +
+                '}';
+    }
+
     public class UserListRecord {
         @JsonProperty("openid")
         private List<String> openId;
@@ -65,15 +75,5 @@ public class UserList {
         public void setOpenId(List<String> openId) {
             this.openId = openId;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Users{" +
-                "total=" + total +
-                ", count=" + count +
-                ", data=" + data +
-                ", nextOpenId='" + nextOpenId + '\'' +
-                '}';
     }
 }

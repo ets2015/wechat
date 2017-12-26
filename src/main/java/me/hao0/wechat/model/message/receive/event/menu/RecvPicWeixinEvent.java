@@ -1,7 +1,10 @@
 package me.hao0.wechat.model.message.receive.event.menu;
 
+import me.hao0.wechat.model.message.receive.event.RecvEventType;
+
 /**
  * 弹出微信相册发图器的事件推送
+ *
  * @author Shinez.
  */
 public class RecvPicWeixinEvent extends RecvPicSysphotoEvent {
@@ -16,7 +19,7 @@ public class RecvPicWeixinEvent extends RecvPicSysphotoEvent {
 
     @Override
     public String getEventType() {
-        return RecvMenuEventType.PIC_WEIXIN.value();
+        return RecvEventType.PIC_WEIXIN.value();
     }
 
 }

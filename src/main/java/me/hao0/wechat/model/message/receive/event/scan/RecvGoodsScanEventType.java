@@ -5,6 +5,7 @@ import java.util.Objects;
 
 /**
  * 微信扫一扫事件类型
+ *
  * @author Shinez.
  */
 public enum RecvGoodsScanEventType {
@@ -43,10 +44,6 @@ public enum RecvGoodsScanEventType {
         this.desc = desc;
     }
 
-    public String value() {
-        return value;
-    }
-
     public static RecvGoodsScanEventType from(String type) {
         for (RecvGoodsScanEventType t : RecvGoodsScanEventType.values()) {
             if (Objects.equals(t.value(), type)) {
@@ -55,6 +52,10 @@ public enum RecvGoodsScanEventType {
         }
 
         return UNKNOW;
+    }
+
+    public String value() {
+        return value;
     }
 
     @Override

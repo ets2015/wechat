@@ -7,6 +7,7 @@ import java.io.Serializable;
  * Author: haolin
  * Email: haolin.h0@gmail.com
  * Date: 14/11/15
+ *
  * @see TicketType
  */
 public class Ticket implements Serializable {

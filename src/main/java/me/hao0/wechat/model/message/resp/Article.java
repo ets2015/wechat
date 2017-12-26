@@ -26,7 +26,8 @@ public class Article implements Serializable {
      */
     private String url;
 
-    public Article(){}
+    public Article() {
+    }
 
     public Article(String title, String desc, String picUrl, String url) {
         this.title = title;

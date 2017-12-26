@@ -12,7 +12,7 @@ public class RecvShortVideoMessage extends RecvVideoMessage {
 
     private static final long serialVersionUID = 4589295453710532536L;
 
-    public RecvShortVideoMessage(RecvMsg m){
+    public RecvShortVideoMessage(RecvMsg m) {
         super(m);
         this.msgId = m.msgId;
     }

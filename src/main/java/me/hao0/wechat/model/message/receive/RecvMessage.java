@@ -27,13 +27,15 @@ public class RecvMessage implements Serializable {
 
     /**
      * 消息类型:
+     *
      * @see me.hao0.wechat.model.message.resp.RespMessageType
      */
     protected String msgType;
 
-    public RecvMessage(){}
+    public RecvMessage() {
+    }
 
-    public RecvMessage(RecvMessage m){
+    public RecvMessage(RecvMessage m) {
         this.toUserName = m.toUserName;
         this.fromUserName = m.fromUserName;
         this.createTime = m.createTime;
@@ -64,12 +66,12 @@ public class RecvMessage implements Serializable {
         this.createTime = createTime;
     }
 
-    public void setMsgType(String msgType) {
-        this.msgType = msgType;
+    public String getMsgType() {
+        return this.msgType;
     }
 
-    public String getMsgType(){
-        return this.msgType;
+    public void setMsgType(String msgType) {
+        this.msgType = msgType;
     }
 
     @Override

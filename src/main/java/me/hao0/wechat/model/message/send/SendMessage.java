@@ -15,13 +15,15 @@ public class SendMessage implements Serializable {
 
     /**
      * 消息类型:
-     *  @see SendMessageType
+     *
+     * @see SendMessageType
      */
     private SendMessageType type;
 
     /**
      * 发送范围
-     *  @see SendMessageScope
+     *
+     * @see SendMessageScope
      */
     private SendMessageScope scope;
 

@@ -20,16 +20,16 @@ public enum RespMessageType {
 
     private String desc;
 
-    private RespMessageType(String value, String desc){
+    private RespMessageType(String value, String desc) {
         this.value = value;
         this.desc = desc;
     }
 
-    public String value(){
+    public String value() {
         return value;
     }
 
-    public String desc(){
+    public String desc() {
         return desc;
     }
 }

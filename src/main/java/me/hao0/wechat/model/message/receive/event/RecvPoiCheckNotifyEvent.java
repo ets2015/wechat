@@ -2,37 +2,33 @@ package me.hao0.wechat.model.message.receive.event;
 
 /**
  * 门店审核事件推送
- *  @author Shinez.
+ *
+ * @author Shinez.
  */
 public class RecvPoiCheckNotifyEvent extends RecvEvent {
 
-    private static final long serialVersionUID = 50677774486229911L;
-
-    public RecvPoiCheckNotifyEvent(){}
-    public RecvPoiCheckNotifyEvent(RecvEvent e) {
-        super(e);
-        this.eventType = e.getEventType();
-    }
-
+    private static final long serialVersionUID = 50677774466229911L;
     /**
      * 商户自己内部ID，即字段中的sid
      */
     private String uniqId;
-
     /**
      * 微信的门店ID，微信内门店唯一标示ID
      */
     private String poiId;
-
     /**
      * 审核结果，成功succ 或失败fail
      */
     private String result;
-
     /**
-     *  成功的通知信息，或审核失败的驳回理由
+     * 成功的通知信息，或审核失败的驳回理由
      */
     private String msg;
+
+    public RecvPoiCheckNotifyEvent(RecvEvent e) {
+        super(e);
+        this.eventType = e.getEventType();
+    }
 
     public String getUniqId() {
         return uniqId;

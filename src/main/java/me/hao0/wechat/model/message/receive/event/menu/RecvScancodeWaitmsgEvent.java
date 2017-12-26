@@ -1,7 +1,10 @@
 package me.hao0.wechat.model.message.receive.event.menu;
 
+import me.hao0.wechat.model.message.receive.event.RecvEventType;
+
 /**
  * 扫码推事件且弹出“消息接收中”提示框 事件推送
+ *
  * @author Shinez.
  */
 public class RecvScancodeWaitmsgEvent extends RecvScancodePushEvent {
@@ -16,7 +19,7 @@ public class RecvScancodeWaitmsgEvent extends RecvScancodePushEvent {
 
     @Override
     public String getEventType() {
-        return RecvMenuEventType.SCANCODE_WAITMSG.value();
+        return RecvEventType.SCANCODE_WAITMSG.value();
     }
 
 }

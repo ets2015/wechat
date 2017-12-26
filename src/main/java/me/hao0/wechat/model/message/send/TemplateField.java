@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Email: haolin.h0@gmail.com
  * Date: 8/11/15
  */
-public class TemplateField implements Serializable{
+public class TemplateField implements Serializable {
 
     private static final long serialVersionUID = 8228081012066368310L;
 
@@ -27,7 +27,8 @@ public class TemplateField implements Serializable{
      */
     private String color;
 
-    public TemplateField(){}
+    public TemplateField() {
+    }
 
 
     public TemplateField(String name, String value, String color) {

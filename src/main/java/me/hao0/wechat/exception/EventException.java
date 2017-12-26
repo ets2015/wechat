@@ -5,6 +5,7 @@ package me.hao0.wechat.exception;
  * Author: haolin
  * Email: haolin.h0@gmail.com
  * Date: 5/11/15
+ *
  * @see me.hao0.wechat.model.message.receive.event.RecvEventType#from
  * @since 1.4.0
  */

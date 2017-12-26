@@ -19,16 +19,16 @@ public enum SendMessageType {
 
     private String desc;
 
-    private SendMessageType(String value, String desc){
+    private SendMessageType(String value, String desc) {
         this.value = value;
         this.desc = desc;
     }
 
-    public String value(){
+    public String value() {
         return value;
     }
 
-    public String desc(){
+    public String desc() {
         return desc;
     }
 }

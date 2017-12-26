@@ -7,6 +7,7 @@ import java.util.Map;
  * Author: haolin
  * Email: haolin.h0@gmail.com
  * Date: 5/11/15
+ *
  * @since 1.0.0
  */
 public class WechatException extends RuntimeException {
@@ -18,7 +19,7 @@ public class WechatException extends RuntimeException {
 
     public WechatException(Map<String, ?> errMap) {
         super("[" + errMap.get("errcode") + "]" + errMap.get("errmsg"));
-        code = (Integer)errMap.get("errcode");
+        code = (Integer) errMap.get("errcode");
     }
 
     public WechatException() {

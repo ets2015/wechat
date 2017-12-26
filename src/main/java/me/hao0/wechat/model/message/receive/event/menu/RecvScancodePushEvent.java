@@ -1,23 +1,50 @@
 package me.hao0.wechat.model.message.receive.event.menu;
 
+import me.hao0.wechat.model.message.receive.event.RecvEventType;
+
 /**
  * 扫码推事件的事件推送
+ *
  * @author Shinez.
  */
 public class RecvScancodePushEvent extends RecvMenuEvent {
 
 
     private static final long serialVersionUID = 7225852830693739857L;
+    /**
+     * 扫描信息
+     */
+    private ScanCodeInfo scanCodeInfo;
+    /**
+     * 事件KEY值，由开发者在创建菜单时设定
+     */
+    private String eventKey;
 
     public RecvScancodePushEvent(RecvMenuEvent e) {
         super(e);
         this.eventType = e.getEventType();
     }
 
-    /**
-     * 扫描信息
-     */
-    private ScanCodeInfo scanCodeInfo;
+    public String getEventKey() {
+        return eventKey;
+    }
+
+    public void setEventKey(String eventKey) {
+        this.eventKey = eventKey;
+    }
+
+    public ScanCodeInfo getScanCodeInfo() {
+        return scanCodeInfo;
+    }
+
+    public void setScanCodeInfo(ScanCodeInfo scanCodeInfo) {
+        this.scanCodeInfo = scanCodeInfo;
+    }
+
+    @Override
+    public String getEventType() {
+        return RecvEventType.SCANCODE_PUSH.value();
+    }
 
     /**
      * 扫描信息
@@ -49,33 +76,6 @@ public class RecvScancodePushEvent extends RecvMenuEvent {
         public void setScanResult(String scanResult) {
             this.scanResult = scanResult;
         }
-    }
-
-
-    /**
-     * 事件KEY值，由开发者在创建菜单时设定
-     */
-    private String eventKey;
-
-    public String getEventKey() {
-        return eventKey;
-    }
-
-    public void setEventKey(String eventKey) {
-        this.eventKey = eventKey;
-    }
-
-    public ScanCodeInfo getScanCodeInfo() {
-        return scanCodeInfo;
-    }
-
-    public void setScanCodeInfo(ScanCodeInfo scanCodeInfo) {
-        this.scanCodeInfo = scanCodeInfo;
-    }
-
-    @Override
-    public String getEventType() {
-        return RecvMenuEventType.SCANCODE_PUSH.value();
     }
 
 }

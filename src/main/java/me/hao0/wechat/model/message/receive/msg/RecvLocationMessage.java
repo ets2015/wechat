@@ -32,7 +32,7 @@ public class RecvLocationMessage extends RecvMsg {
      */
     private String label;
 
-    public RecvLocationMessage(RecvMsg m){
+    public RecvLocationMessage(RecvMsg m) {
         super(m);
         this.msgId = m.msgId;
     }

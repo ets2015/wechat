@@ -27,7 +27,7 @@ public class RecvLinkMessage extends RecvMsg {
      */
     private String url;
 
-    public RecvLinkMessage(RecvMsg m){
+    public RecvLinkMessage(RecvMsg m) {
         super(m);
         this.msgId = m.msgId;
     }

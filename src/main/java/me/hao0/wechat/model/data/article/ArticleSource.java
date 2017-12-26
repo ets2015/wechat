@@ -42,20 +42,20 @@ public enum ArticleSource {
 
     private Integer value;
 
-    private ArticleSource(Integer scope){
+    private ArticleSource(Integer scope) {
         this.value = scope;
     }
 
-    public Integer value(){
-        return value;
-    }
-
-    public static ArticleSource from(Integer s){
-        for (ArticleSource source : ArticleSource.values()){
-            if (Objects.equal(source.value(), s)){
+    public static ArticleSource from(Integer s) {
+        for (ArticleSource source : ArticleSource.values()) {
+            if (Objects.equal(source.value(), s)) {
                 return source;
             }
         }
         return OTHER;
+    }
+
+    public Integer value() {
+        return value;
     }
 }

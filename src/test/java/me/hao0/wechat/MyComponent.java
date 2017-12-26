@@ -9,7 +9,7 @@ import me.hao0.wechat.core.Component;
  */
 public class MyComponent extends Component {
 
-    public String getAppId(){
+    public String getAppId() {
         return wechat.getAppId();
     }
 }

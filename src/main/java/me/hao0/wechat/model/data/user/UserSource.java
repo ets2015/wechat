@@ -41,20 +41,20 @@ public enum UserSource {
 
     private Integer value;
 
-    private UserSource(Integer scope){
+    private UserSource(Integer scope) {
         this.value = scope;
     }
 
-    public Integer value(){
-        return value;
-    }
-
-    public static UserSource from(Integer s){
-        for (UserSource source : UserSource.values()){
-            if (Objects.equal(source.value(), s)){
+    public static UserSource from(Integer s) {
+        for (UserSource source : UserSource.values()) {
+            if (Objects.equal(source.value(), s)) {
                 return source;
             }
         }
         throw new IllegalArgumentException("非法的用户渠道: " + s);
+    }
+
+    public Integer value() {
+        return value;
     }
 }

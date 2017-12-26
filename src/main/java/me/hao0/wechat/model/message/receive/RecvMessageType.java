@@ -21,7 +21,8 @@ public enum RecvMessageType {
     LINK("link", "链接信息"),
     /**
      * 接收到微信服务器的事件消息:
-     *  @see me.hao0.wechat.model.message.receive.event.RecvEventType
+     *
+     * @see me.hao0.wechat.model.message.receive.event.RecvEventType
      */
     EVENT("event", "事件消息");
 
@@ -29,26 +30,26 @@ public enum RecvMessageType {
 
     private String desc;
 
-    private RecvMessageType(String value, String desc){
+    private RecvMessageType(String value, String desc) {
         this.value = value;
         this.desc = desc;
     }
 
-    public String value(){
-        return value;
-    }
-
-    public String desc(){
-        return desc;
-    }
-
-    public static RecvMessageType from(String type){
-        for (RecvMessageType t : RecvMessageType.values()){
-            if (Objects.equals(t.value(), type)){
+    public static RecvMessageType from(String type) {
+        for (RecvMessageType t : RecvMessageType.values()) {
+            if (Objects.equals(t.value(), type)) {
                 return t;
             }
         }
         throw new EventException("unknown message type");
+    }
+
+    public String value() {
+        return value;
+    }
+
+    public String desc() {
+        return desc;
     }
 
     @Override

@@ -13,22 +13,24 @@ public class RecvEvent extends RecvMessage {
 
     /**
      * 事件类型:
+     *
      * @see RecvEvent
      */
     protected String eventType;
 
-    public RecvEvent(){}
+    public RecvEvent() {
+    }
 
-    public RecvEvent(RecvMessage e){
+    public RecvEvent(RecvMessage e) {
         super(e);
     }
 
-    public void setEventType(String eventType){
-        this.eventType = eventType;
+    public String getEventType() {
+        return this.eventType;
     }
 
-    public String getEventType(){
-        return this.eventType;
+    public void setEventType(String eventType) {
+        this.eventType = eventType;
     }
 
     @Override

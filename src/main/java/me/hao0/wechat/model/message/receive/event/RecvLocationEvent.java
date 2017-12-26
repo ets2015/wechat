@@ -23,7 +23,7 @@ public class RecvLocationEvent extends RecvEvent {
      */
     private String precision;
 
-    public RecvLocationEvent(RecvEvent e){
+    public RecvLocationEvent(RecvEvent e) {
         super(e);
         this.eventType = e.eventType;
     }

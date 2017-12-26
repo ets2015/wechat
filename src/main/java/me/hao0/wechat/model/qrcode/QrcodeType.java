@@ -16,7 +16,7 @@ public enum QrcodeType {
      * 永久二维码，最多100000个
      */
     QR_LIMIT_SCENE("QR_LIMIT_SCENE"),
-    
+
     /**
      * 永久二维码，字符串类型，长度限制为1到64
      */
@@ -24,11 +24,11 @@ public enum QrcodeType {
 
     private String value;
 
-    private QrcodeType(String value){
+    private QrcodeType(String value) {
         this.value = value;
     }
 
-    public String value(){
+    public String value() {
         return value;
     }
 }

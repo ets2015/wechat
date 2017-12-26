@@ -8,6 +8,7 @@ import me.hao0.wechat.model.base.AccessToken;
  * Author: haolin
  * Email: haolin.h0@gmail.com
  * Date: 10/11/15
+ *
  * @since 1.3.0
  */
 public class DefaultAccessTokenLoader implements AccessTokenLoader {

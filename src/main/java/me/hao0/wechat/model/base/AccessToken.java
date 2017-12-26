@@ -7,6 +7,7 @@ import java.io.Serializable;
  * Author: haolin
  * Email: haolin.h0@gmail.com
  * Date: 10/11/15
+ *
  * @since 1.0.0
  */
 public class AccessToken implements Serializable {

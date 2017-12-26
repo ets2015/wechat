@@ -8,9 +8,10 @@ import java.io.Serializable;
  * 用户同意授权后，通过code获取的访问Token
  * Author: haolin
  * Email: haolin.h0@gmail.com
+ *
  * @since 1.9.1
  * <p>
- *     <a href="http://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html" target="_blank">参考链接</a>
+ * <a href="http://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html" target="_blank">参考链接</a>
  * </p>
  */
 public class AuthAccessToken implements Serializable {
@@ -43,7 +44,7 @@ public class AuthAccessToken implements Serializable {
     /**
      * 只有在用户将公众号绑定到微信开放平台帐号后，才会出现该字段。
      * <p>
-     *     <a href="https://open.weixin.qq.com/cgi-bin/frame?t=resource/res_main_tmpl&lang=zh_CN&target=res/app_wx_login" target="_blank">详见</a>
+     * <a href="https://open.weixin.qq.com/cgi-bin/frame?t=resource/res_main_tmpl&lang=zh_CN&target=res/app_wx_login" target="_blank">详见</a>
      * </p>
      */
     @JsonProperty("unionid")

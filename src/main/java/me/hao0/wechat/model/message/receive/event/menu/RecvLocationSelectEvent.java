@@ -1,23 +1,25 @@
 package me.hao0.wechat.model.message.receive.event.menu;
 
+import me.hao0.wechat.model.message.receive.event.RecvEventType;
+
 /**
  * 弹出地理位置选择器的事件推送
+ *
  * @author Shinez.
  */
 public class RecvLocationSelectEvent extends RecvMenuEvent {
 
 
     private static final long serialVersionUID = 5696375686747195933L;
+    /**
+     * 发送的位置信息
+     */
+    private SendLocationInfo sendLocationInfo;
 
     public RecvLocationSelectEvent(RecvMenuEvent e) {
         super(e);
         this.eventType = e.getEventType();
     }
-
-    /**
-     * 发送的位置信息
-     */
-    private SendLocationInfo sendLocationInfo;
 
     public SendLocationInfo getSendLocationInfo() {
         return sendLocationInfo;
@@ -25,6 +27,11 @@ public class RecvLocationSelectEvent extends RecvMenuEvent {
 
     public void setSendLocationInfo(SendLocationInfo sendLocationInfo) {
         this.sendLocationInfo = sendLocationInfo;
+    }
+
+    @Override
+    public String getEventType() {
+        return RecvEventType.LOCATION_SELECT.value();
     }
 
     /**
@@ -98,11 +105,6 @@ public class RecvLocationSelectEvent extends RecvMenuEvent {
         public void setPoiname(String poiname) {
             this.poiname = poiname;
         }
-    }
-
-    @Override
-    public String getEventType() {
-        return RecvMenuEventType.LOCATION_SELECT.value();
     }
 
 }

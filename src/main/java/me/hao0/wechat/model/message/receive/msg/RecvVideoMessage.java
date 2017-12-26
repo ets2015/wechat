@@ -22,7 +22,7 @@ public class RecvVideoMessage extends RecvMsg {
      */
     private String thumbMediaId;
 
-    public RecvVideoMessage(RecvMsg m){
+    public RecvVideoMessage(RecvMsg m) {
         super(m);
         this.msgId = m.msgId;
     }

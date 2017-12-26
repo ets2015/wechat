@@ -17,12 +17,12 @@ public enum MaterialUploadType {
 
     private String value;
 
-    private MaterialUploadType(String value){
+    private MaterialUploadType(String value) {
         this.value = value;
     }
 
     @JsonValue
-    public String value(){
+    public String value() {
         return value;
     }
 }

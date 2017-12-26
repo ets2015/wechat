@@ -33,20 +33,20 @@ public enum ArticleShareScene {
 
     private Integer value;
 
-    private ArticleShareScene(Integer scope){
+    private ArticleShareScene(Integer scope) {
         this.value = scope;
     }
 
-    public Integer value(){
-        return value;
-    }
-
-    public static ArticleShareScene from(Integer s){
-        for (ArticleShareScene source : ArticleShareScene.values()){
-            if (Objects.equal(source.value(), s)){
+    public static ArticleShareScene from(Integer s) {
+        for (ArticleShareScene source : ArticleShareScene.values()) {
+            if (Objects.equal(source.value(), s)) {
                 return source;
             }
         }
         return UNKNOWN;
+    }
+
+    public Integer value() {
+        return value;
     }
 }

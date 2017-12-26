@@ -14,7 +14,8 @@ public class SendPreviewMessage implements Serializable {
 
     /**
      * 消息类型:
-     *  @see SendMessageType
+     *
+     * @see SendMessageType
      */
     private SendMessageType type;
 

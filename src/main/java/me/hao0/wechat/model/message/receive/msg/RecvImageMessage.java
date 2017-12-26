@@ -22,7 +22,7 @@ public class RecvImageMessage extends RecvMsg {
      */
     private String mediaId;
 
-    public RecvImageMessage(RecvMsg m){
+    public RecvImageMessage(RecvMsg m) {
         super(m);
         this.msgId = m.msgId;
     }

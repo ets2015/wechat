@@ -1,28 +1,22 @@
 package me.hao0.wechat.model.message.receive.event.card;
 
 import me.hao0.wechat.model.message.receive.event.RecvEvent;
+import me.hao0.wechat.model.message.receive.event.RecvEventType;
 
 import java.util.Date;
 
 /**
  * 券点流水详情事件
  * 当商户朋友的券券点发生变动时，微信服务器会推送消息给商户服务器
+ *
  * @author Shinez.
  */
 public class RecvCardPayOrderEvent extends RecvEvent {
     private static final long serialVersionUID = -57254023737174302L;
-
-    public RecvCardPayOrderEvent(RecvEvent e) {
-        super(e);
-        this.eventType = e.getEventType();
-    }
-
     /**
      * 本次推送对应的订单号
      */
     private String orderId;
-
-
     /**
      * 本次订单号的状态
      * <p>
@@ -36,42 +30,34 @@ public class RecvCardPayOrderEvent extends RecvEvent {
      * ORDER_STATUS_HAS_RECEIPT 已开发票
      */
     private String status;
-
     /**
      * 购买券点时，支付二维码的生成时间 (秒)
      */
     private Date createOrderTime;
-
     /**
      * 购买券点时，实际支付成功的时间
      */
     private Date payFinishTime;
-
     /**
      * 支付方式，一般为微信支付充值
      */
     private String desc;
-
     /**
      * 剩余免费券点数量
      */
     private Integer freeCoinCount;
-
     /**
      * 剩余付费券点数量
      */
     private Integer payCoinCount;
-
     /**
      * 本次变动的免费券点数量
      */
     private Integer refundFreeCoinCount;
-
     /**
      * 本次变动的付费券点数量
      */
     private Integer refundPayCoinCount;
-
     /**
      * 所要拉取的订单类型
      * ORDER_TYPE_SYS_ADD 平台赠送券点
@@ -81,16 +67,19 @@ public class RecvCardPayOrderEvent extends RecvEvent {
      * ORDER_TYPE_SYS_REDUCE 平台扣减
      */
     private String orderType;
-
     /**
      * 系统备注，说明此次变动的缘由，如开通账户奖励、门店奖励、核销奖励以及充值、扣减。
      */
     private String memo;
-
     /**
      * 所开发票的详情
      */
     private String receiptInfo;
+
+    public RecvCardPayOrderEvent(RecvEvent e) {
+        super(e);
+        this.eventType = e.getEventType();
+    }
 
     public String getOrderId() {
         return orderId;
@@ -190,6 +179,6 @@ public class RecvCardPayOrderEvent extends RecvEvent {
 
     @Override
     public String getEventType() {
-        return RecvCardEventType.CARD_PAY_ORDER.value();
+        return RecvEventType.CARD_PAY_ORDER.value();
     }
 }

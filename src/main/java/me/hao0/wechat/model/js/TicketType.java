@@ -17,11 +17,11 @@ public enum TicketType {
 
     private String type;
 
-    private TicketType(String type){
+    private TicketType(String type) {
         this.type = type;
     }
 
-    public String type(){
+    public String type() {
         return type;
     }
 }

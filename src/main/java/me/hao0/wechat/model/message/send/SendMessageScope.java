@@ -22,7 +22,7 @@ public enum SendMessageScope {
 
     private String desc;
 
-    private SendMessageScope(Integer value, String desc){
+    private SendMessageScope(Integer value, String desc) {
         this.value = value;
         this.desc = desc;
     }

@@ -4,24 +4,23 @@ import me.hao0.wechat.model.message.receive.event.RecvEvent;
 import me.hao0.wechat.model.message.receive.event.RecvEventType;
 
 /**
- *  菜单点击跳转链接事件
+ * 菜单点击拉取消息事件
+ *
  * @author Shinez.
  */
-public class RecvViewEvent extends RecvEvent {
+public class RecvMenuClickEvent extends RecvEvent {
 
-
-    private static final long serialVersionUID = -7627219354870692831L;
-
-    public RecvViewEvent(RecvEvent e) {
-        super(e);
-        this.eventType = e.getEventType();
-    }
-
+    private static final long serialVersionUID = 9202883940530774972L;
     /**
      * 事件KEY值，与自定义菜单接口中KEY值对应
      * 事件KEY值，设置的跳转URL
      */
     private String eventKey;
+
+    public RecvMenuClickEvent(RecvEvent e) {
+        super(e);
+        this.eventType = e.getEventType();
+    }
 
     public String getEventKey() {
         return eventKey;
@@ -33,7 +32,7 @@ public class RecvViewEvent extends RecvEvent {
 
     @Override
     public String getEventType() {
-        return RecvEventType.MENU_VIEW.value();
+        return RecvEventType.MENU_CLICK.value();
     }
 
 }

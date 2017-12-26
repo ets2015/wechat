@@ -15,11 +15,11 @@ public enum MaterialType {
 
     private String value;
 
-    private MaterialType(String value){
+    private MaterialType(String value) {
         this.value = value;
     }
 
-    public String value(){
+    public String value() {
         return value;
     }
 }

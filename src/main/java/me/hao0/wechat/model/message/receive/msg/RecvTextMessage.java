@@ -17,7 +17,7 @@ public class RecvTextMessage extends RecvMsg {
      */
     private String content;
 
-    public RecvTextMessage(RecvMsg m){
+    public RecvTextMessage(RecvMsg m) {
         super(m);
         this.msgId = m.msgId;
     }
