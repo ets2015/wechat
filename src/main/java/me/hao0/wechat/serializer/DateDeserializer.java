@@ -8,10 +8,10 @@ import java.io.IOException;
 import java.util.Date;
 
 public class DateDeserializer extends JsonDeserializer<Date> {
- 
+
     @Override
     public Date deserialize(JsonParser parser, DeserializationContext context)
-      throws IOException {
+            throws IOException {
         return new Date(parser.getIntValue() * 1000L);
     }
 }

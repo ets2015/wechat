@@ -21,8 +21,8 @@ public class MsgSendDist implements Serializable {
     private String date;
 
     /**
-     *当日发送消息量分布的区间:
-     *  0代表 “0”，1代表“1-5”，2代表“6-10”，3代表“10次以上”
+     * 当日发送消息量分布的区间:
+     * 0代表 “0”，1代表“1-5”，2代表“6-10”，3代表“10次以上”
      */
     @JsonProperty("count_interval")
     private Integer countInterval;

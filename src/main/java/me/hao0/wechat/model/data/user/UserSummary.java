@@ -24,7 +24,8 @@ public class UserSummary implements Serializable {
 
     /**
      * 用户的渠道
-     *  @see UserSource
+     *
+     * @see UserSource
      */
     @JsonProperty("user_source")
     @JsonDeserialize(using = UserSourceDeserializer.class)
@@ -76,10 +77,11 @@ public class UserSummary implements Serializable {
 
     /**
      * 获取用户增量(负数表示取消关注的人多于新增的人)
-     *  newUser - cancelUser
+     * newUser - cancelUser
+     *
      * @return 用户增量
      */
-    public Integer getIncrement(){
+    public Integer getIncrement() {
         return newCount - cancelCount;
     }
 

@@ -12,6 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Author: haolin
  * Email: haolin.h0@gmail.com
  * Date: 15/11/15
+ *
  * @since 1.3.0
  */
 public class DefaultTicketLoader implements TicketLoader {

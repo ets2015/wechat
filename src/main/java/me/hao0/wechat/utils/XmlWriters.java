@@ -17,50 +17,52 @@ public class XmlWriters {
 
     List<E> es = new ArrayList<>();
 
-    private XmlWriters(){}
+    private XmlWriters() {
+    }
 
-    public static XmlWriters create(){
+    public static XmlWriters create() {
         return new XmlWriters();
     }
 
-    public XmlWriters element(String name, String text){
+    public XmlWriters element(String name, String text) {
         E e = new TextE(name, text);
         es.add(e);
         return this;
     }
 
-    public XmlWriters element(String name, Number number){
+    public XmlWriters element(String name, Number number) {
         E e = new NumberE(name, number);
         es.add(e);
         return this;
     }
 
-    public XmlWriters element(String parentName, String childName, String childText){
+    public XmlWriters element(String parentName, String childName, String childText) {
         return element(parentName, new TextE(childName, childText));
     }
 
-    public XmlWriters element(String parentName, String childName, Number childNumber){
+    public XmlWriters element(String parentName, String childName, Number childNumber) {
         return element(parentName, new NumberE(childName, childNumber));
     }
 
     /**
      * 构建包含多个子元素的元素
+     *
      * @param parentName 父元素标签名
      * @param childPairs childName1, childValue1, childName2, childValu2, ...，长度必读为2的倍数
      * @return this
      */
-    public XmlWriters element(String parentName, Object... childPairs){
-        if (childPairs.length % 2 != 0){
+    public XmlWriters element(String parentName, Object... childPairs) {
+        if (childPairs.length % 2 != 0) {
             throw new XmlException("var args's length must % 2 = 0");
         }
         E parent = new TextE(parentName, null);
         List<E> children = new ArrayList<>();
         E child;
-        for (int i=0; i<childPairs.length ; i=i+2){
-            if (childPairs[i+1] instanceof Number){
-                child = new NumberE((String)childPairs[i], (Serializable)childPairs[i+1]);
+        for (int i = 0; i < childPairs.length; i = i + 2) {
+            if (childPairs[i + 1] instanceof Number) {
+                child = new NumberE((String) childPairs[i], (Serializable) childPairs[i + 1]);
             } else {
-                child = new TextE((String)childPairs[i], (Serializable)childPairs[i+1]);
+                child = new TextE((String) childPairs[i], (Serializable) childPairs[i + 1]);
             }
             children.add(child);
         }
@@ -69,14 +71,14 @@ public class XmlWriters {
         return this;
     }
 
-    public XmlWriters element(String parentName, E child){
+    public XmlWriters element(String parentName, E child) {
         E e = new TextE(parentName, null);
         e.children = Arrays.asList(child);
         es.add(e);
         return this;
     }
 
-    public XmlWriters element(String parentName, List<E> children){
+    public XmlWriters element(String parentName, List<E> children) {
         E e = new TextE(parentName, null);
         e.children = children;
         es.add(e);
@@ -85,19 +87,20 @@ public class XmlWriters {
 
     /**
      * 构建包含多个子元素的元素
+     *
      * @param parentName 父元素标签名
      * @param childPairs childName1, childValue1, childName2, childValu2, ...，长度必读为2的倍数
      * @return an element
      */
-    public E newElement(String parentName,  Object... childPairs){
+    public E newElement(String parentName, Object... childPairs) {
         E parent = new TextE(parentName, null);
         List<E> children = new ArrayList<>();
         E child;
-        for (int i=0; i<childPairs.length ; i=i+2){
-            if (childPairs[i+1] instanceof Number){
-                child = new NumberE((String)childPairs[i], (Serializable)childPairs[i+1]);
+        for (int i = 0; i < childPairs.length; i = i + 2) {
+            if (childPairs[i + 1] instanceof Number) {
+                child = new NumberE((String) childPairs[i], (Serializable) childPairs[i + 1]);
             } else {
-                child = new TextE((String)childPairs[i], (Serializable)childPairs[i+1]);
+                child = new TextE((String) childPairs[i], (Serializable) childPairs[i + 1]);
             }
             children.add(child);
         }
@@ -105,7 +108,7 @@ public class XmlWriters {
         return parent;
     }
 
-    public String build(){
+    public String build() {
         return buildElements();
     }
 
@@ -115,8 +118,8 @@ public class XmlWriters {
 
         xml.append("<xml>");
 
-        if (es != null && es.size() > 0){
-            for (E e : es){
+        if (es != null && es.size() > 0) {
+            for (E e : es) {
                 xml.append(e.render());
             }
         }
@@ -153,12 +156,12 @@ public class XmlWriters {
             StringBuilder content = new StringBuilder();
             content.append("<").append(name).append(">");
 
-            if (text != null){
+            if (text != null) {
                 content.append("<![CDATA[").append(text).append("]]>");
             }
 
-            if (children != null && children.size() > 0){
-                for (E child : children){
+            if (children != null && children.size() > 0) {
+                for (E child : children) {
                     content.append(child.render());
                 }
             }

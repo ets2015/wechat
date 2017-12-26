@@ -13,26 +13,26 @@ import static org.junit.Assert.assertNotNull;
 public class XmlWritersTest {
 
     @Test
-    public void testOneLevel(){
+    public void testOneLevel() {
         XmlWriters xmlWriters = XmlWriters.create();
 
         xmlWriters.element("ToUserName", "123456")
-            .element("FromUserName", "me")
-            .element("CreateTime", System.currentTimeMillis())
-            .element("MsgType", "transfer_customer_service");
+                .element("FromUserName", "me")
+                .element("CreateTime", System.currentTimeMillis())
+                .element("MsgType", "transfer_customer_service");
 
         assertNotNull(xmlWriters.build());
     }
 
     @Test
-    public void testMultiLevel(){
+    public void testMultiLevel() {
         XmlWriters xmlWriters = XmlWriters.create();
 
         xmlWriters.element("ToUserName", "123456")
-            .element("FromUserName", "me")
-            .element("CreateTime", System.currentTimeMillis())
-            .element("TransInfo", "KfAccount", "test1@test")
-            .element("MsgType", "transfer_customer_service");
+                .element("FromUserName", "me")
+                .element("CreateTime", System.currentTimeMillis())
+                .element("TransInfo", "KfAccount", "test1@test")
+                .element("MsgType", "transfer_customer_service");
 
         assertNotNull(xmlWriters.build());
     }

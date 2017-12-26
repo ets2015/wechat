@@ -19,6 +19,7 @@ import static me.hao0.common.util.Preconditions.checkNotNullAndEmpty;
  * Author: haolin
  * Email: haolin.h0@gmail.com
  * Date: 18/11/15
+ *
  * @since 1.4.0
  */
 public final class QrCodes extends Component {
@@ -38,36 +39,40 @@ public final class QrCodes extends Component {
      */
     private static final String LONG_TO_SHORT = "https://api.weixin.qq.com/cgi-bin/shorturl?access_token=";
 
-    QrCodes(){}
+    QrCodes() {
+    }
 
     /**
      * 获取临时二维码
+     *
      * @param sceneId 业务场景ID，32位非0整型
-     * @param expire 该二维码有效时间，以秒为单位。 最大不超过604800（即7天）
+     * @param expire  该二维码有效时间，以秒为单位。 最大不超过604800（即7天）
      * @return 临时二维码链接，或抛WechatException
      */
-    public String getTempQrcode(String sceneId, Integer expire){
+    public String getTempQrcode(String sceneId, Integer expire) {
         return getTempQrcode(loadAccessToken(), sceneId, expire);
     }
 
     /**
      * 获取临时二维码
+     *
      * @param sceneId 业务场景ID，32位非0整型
-     * @param expire 该二维码有效时间，以秒为单位。 最大不超过604800（即7天）
-     * @param cb 回调
+     * @param expire  该二维码有效时间，以秒为单位。 最大不超过604800（即7天）
+     * @param cb      回调
      */
-    public void getTempQrcode(final String sceneId, final Integer expire, Callback<String> cb){
+    public void getTempQrcode(final String sceneId, final Integer expire, Callback<String> cb) {
         getTempQrcode(loadAccessToken(), sceneId, expire, cb);
     }
 
     /**
      * 获取临时二维码
+     *
      * @param accessToken accessToken
-     * @param sceneId 业务场景ID，32位非0整型
-     * @param expire 该二维码有效时间，以秒为单位。 最大不超过604800（即7天）
-     * @param cb 回调
+     * @param sceneId     业务场景ID，32位非0整型
+     * @param expire      该二维码有效时间，以秒为单位。 最大不超过604800（即7天）
+     * @param cb          回调
      */
-    public void getTempQrcode(final String accessToken, final String sceneId, final Integer expire, Callback<String> cb){
+    public void getTempQrcode(final String accessToken, final String sceneId, final Integer expire, Callback<String> cb) {
         doAsync(new AsyncFunction<String>(cb) {
             @Override
             public String execute() {
@@ -78,12 +83,13 @@ public final class QrCodes extends Component {
 
     /**
      * 获取临时二维码
+     *
      * @param accessToken accessToken
-     * @param sceneId 业务场景ID，32位非0整型
-     * @param expire 该二维码有效时间，以秒为单位。 最大不超过604800（即7天）
+     * @param sceneId     业务场景ID，32位非0整型
+     * @param expire      该二维码有效时间，以秒为单位。 最大不超过604800（即7天）
      * @return 临时二维码链接，或抛WechatException
      */
-    public String getTempQrcode(String accessToken, String sceneId, Integer expire){
+    public String getTempQrcode(String accessToken, String sceneId, Integer expire) {
         checkNotNullAndEmpty(accessToken, "accessToken");
         checkNotNullAndEmpty(sceneId, "sceneId");
         checkArgument(expire != null && expire > 0, "expire must > 0");
@@ -99,29 +105,32 @@ public final class QrCodes extends Component {
 
     /**
      * 获取永久二维码
+     *
      * @param sceneId 业务场景ID，最大值为100000（目前参数只支持1--100000）
      * @return 永久二维码链接，或抛WechatException
      */
-    public String getPermQrcode(String sceneId){
+    public String getPermQrcode(String sceneId) {
         return getPermQrcode(loadAccessToken(), sceneId);
     }
 
     /**
      * 获取永久二维码
+     *
      * @param sceneId 业务场景ID，最大值为100000（目前参数只支持1--100000）
-     * @param cb 回调
+     * @param cb      回调
      */
-    public void getPermQrcode(final String sceneId, Callback<String> cb){
+    public void getPermQrcode(final String sceneId, Callback<String> cb) {
         getPermQrcode(loadAccessToken(), sceneId, cb);
     }
 
     /**
      * 获取永久二维码
+     *
      * @param accessToken accessToken
-     * @param sceneId 业务场景ID，最大值为100000（目前参数只支持1--100000）
-     * @param cb 回调
+     * @param sceneId     业务场景ID，最大值为100000（目前参数只支持1--100000）
+     * @param cb          回调
      */
-    public void getPermQrcode(final String accessToken, final String sceneId, Callback<String> cb){
+    public void getPermQrcode(final String accessToken, final String sceneId, Callback<String> cb) {
         doAsync(new AsyncFunction<String>(cb) {
             @Override
             public String execute() {
@@ -132,11 +141,12 @@ public final class QrCodes extends Component {
 
     /**
      * 获取永久二维码
+     *
      * @param accessToken accessToken
-     * @param sceneId 业务场景ID，最大值为100000（目前参数只支持1--100000）
+     * @param sceneId     业务场景ID，最大值为100000（目前参数只支持1--100000）
      * @return 永久二维码链接，或抛WechatException
      */
-    public String getPermQrcode(String accessToken, String sceneId){
+    public String getPermQrcode(String accessToken, String sceneId) {
         checkNotNullAndEmpty(accessToken, "accessToken");
         checkNotNullAndEmpty(sceneId, "sceneId");
 
@@ -148,32 +158,36 @@ public final class QrCodes extends Component {
 
         return showQrcode(qr.getTicket());
     }
-    
-    
+
+
     /**
      * 获取永久二维码
-     * @param sceneStr	场景值ID（字符串形式的ID），字符串类型，长度限制为1到64，仅永久二维码支持此字段   
+     *
+     * @param sceneStr 场景值ID（字符串形式的ID），字符串类型，长度限制为1到64，仅永久二维码支持此字段
      * @return 永久二维码链接，或抛WechatException
      */
-    public String getPermQrcodeBySceneStr(String sceneStr){
+    public String getPermQrcodeBySceneStr(String sceneStr) {
         return getPermQrcodeBySceneStr(loadAccessToken(), sceneStr);
     }
+
     /**
      * 获取永久二维码
-     * @param sceneStr	场景值ID（字符串形式的ID），字符串类型，长度限制为1到64，仅永久二维码支持此字段   
-     * @param cb 回调
+     *
+     * @param sceneStr 场景值ID（字符串形式的ID），字符串类型，长度限制为1到64，仅永久二维码支持此字段
+     * @param cb       回调
      */
-    public void getPermQrcodeBySceneStr(final String sceneStr, Callback<String> cb){
+    public void getPermQrcodeBySceneStr(final String sceneStr, Callback<String> cb) {
         getPermQrcodeBySceneStr(loadAccessToken(), sceneStr, cb);
     }
 
     /**
      * 根据场景字符串获取永久二维码
+     *
      * @param accessToken accessToken
-     * @param sceneStr	场景值ID（字符串形式的ID），字符串类型，长度限制为1到64，仅永久二维码支持此字段
-     * @param cb 回调
+     * @param sceneStr    场景值ID（字符串形式的ID），字符串类型，长度限制为1到64，仅永久二维码支持此字段
+     * @param cb          回调
      */
-    public void getPermQrcodeBySceneStr(final String accessToken, final String sceneStr, Callback<String> cb){
+    public void getPermQrcodeBySceneStr(final String accessToken, final String sceneStr, Callback<String> cb) {
         doAsync(new AsyncFunction<String>(cb) {
             @Override
             public String execute() {
@@ -181,14 +195,15 @@ public final class QrCodes extends Component {
             }
         });
     }
-    
+
     /**
      * 获取永久二维码
+     *
      * @param accessToken accessToken
-     * @param sceneStr	场景值ID（字符串形式的ID），字符串类型，长度限制为1到64，仅永久二维码支持此字段   
+     * @param sceneStr    场景值ID（字符串形式的ID），字符串类型，长度限制为1到64，仅永久二维码支持此字段
      * @return 永久二维码链接，或抛WechatException
      */
-    public String getPermQrcodeBySceneStr(String accessToken, String sceneStr){
+    public String getPermQrcodeBySceneStr(String accessToken, String sceneStr) {
         checkNotNullAndEmpty(accessToken, "accessToken");
         checkNotNullAndEmpty(sceneStr, "sceneStr");
 
@@ -203,10 +218,11 @@ public final class QrCodes extends Component {
 
     /**
      * 生成二维码参数，首先尝试使用 sceneId，再使用sceneStr
-     * @param sceneId	场景值ID，临时二维码时为32位非0整型，永久二维码时最大值为100000（目前参数只支持1--100000）
-     * @param sceneStr	场景值ID（字符串形式的ID），字符串类型，长度限制为1到64，仅永久二维码支持此字段   
-     * @param type	二维码类型，QR_SCENE为临时,QR_LIMIT_SCENE为永久,QR_LIMIT_STR_SCENE为永久的字符串参数值
-     * @return	二维码参数
+     *
+     * @param sceneId  场景值ID，临时二维码时为32位非0整型，永久二维码时最大值为100000（目前参数只支持1--100000）
+     * @param sceneStr 场景值ID（字符串形式的ID），字符串类型，长度限制为1到64，仅永久二维码支持此字段
+     * @param type     二维码类型，QR_SCENE为临时,QR_LIMIT_SCENE为永久,QR_LIMIT_STR_SCENE为永久的字符串参数值
+     * @return 二维码参数
      */
     private Map<String, Object> buildQrcodeParams(String sceneId, String sceneStr, QrcodeType type) {
         Map<String, Object> params = Maps.newHashMapWithExpectedSize(2);
@@ -214,11 +230,11 @@ public final class QrCodes extends Component {
 
         Map<String, Object> sceneMap = Maps.newHashMapWithExpectedSize(1);
         if (!Strings.isNullOrEmpty(sceneId)) {
-        	sceneMap.put("scene_id", sceneId);
-		}else if (!Strings.isNullOrEmpty(sceneStr)) {
-        	sceneMap.put("scene_str", sceneStr);
-		}
-        
+            sceneMap.put("scene_id", sceneId);
+        } else if (!Strings.isNullOrEmpty(sceneStr)) {
+            sceneMap.put("scene_str", sceneStr);
+        }
+
         Map<String, Object> scene = Maps.newHashMapWithExpectedSize(1);
         scene.put("scene", sceneMap);
 
@@ -228,10 +244,11 @@ public final class QrCodes extends Component {
 
     /**
      * 获取二维码链接
+     *
      * @param ticket 二维码的ticket
      * @return 二维码链接，或抛WechatException
      */
-    private String showQrcode(String ticket){
+    private String showQrcode(String ticket) {
         try {
             return SHOW_QRCODE + URLEncoder.encode(ticket, "UTF-8");
         } catch (UnsupportedEncodingException e) {
@@ -241,29 +258,32 @@ public final class QrCodes extends Component {
 
     /**
      * 将二维码长链接转换为端链接，生成二维码将大大提升扫码速度和成功率
+     *
      * @param longUrl 长链接
      * @return 短链接，或抛WechatException
      */
-    public String shortUrl(String longUrl){
+    public String shortUrl(String longUrl) {
         return shortUrl(loadAccessToken(), longUrl);
     }
 
     /**
      * 将二维码长链接转换为端链接，生成二维码将大大提升扫码速度和成功率
+     *
      * @param longUrl 长链接
-     * @param cb 回调
+     * @param cb      回调
      */
-    public void shortUrl(final String longUrl, Callback<String> cb){
+    public void shortUrl(final String longUrl, Callback<String> cb) {
         shortUrl(longUrl, longUrl, cb);
     }
 
     /**
      * 将二维码长链接转换为端链接，生成二维码将大大提升扫码速度和成功率
+     *
      * @param accessToken accessToken
-     * @param longUrl 长链接
-     * @param cb 回调
+     * @param longUrl     长链接
+     * @param cb          回调
      */
-    public void shortUrl(final String accessToken, final String longUrl, Callback<String> cb){
+    public void shortUrl(final String accessToken, final String longUrl, Callback<String> cb) {
         doAsync(new AsyncFunction<String>(cb) {
             @Override
             public String execute() {
@@ -274,11 +294,12 @@ public final class QrCodes extends Component {
 
     /**
      * 将二维码长链接转换为端链接，生成二维码将大大提升扫码速度和成功率
+     *
      * @param accessToken accessToken
-     * @param longUrl 长链接
+     * @param longUrl     长链接
      * @return 短链接，或抛WechatException
      */
-    public String shortUrl(String accessToken, String longUrl){
+    public String shortUrl(String accessToken, String longUrl) {
         checkNotNullAndEmpty(accessToken, "accessToken");
         checkNotNullAndEmpty(longUrl, "longUrl");
 
@@ -288,6 +309,6 @@ public final class QrCodes extends Component {
         params.put("long_url", longUrl);
 
         Map<String, Object> resp = doPost(url, params);
-        return (String)resp.get("short_url");
+        return (String) resp.get("short_url");
     }
 }

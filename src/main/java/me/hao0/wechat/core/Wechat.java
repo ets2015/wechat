@@ -29,74 +29,23 @@ import java.util.concurrent.ThreadFactory;
  * Author: haolin
  * Email: haolin.h0@gmail.com
  * Date: 5/11/15
+ *
  * @since 1.0.0
  */
 public final class Wechat {
 
-    /**
-     * 微信APP ID
-     */
-    private String appId;
-
-    /**
-     * 微信APP 密钥
-     */
-    private String appSecret;
-
-    /**
-     * 微信APP (令牌)Token
-     */
-    String appToken;
-
-    /**
-     * 消息加密Key
-     */
-    String msgKey;
-
-    /**
-     * AccessToken加载器
-     */
-    AccessTokenLoader tokenLoader = DEFAULT_ACCESS_TOKEN_LOADER;
-
-    /**
-     * Ticket加载器
-     */
-    TicketLoader ticketLoader = DEFAULT_TICKET_LOADER;
-
-    /**
-     * 异步执行器
-     */
-    ExecutorService executor = DEFAULT_EXECUTOR;
-
-    /**
-     * 微信错误码变量
-     */
-    private final String ERROR_CODE = "errcode";
-
     private static final String BASES = "me.hao0.wechat.core.Bases";
-
     private static final String USERS = "me.hao0.wechat.core.Users";
-
     private static final String MENUS = "me.hao0.wechat.core.Menus";
-
     private static final String CUSTOMER_SERVICES = "me.hao0.wechat.core.CustomerServices";
-
     private static final String MESSAGES = "me.hao0.wechat.core.Messages";
-
     private static final String QRCODES = "me.hao0.wechat.core.QrCodes";
-
     private static final String MATERIALS = "me.hao0.wechat.core.Materials";
-
     private static final String DATAS = "me.hao0.wechat.core.Datas";
-
     private static final String JSSDKS = "me.hao0.wechat.core.JsSdks";
-
     private static final AccessTokenLoader DEFAULT_ACCESS_TOKEN_LOADER = new DefaultAccessTokenLoader();
-
     private static final DefaultTicketLoader DEFAULT_TICKET_LOADER = new DefaultTicketLoader();
-
     private static final JavaType MAP_STRING_OBJ_TYPE = Jsons.DEFAULT.createCollectionType(Map.class, String.class, Object.class);
-
     private static final ExecutorService DEFAULT_EXECUTOR = Executors.newFixedThreadPool(
             Runtime.getRuntime().availableProcessors() + 1, new ThreadFactory() {
                 @Override
@@ -106,7 +55,38 @@ public final class Wechat {
                     return t;
                 }
             });
-
+    /**
+     * 微信错误码变量
+     */
+    private final String ERROR_CODE = "errcode";
+    /**
+     * 微信APP (令牌)Token
+     */
+    String appToken;
+    /**
+     * 消息加密Key
+     */
+    String msgKey;
+    /**
+     * AccessToken加载器
+     */
+    AccessTokenLoader tokenLoader = DEFAULT_ACCESS_TOKEN_LOADER;
+    /**
+     * Ticket加载器
+     */
+    TicketLoader ticketLoader = DEFAULT_TICKET_LOADER;
+    /**
+     * 异步执行器
+     */
+    ExecutorService executor = DEFAULT_EXECUTOR;
+    /**
+     * 微信APP ID
+     */
+    private String appId;
+    /**
+     * 微信APP 密钥
+     */
+    private String appSecret;
     private LoadingCache<String, Component> components =
             CacheBuilder.newBuilder().build(new CacheLoader<String, Component>() {
                 @Override
@@ -114,11 +94,11 @@ public final class Wechat {
                     Class clazz = Class.forName(classFullName);
                     Object comp = clazz.newInstance();
                     injectWechat(clazz, comp);
-                    return (Component)comp;
+                    return (Component) comp;
                 }
             });
 
-    Wechat(String appId, String appSecret){
+    Wechat(String appId, String appSecret) {
         this.appId = appId;
         this.appSecret = appSecret;
     }
@@ -139,40 +119,40 @@ public final class Wechat {
         return msgKey;
     }
 
-    public Bases base(){
-        return (Bases)components.getUnchecked(BASES);
+    public Bases base() {
+        return (Bases) components.getUnchecked(BASES);
     }
 
-    public CustomerServices cs(){
-        return (CustomerServices)components.getUnchecked(CUSTOMER_SERVICES);
+    public CustomerServices cs() {
+        return (CustomerServices) components.getUnchecked(CUSTOMER_SERVICES);
     }
 
-    public Menus menu(){
-        return (Menus)components.getUnchecked(MENUS);
+    public Menus menu() {
+        return (Menus) components.getUnchecked(MENUS);
     }
 
-    public Users user(){
-        return (Users)components.getUnchecked(USERS);
+    public Users user() {
+        return (Users) components.getUnchecked(USERS);
     }
 
-    public Messages msg(){
-        return (Messages)components.getUnchecked(MESSAGES);
+    public Messages msg() {
+        return (Messages) components.getUnchecked(MESSAGES);
     }
 
-    public QrCodes qr(){
-        return (QrCodes)components.getUnchecked(QRCODES);
+    public QrCodes qr() {
+        return (QrCodes) components.getUnchecked(QRCODES);
     }
 
-    public Materials material(){
-        return (Materials)components.getUnchecked(MATERIALS);
+    public Materials material() {
+        return (Materials) components.getUnchecked(MATERIALS);
     }
 
-    public Datas data(){
-        return (Datas)components.getUnchecked(DATAS);
+    public Datas data() {
+        return (Datas) components.getUnchecked(DATAS);
     }
 
-    public JsSdks js(){
-        return (JsSdks)components.getUnchecked(JSSDKS);
+    public JsSdks js() {
+        return (JsSdks) components.getUnchecked(JSSDKS);
     }
 
     private void injectWechat(Class clazz, Object comp) throws NoSuchFieldException {
@@ -182,10 +162,11 @@ public final class Wechat {
 
     /**
      * 注册组件
+     *
      * @param component 组件对象
-     * @param <T> 范型
+     * @param <T>       范型
      */
-    public <T extends Component> void register(T component){
+    public <T extends Component> void register(T component) {
         try {
             injectWechat(component.getClass(), component);
         } catch (NoSuchFieldException e) {
@@ -196,15 +177,15 @@ public final class Wechat {
     /**
      * 关闭异步执行器(不再支持异步执行)
      */
-    public void destroy(){
-        if (executor.isShutdown()){
+    public void destroy() {
+        if (executor.isShutdown()) {
             executor.shutdown();
         }
     }
 
-    String loadAccessToken(){
+    String loadAccessToken() {
         String accessToken = tokenLoader.get();
-        if (Strings.isNullOrEmpty(accessToken)){
+        if (Strings.isNullOrEmpty(accessToken)) {
             AccessToken token = base().accessToken();
             tokenLoader.refresh(token);
             accessToken = token.getAccessToken();
@@ -212,9 +193,9 @@ public final class Wechat {
         return accessToken;
     }
 
-    String loadTicket(TicketType type){
+    String loadTicket(TicketType type) {
         String ticket = ticketLoader.get(type);
-        if (Strings.isNullOrEmpty(ticket)){
+        if (Strings.isNullOrEmpty(ticket)) {
             Ticket t = js().getTicket(type);
             ticketLoader.refresh(t);
             ticket = t.getTicket();
@@ -224,7 +205,7 @@ public final class Wechat {
 
     Map<String, Object> doPost(String url, Map<String, Object> params) {
         String body = null;
-        if (params != null && !params.isEmpty()){
+        if (params != null && !params.isEmpty()) {
             body = Jsons.DEFAULT.toJson(params);
         }
         return doPost(url, body);
@@ -232,12 +213,12 @@ public final class Wechat {
 
     Map<String, Object> doPost(String url, String body) {
         Http http = Http.post(url);
-        if (!Strings.isNullOrEmpty(body)){
+        if (!Strings.isNullOrEmpty(body)) {
             http.body(body);
         }
         Map<String, Object> resp = http.request(MAP_STRING_OBJ_TYPE);
-        Integer errcode = (Integer)resp.get(ERROR_CODE);
-        if (errcode != null && errcode != 0){
+        Integer errcode = (Integer) resp.get(ERROR_CODE);
+        if (errcode != null && errcode != 0) {
             throw new WechatException(resp);
         }
         return resp;
@@ -249,35 +230,35 @@ public final class Wechat {
 
     Map<String, Object> doGet(String url, Map<String, Object> params) {
         Http http = Http.get(url);
-        if (params != null && params.size() > 0){
+        if (params != null && params.size() > 0) {
             http.body(Jsons.DEFAULT.toJson(params));
         }
         Map<String, Object> resp = http.request(MAP_STRING_OBJ_TYPE);
-        Integer errcode = (Integer)resp.get(ERROR_CODE);
-        if (errcode != null && errcode != 0){
+        Integer errcode = (Integer) resp.get(ERROR_CODE);
+        if (errcode != null && errcode != 0) {
             throw new WechatException(resp);
         }
         return resp;
     }
 
-    Map<String, Object> doUpload(String url, String fieldName, String fileName, InputStream input, Map<String, String> params){
+    Map<String, Object> doUpload(String url, String fieldName, String fileName, InputStream input, Map<String, String> params) {
         String json = Http.upload(url, fieldName, fileName, input, params);
         Map<String, Object> resp = Jsons.DEFAULT.fromJson(json, MAP_STRING_OBJ_TYPE);
-        Integer errcode = (Integer)resp.get(ERROR_CODE);
-        if (errcode != null && errcode != 0){
+        Integer errcode = (Integer) resp.get(ERROR_CODE);
+        if (errcode != null && errcode != 0) {
             throw new WechatException(resp);
         }
         return resp;
     }
 
-    <T> void doAsync(final AsyncFunction<T> f){
+    <T> void doAsync(final AsyncFunction<T> f) {
         executor.submit(new Runnable() {
             @Override
             public void run() {
                 try {
                     T res = f.execute();
                     f.cb.onSuccess(res);
-                } catch (Exception e){
+                } catch (Exception e) {
                     f.cb.onFailure(e);
                 }
             }

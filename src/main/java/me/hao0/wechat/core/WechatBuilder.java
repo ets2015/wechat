@@ -13,6 +13,7 @@ import static me.hao0.common.util.Preconditions.checkNotNullAndEmpty;
  * Author: haolin
  * Email: haolin.h0@gmail.com
  * Date: 14/11/15
+ *
  * @since 1.4.0
  */
 public final class WechatBuilder {
@@ -21,11 +22,12 @@ public final class WechatBuilder {
 
     /**
      * 创建一个WechatBuilder
-     * @param appId 微信appId
+     *
+     * @param appId     微信appId
      * @param appSecret 微信appSecret
      * @return a builder
      */
-    public static WechatBuilder newBuilder(String appId, String appSecret){
+    public static WechatBuilder newBuilder(String appId, String appSecret) {
         checkNotNullAndEmpty(appId, "appId");
         checkNotNullAndEmpty(appSecret, "appSecret");
 
@@ -36,10 +38,11 @@ public final class WechatBuilder {
 
     /**
      * 配置微信APP令牌(Token)
+     *
      * @param token 微信APP令牌(Token)
      * @return this
      */
-    public WechatBuilder token(String token){
+    public WechatBuilder token(String token) {
         checkNotNullAndEmpty(token, "token");
         wechat.appToken = token;
         return this;
@@ -47,10 +50,11 @@ public final class WechatBuilder {
 
     /**
      * 配置加密消息的Key
+     *
      * @param msgKey 加密消息的Key
      * @return this
      */
-    public WechatBuilder msgKey(String msgKey){
+    public WechatBuilder msgKey(String msgKey) {
         checkNotNullAndEmpty(msgKey, "msgKey");
         wechat.msgKey = msgKey;
         return this;
@@ -58,10 +62,11 @@ public final class WechatBuilder {
 
     /**
      * 配置accessToken加载器
+     *
      * @param accessTokenLoader accessToken加载器
      * @return return this
      */
-    public WechatBuilder accessTokenLoader(AccessTokenLoader accessTokenLoader){
+    public WechatBuilder accessTokenLoader(AccessTokenLoader accessTokenLoader) {
         checkNotNull(accessTokenLoader, "accessTokenLoader can't be null");
         wechat.tokenLoader = accessTokenLoader;
         return this;
@@ -69,10 +74,11 @@ public final class WechatBuilder {
 
     /**
      * 配置ticket加载器
+     *
      * @param ticketLoader ticket加载器
      * @return this
      */
-    public WechatBuilder ticketLoader(TicketLoader ticketLoader){
+    public WechatBuilder ticketLoader(TicketLoader ticketLoader) {
         checkNotNull(ticketLoader, "ticketLoader can't be null");
         wechat.ticketLoader = ticketLoader;
         return this;
@@ -80,10 +86,11 @@ public final class WechatBuilder {
 
     /**
      * 设置ExecutorService，用于异步调用
+     *
      * @param executor 异步执行器
      * @return this
      */
-    public WechatBuilder executor(ExecutorService executor){
+    public WechatBuilder executor(ExecutorService executor) {
         checkNotNull(executor, "executor can't be null");
         wechat.executor = executor;
         return this;
@@ -91,9 +98,10 @@ public final class WechatBuilder {
 
     /**
      * 返回最终配置好的Wechat对象
+     *
      * @return Wechat对象
      */
-    public Wechat build(){
+    public Wechat build() {
         return wechat;
     }
 }

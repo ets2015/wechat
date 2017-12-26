@@ -469,6 +469,7 @@ public final class Users extends Component {
 
     /**
      * 获取用户信息(用户未关注，但已手动同意授权，并通过code获取到授权accessToken)
+     *
      * @param authAccessToken 用户手动同意授权后，通过code获取的accessToken
      * @return 用户信息，或抛WechatException
      * @see Bases#authAccessToken(String)
@@ -521,7 +522,7 @@ public final class Users extends Component {
      * 拉取用户列表信息
      *
      * @param accessToken accessToken
-     * @param nextOpenId   第一个拉取的OPENID，不填默认从头开始拉取
+     * @param nextOpenId  第一个拉取的OPENID，不填默认从头开始拉取
      * @return 用户列表，或抛WechatExeption
      */
     public UserList getUsers(String accessToken, String nextOpenId) {

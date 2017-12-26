@@ -64,71 +64,71 @@ public class WechatTests {
     }
 
     @Test
-    public void testAccessToken(){
+    public void testAccessToken() {
         AccessToken token = wechat.base().accessToken();
         assertNotNull(token);
         System.out.println(token);
     }
 
     @Test
-    public void testGetIps(){
+    public void testGetIps() {
         assertNotNull(wechat.base().ip(accessToken));
     }
 
     @Test(expected = WechatException.class)
-    public void testGetIpsErr(){
+    public void testGetIpsErr() {
         wechat.base().ip(accessToken + "xxx");
     }
 
     @Test
-    public void testCreateCsAccount(){
+    public void testCreateCsAccount() {
         assertTrue(wechat.cs().createAccount(accessToken, "haolin007@" + testDomain, "haolin007", "123456"));
     }
 
     @Test
-    public void testUpdateCsAccount(){
+    public void testUpdateCsAccount() {
         assertTrue(wechat.cs().updateAccount(accessToken, "haolin007@" + testDomain, "haolin007", "1234567"));
     }
 
     @Test
-    public void testUploadHead(){
+    public void testUploadHead() {
         assertTrue(wechat.cs().uploadHead(accessToken, "haolin007@bingex01", new File("/Users/haolin/temp/user.png")));
     }
 
     @Test
-    public void testDeleteCsAccount(){
+    public void testDeleteCsAccount() {
         assertTrue(wechat.cs().deleteAccount(accessToken, "haolin007@" + testDomain));
     }
 
     @Test
-    public void testGetCsRecords(){
+    public void testGetCsRecords() {
         Date startTime = new Date(1439434683);
         Date endTime = new Date(1439481483);
         assertNotNull(wechat.cs().getMsgRecords("ZL0gV5PVZy_fuTRRdMlJFFYebGpNHJNAWk71KlR0LA_sxGRp5wSHfRopva2TGAGnFyiDlL-Dr-FYjZ7eMg9nXkmNVyx-TPnC-vA4OVX2chgCAPjAIATRG", 1, 10, startTime, endTime));
     }
 
     @Test
-    public void testCreateCsSession(){
+    public void testCreateCsSession() {
         assertTrue(wechat.cs().createSession(accessToken, "onN_8trIW7PSoXLMzMSWySb5jfdY", "haolin007@" + testDomain, "你好"));
     }
 
     @Test
-    public void testGetUserSession(){
+    public void testGetUserSession() {
         assertNotNull(wechat.cs().getUserSession(accessToken, "onN_8trIW7PSoXLMzMSWySb5jfdY"));
     }
 
     @Test
-    public void testGetCsSession(){
+    public void testGetCsSession() {
         assertNotNull(wechat.cs().getCsSessions(accessToken, "haolin007@" + testDomain));
     }
 
     @Test
-    public void testGetWaitingSession(){
+    public void testGetWaitingSession() {
         assertNotNull(wechat.cs().getWaitingSessions(accessToken));
     }
 
     @Test
-    public void testMenuBuild(){
+    public void testMenuBuild() {
         MenuBuilder menuBuilder = MenuBuilder.newBuilder();
 
         menuBuilder.view("我要下单", "http://www.hao0.me");
@@ -146,44 +146,44 @@ public class WechatTests {
     }
 
     @Test
-    public void testMenuGet(){
+    public void testMenuGet() {
         assertNotNull(wechat.menu().get(accessToken));
     }
 
     @Test
-    public void testGroupCreate(){
+    public void testGroupCreate() {
         assertTrue(wechat.user().createGroup(accessToken, "测试分组2") > 0);
     }
 
     @Test
-    public void testGroupGet(){
+    public void testGroupGet() {
         List<Group> groups = wechat.user().getGroup(accessToken);
         assertNotNull(groups);
         System.out.println(groups);
     }
 
     @Test
-    public void testGroupDelete(){
+    public void testGroupDelete() {
         assertTrue(wechat.user().deleteGroup(accessToken, 102));
     }
 
     @Test
-    public void testUpdateGroup(){
+    public void testUpdateGroup() {
         assertTrue(wechat.user().updateGroup(accessToken, 100, "测试分组哟"));
     }
 
     @Test
-    public void testGetUserGroup(){
+    public void testGetUserGroup() {
         assertTrue(wechat.user().getUserGroup(accessToken, openId) > 0);
     }
 
     @Test
-    public void testMoveUserGroup(){
+    public void testMoveUserGroup() {
         assertTrue(wechat.user().mvUserGroup(accessToken, openId, 100));
     }
 
     @Test
-    public void testGetUser(){
+    public void testGetUser() {
         assertNotNull(wechat.user().getUser(accessToken, openId));
     }
 
@@ -195,12 +195,12 @@ public class WechatTests {
     }
 
     @Test
-    public void testUserRemark(){
+    public void testUserRemark() {
         assertTrue(wechat.user().remarkUser(accessToken, openId, "林浩"));
     }
 
     @Test
-    public void testMessageResp(){
+    public void testMessageResp() {
         RecvMessage msg = new RecvMessage();
         msg.setFromUserName("xxx");
         msg.setToUserName("yyy");
@@ -213,31 +213,31 @@ public class WechatTests {
         assertNotNull(wechat.msg().respVideo(msg, "nowefwifjwopefjiwe", "视频标题", "视频描述"));
         assertNotNull(wechat.msg().respMusic(msg, "joiwefjoiwejf", "音乐标题", "音乐描述", "http://jofwieofj.com", "http://jofwieofj.com?hq"));
         assertNotNull(wechat.msg().respNews(msg,
-                        Arrays.asList(
-                                new Article("图文标题", "图文描述", "图片链接", "链接"),
-                                new Article("图文标题", "图文描述", "图片链接", "链接"),
-                                new Article("图文标题", "图文描述", "图片链接", "链接"),
-                                new Article("图文标题", "图文描述", "图片链接", "链接")
-                        ))
+                Arrays.asList(
+                        new Article("图文标题", "图文描述", "图片链接", "链接"),
+                        new Article("图文标题", "图文描述", "图片链接", "链接"),
+                        new Article("图文标题", "图文描述", "图片链接", "链接"),
+                        new Article("图文标题", "图文描述", "图片链接", "链接")
+                ))
         );
     }
 
     @Test
-    public void testSendTemplate(){
+    public void testSendTemplate() {
         Long msgId = wechat.msg().sendTemplate(accessToken,
                 openId, "vxjR2DrT-I5-Edzc3vgWV-CgMoG0cAWISAxQIMLmYk4", "http://www.hao0.me",
                 Arrays.asList(
-                    new TemplateField("first", "下单成功"),
-                    new TemplateField("remark", "感谢您的使用。"),
-                    new TemplateField("keyword1", "TD113123123"),
-                    new TemplateField("keyword2", "2015-11-11 11:11:11"),
-                    new TemplateField("keyword3", "123456")
+                        new TemplateField("first", "下单成功"),
+                        new TemplateField("remark", "感谢您的使用。"),
+                        new TemplateField("keyword1", "TD113123123"),
+                        new TemplateField("keyword2", "2015-11-11 11:11:11"),
+                        new TemplateField("keyword3", "123456")
                 ));
         assertTrue(msgId > 0L);
     }
 
     @Test
-    public void testMessageReceive(){
+    public void testMessageReceive() {
         String xml = "<xml>\n" +
                 " <ToUserName><![CDATA[toUser]]></ToUserName>\n" +
                 " <FromUserName><![CDATA[fromUser]]></FromUserName> \n" +
@@ -394,7 +394,7 @@ public class WechatTests {
     }
 
     @Test
-    public void testMessagePreview(){
+    public void testMessagePreview() {
         SendPreviewMessage msg = new SendPreviewMessage();
         msg.setOpenId(openId);
         msg.setType(SendMessageType.TEXT);
@@ -403,7 +403,7 @@ public class WechatTests {
     }
 
     @Test
-    public void testMessageSendByOpenIds(){
+    public void testMessageSendByOpenIds() {
         SendMessage msg = new SendMessage();
         msg.setScope(SendMessageScope.OPEN_ID);
         msg.setType(SendMessageType.TEXT);
@@ -415,7 +415,7 @@ public class WechatTests {
     }
 
     @Test
-    public void testMessageSendByGroupId(){
+    public void testMessageSendByGroupId() {
         SendMessage msg = new SendMessage();
         msg.setScope(SendMessageScope.GROUP);
         msg.setGroupId(100);
@@ -427,42 +427,42 @@ public class WechatTests {
     }
 
     @Test
-    public void testMessageStatus(){
+    public void testMessageStatus() {
         assertNotNull(wechat.msg().getSend(accessToken, 2547931045L));
     }
 
     @Test
-    public void testMessageDelete(){
+    public void testMessageDelete() {
         assertTrue(wechat.msg().deleteSend(accessToken, 2547931045L));
     }
 
     @Test
-    public void testGetTempQrcode(){
+    public void testGetTempQrcode() {
         assertNotNull(wechat.qr().getTempQrcode(accessToken, "1234", 3600));
     }
 
     @Test
-    public void testGetPermQrcode(){
+    public void testGetPermQrcode() {
         assertNotNull(wechat.qr().getPermQrcode(accessToken, "12345"));
     }
-    
+
     @Test
-    public void testGetPermQrcodeBySceneStr(){
+    public void testGetPermQrcodeBySceneStr() {
         assertNotNull(wechat.qr().getPermQrcodeBySceneStr(accessToken, "abcdefg"));
     }
 
     @Test
-    public void testShortUrl(){
+    public void testShortUrl() {
         assertNotNull(wechat.qr().shortUrl(accessToken, "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=xxxx%3D%3D"));
     }
 
     @Test
-    public void testMaterialCount(){
+    public void testMaterialCount() {
         assertNotNull(wechat.material().count(accessToken));
     }
 
     @Test
-    public void testMaterialGets(){
+    public void testMaterialGets() {
 
         Page<CommonMaterial> images = wechat.material().gets(accessToken, MaterialType.IMAGE, 0, 10);
         assertNotNull(images);
@@ -495,7 +495,7 @@ public class WechatTests {
     }
 
     @Test
-    public void testUploadPerm(){
+    public void testUploadPerm() {
         PermMaterial material = wechat.material().uploadPerm(accessToken, MaterialUploadType.THUMB, new File("/Users/haolin/temp/user.png"));
         assertNotNull(material);
         // K74X6mIzSjUcRNfP5rjI8oERKkI_0_X8u16ZiY14ut4
@@ -503,10 +503,10 @@ public class WechatTests {
     }
 
     @Test
-    public void testUploadPermNews(){
+    public void testUploadPermNews() {
         List<NewsContentItem> items = new ArrayList<>();
         NewsContentItem item;
-        for (int i=0; i<3; i++){
+        for (int i = 0; i < 3; i++) {
             item = new NewsContentItem();
             item.setTitle("测试标题" + i);
             item.setAuthor("测试作者" + i);
@@ -524,7 +524,7 @@ public class WechatTests {
     }
 
     @Test
-    public void testUpdatePermNews(){
+    public void testUpdatePermNews() {
         NewsContentItem item = new NewsContentItem();
         item.setTitle("测试标题");
         item.setAuthor("测试作者");
@@ -545,7 +545,7 @@ public class WechatTests {
     }
 
     @Test
-    public void testGetTicket(){
+    public void testGetTicket() {
         Ticket t = wechat.js().getTicket(accessToken, TicketType.JSAPI);
         assertNotNull(t);
         System.out.println(t);
@@ -556,7 +556,7 @@ public class WechatTests {
     }
 
     @Test
-    public void testJsConfig(){
+    public void testJsConfig() {
         String jsApiTicket = "sM4AOVdWfPE4DxkXGEs8VCGATNbUB_Oae4oi2hRmdEb_g8HSkXz8ZFP6vY96wdPqIgHpx9HYoIePo-tRG7pt1g";
         Config config = wechat.js().getConfig(jsApiTicket, "abcde", 12345678L, "http://m.bingex.com/demo");
         assertNotNull(config);
@@ -564,7 +564,7 @@ public class WechatTests {
     }
 
     @Test
-    public void testLoadWithoutToken(){
+    public void testLoadWithoutToken() {
         List<Group> groups = wechat.user().getGroup();
         assertNotNull(groups);
         System.out.println(groups);
@@ -598,150 +598,150 @@ public class WechatTests {
     }
 
     @Test
-    public void testClazzName(){
+    public void testClazzName() {
         System.out.println(Wechat.class.getSimpleName());
         System.out.println(Wechat.class.getCanonicalName());
         System.out.println(Wechat.class.getName());
     }
 
     @Test
-    public void testRegisterComponent(){
+    public void testRegisterComponent() {
         MyComponent myComp = new MyComponent();
         wechat.register(myComp);
         assertNotNull(myComp.getAppId());
     }
 
     @Test
-    public void testUserSummary(){
+    public void testUserSummary() {
         List<UserSummary> summaries = wechat.data().userSummary(accessToken, "2015-09-01", "2015-09-06");
         assertNotNull(summaries);
         System.out.println(summaries);
     }
 
     @Test
-    public void testUserCumulate(){
+    public void testUserCumulate() {
         List<UserCumulate> cumulates = wechat.data().userCumulate(accessToken, "2015-09-01", "2015-09-06");
         assertNotNull(cumulates);
         System.out.println(cumulates);
     }
 
     @Test
-    public void testarticleSummaryDaily(){
+    public void testarticleSummaryDaily() {
         List<ArticleDailySummary> summaries = wechat.data().articleDailySummary(accessToken, "2015-11-11");
         assertNotNull(summaries);
         System.out.println(summaries);
     }
 
     @Test
-    public void testArticleTotal(){
+    public void testArticleTotal() {
         List<ArticleTotal> totals = wechat.data().articleTotal(accessToken, "2015-11-11");
         assertNotNull(totals);
         System.out.println(totals);
     }
 
     @Test
-    public void testArticleSummary(){
+    public void testArticleSummary() {
         List<ArticleSummary> summaries = wechat.data().articleSummary(accessToken, "2015-06-23", "2015-06-25");
         assertNotNull(summaries);
         System.out.println(summaries);
     }
 
     @Test
-    public void testArticleSummaryByHour(){
+    public void testArticleSummaryByHour() {
         List<ArticleSummaryHour> summaries = wechat.data().articleSummaryHourly(accessToken, "2015-06-23");
         assertNotNull(summaries);
         System.out.println(summaries);
     }
 
     @Test
-    public void testArticleShare(){
+    public void testArticleShare() {
         List<ArticleShare> shares = wechat.data().articleShare(accessToken, "2015-11-11", "2015-11-17");
         assertNotNull(shares);
         System.out.println(shares);
     }
 
     @Test
-    public void testArticleShareByHour(){
+    public void testArticleShareByHour() {
         List<ArticleShareHour> shares = wechat.data().articleShareByHourly(accessToken, "2015-11-11");
         assertNotNull(shares);
         System.out.println(shares);
     }
 
     @Test
-    public void testInterfaceSummary(){
+    public void testInterfaceSummary() {
         List<InterfaceSummary> summaries = wechat.data().interfaceSummary(accessToken, "2015-11-12", "2015-11-19");
         assertNotNull(summaries);
         System.out.println(summaries);
     }
 
     @Test
-    public void testInterfaceSummaryByHour(){
+    public void testInterfaceSummaryByHour() {
         List<InterfaceSummaryHour> summaries = wechat.data().interfaceSummaryHourly(accessToken, "2015-11-19");
         assertNotNull(summaries);
         System.out.println(summaries);
     }
 
     @Test
-    public void testMsgSendSummary(){
+    public void testMsgSendSummary() {
         List<MsgSendSummary> summaries = wechat.data().msgSendSummary(accessToken, "2015-11-12", "2015-11-18");
         assertNotNull(summaries);
         System.out.println(summaries);
     }
 
     @Test
-    public void testMsgSendSummaryByHour(){
+    public void testMsgSendSummaryByHour() {
         List<MsgSendSummaryHour> summaries = wechat.data().msgSendSummaryHourly(accessToken, "2015-11-19");
         assertNotNull(summaries);
         System.out.println(summaries);
     }
 
     @Test
-    public void testMsgSendSummaryWeekly(){
+    public void testMsgSendSummaryWeekly() {
         List<MsgSendSummary> summaries = wechat.data().msgSendSummaryWeekly(accessToken, "2015-10-01", "2015-10-30");
         assertNotNull(summaries);
-        for (MsgSendSummary summary : summaries){
+        for (MsgSendSummary summary : summaries) {
             System.out.println(summary);
         }
     }
 
     @Test
-    public void testMsgSendSummaryMonthly(){
+    public void testMsgSendSummaryMonthly() {
         List<MsgSendSummary> summaries = wechat.data().msgSendSummaryMonthly(accessToken, "2015-10-01", "2015-10-30");
         assertNotNull(summaries);
-        for (MsgSendSummary summary : summaries){
+        for (MsgSendSummary summary : summaries) {
             System.out.println(summary);
         }
     }
 
     @Test
-    public void testMsgSendDist(){
+    public void testMsgSendDist() {
         List<MsgSendDist> dists = wechat.data().msgSendDist(accessToken, "2015-11-11", "2015-11-18");
         assertNotNull(dists);
-        for (MsgSendDist dist : dists){
+        for (MsgSendDist dist : dists) {
             System.out.println(dist);
         }
     }
 
     @Test
-    public void testMsgSendDistWeekly(){
+    public void testMsgSendDistWeekly() {
         List<MsgSendDist> dists = wechat.data().msgSendDistWeekly(accessToken, "2015-09-01", "2015-09-30");
         assertNotNull(dists);
-        for (MsgSendDist dist : dists){
+        for (MsgSendDist dist : dists) {
             System.out.println(dist);
         }
     }
 
     @Test
-    public void testMsgSendDistMonthly(){
+    public void testMsgSendDistMonthly() {
         List<MsgSendDist> dists = wechat.data().msgSendDistMonthly(accessToken, "2015-10-01", "2015-10-30");
         assertNotNull(dists);
-        for (MsgSendDist dist : dists){
+        for (MsgSendDist dist : dists) {
             System.out.println(dist);
         }
     }
 
     @Test
-    public void testBuildWechat(){
+    public void testBuildWechat() {
         Wechat w = WechatBuilder.newBuilder(null, "").build();
     }
 }

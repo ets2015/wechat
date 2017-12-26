@@ -15,6 +15,7 @@ import static me.hao0.common.util.Preconditions.checkNotNullAndEmpty;
  * Author: haolin
  * Email: haolin.h0@gmail.com
  * Date: 18/11/15
+ *
  * @since 1.4.0
  */
 public final class Menus extends Component {
@@ -36,30 +37,34 @@ public final class Menus extends Component {
 
     private static final JavaType ARRAY_LIST_MENU_TYPE = Jsons.DEFAULT.createCollectionType(ArrayList.class, Menu.class);
 
-    Menus(){}
+    Menus() {
+    }
 
     /**
      * 查询菜单
+     *
      * @return 菜单列表
      */
-    public List<Menu> get(){
+    public List<Menu> get() {
         return get(loadAccessToken());
     }
 
     /**
      * 查询菜单
+     *
      * @param cb 回调
      */
-    public void get(Callback<List<Menu>> cb){
+    public void get(Callback<List<Menu>> cb) {
         get(loadAccessToken(), cb);
     }
 
     /**
      * 查询菜单
+     *
      * @param accessToken accessToken
-     * @param cb 回调
+     * @param cb          回调
      */
-    public void get(final String accessToken, Callback<List<Menu>> cb){
+    public void get(final String accessToken, Callback<List<Menu>> cb) {
         doAsync(new AsyncFunction<List<Menu>>(cb) {
             @Override
             public List<Menu> execute() {
@@ -70,34 +75,37 @@ public final class Menus extends Component {
 
     /**
      * 查询菜单
+     *
      * @param accessToken accessToken
      * @return 菜单列表
      */
-    public List<Menu> get(String accessToken){
+    public List<Menu> get(String accessToken) {
         checkNotNullAndEmpty(accessToken, "accessToken");
 
         String url = GET + accessToken;
-        Map<String, Object> resp =  doGet(url);
+        Map<String, Object> resp = doGet(url);
         String jsonMenu = Jsons.DEFAULT.toJson(((Map) resp.get("menu")).get("button"));
         return Jsons.EXCLUDE_DEFAULT.fromJson(jsonMenu, ARRAY_LIST_MENU_TYPE);
     }
 
     /**
      * 创建菜单
+     *
      * @param jsonMenu 菜单json
      * @return 创建成功返回true，或抛WechatException
      */
-    public Boolean create(String jsonMenu){
+    public Boolean create(String jsonMenu) {
         return create(loadAccessToken(), jsonMenu);
     }
 
     /**
      * 创建菜单
+     *
      * @param accessToken 访问token
-     * @param jsonMenu 菜单json
-     * @param cb 回调
+     * @param jsonMenu    菜单json
+     * @param cb          回调
      */
-    public void create(final String accessToken, final String jsonMenu, Callback<Boolean> cb){
+    public void create(final String accessToken, final String jsonMenu, Callback<Boolean> cb) {
         doAsync(new AsyncFunction<Boolean>(cb) {
             @Override
             public Boolean execute() {
@@ -108,20 +116,22 @@ public final class Menus extends Component {
 
     /**
      * 创建菜单
+     *
      * @param jsonMenu 菜单json
-     * @param cb 回调
+     * @param cb       回调
      */
-    public void create(final String jsonMenu, Callback<Boolean> cb){
+    public void create(final String jsonMenu, Callback<Boolean> cb) {
         create(loadAccessToken(), jsonMenu, cb);
     }
 
     /**
      * 创建菜单
+     *
      * @param accessToken 访问token
-     * @param jsonMenu 菜单json
+     * @param jsonMenu    菜单json
      * @return 创建成功返回true，或抛WechatException
      */
-    public Boolean create(String accessToken, String jsonMenu){
+    public Boolean create(String accessToken, String jsonMenu) {
         checkNotNullAndEmpty(accessToken, "accessToken");
         checkNotNullAndEmpty(jsonMenu, "jsonMenu");
 
@@ -132,26 +142,29 @@ public final class Menus extends Component {
 
     /**
      * 删除菜单
+     *
      * @return 删除成功返回true，或抛WechatException
      */
-    public Boolean delete(){
+    public Boolean delete() {
         return delete(loadAccessToken());
     }
 
     /**
      * 删除菜单
+     *
      * @param cb 回调
      */
-    public void delete(Callback<Boolean> cb){
+    public void delete(Callback<Boolean> cb) {
         delete(loadAccessToken(), cb);
     }
 
     /**
      * 删除菜单
+     *
      * @param accessToken accessToken
-     * @param cb 回调
+     * @param cb          回调
      */
-    public void delete(final String accessToken, Callback<Boolean> cb){
+    public void delete(final String accessToken, Callback<Boolean> cb) {
         doAsync(new AsyncFunction<Boolean>(cb) {
             @Override
             public Boolean execute() {
@@ -162,10 +175,11 @@ public final class Menus extends Component {
 
     /**
      * 删除菜单
+     *
      * @param accessToken accessToken
      * @return 删除成功返回true，或抛WechatException
      */
-    public Boolean delete(String accessToken){
+    public Boolean delete(String accessToken) {
         checkNotNullAndEmpty(accessToken, "accessToken");
 
         String url = DELETE + accessToken;

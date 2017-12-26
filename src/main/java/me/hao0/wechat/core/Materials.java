@@ -21,6 +21,7 @@ import static me.hao0.common.util.Preconditions.*;
  * Author: haolin
  * Email: haolin.h0@gmail.com
  * Date: 18/11/15
+ *
  * @since 1.4.0
  */
 public final class Materials extends Component {
@@ -74,30 +75,34 @@ public final class Materials extends Component {
 
     private static final JavaType ARRAY_LIST_NEWS_MATERIAL_TYPE = Jsons.DEFAULT.createCollectionType(ArrayList.class, NewsMaterial.class);
 
-    Materials(){}
+    Materials() {
+    }
 
     /**
      * 获取素材总数统计
+     *
      * @return 素材总数统计
      */
-    public MaterialCount count(){
+    public MaterialCount count() {
         return count(loadAccessToken());
     }
 
     /**
      * 获取素材总数统计
+     *
      * @param cb 回调
      */
-    public void count(Callback<MaterialCount> cb){
+    public void count(Callback<MaterialCount> cb) {
         count(loadAccessToken(), cb);
     }
 
     /**
      * 获取素材总数统计
+     *
      * @param accessToken accessToken
-     * @param cb 回调
+     * @param cb          回调
      */
-    public void count(final String accessToken, Callback<MaterialCount> cb){
+    public void count(final String accessToken, Callback<MaterialCount> cb) {
         doAsync(new AsyncFunction<MaterialCount>(cb) {
             @Override
             public MaterialCount execute() {
@@ -108,10 +113,11 @@ public final class Materials extends Component {
 
     /**
      * 获取素材总数统计
+     *
      * @param accessToken accessToken
      * @return 素材总数统计，或抛WechatException
      */
-    public MaterialCount count(String accessToken){
+    public MaterialCount count(String accessToken) {
         checkNotNullAndEmpty(accessToken, "accessToken");
         String url = COUNT + accessToken;
         Map<String, Object> resp = doGet(url);
@@ -120,38 +126,41 @@ public final class Materials extends Component {
 
     /**
      * 获取素材列表
-     * @param type 素材类型
+     *
+     * @param type   素材类型
      * @param offset 从全部素材的该偏移位置开始返回，0表示从第一个素材返回
-     * @param count 返回素材的数量，取值在1到20之间
-     * @param <T> Material范型
+     * @param count  返回素材的数量，取值在1到20之间
+     * @param <T>    Material范型
      * @return 素材分页对象，或抛WechatException
      */
-    public <T> Page<T> gets(MaterialType type, Integer offset, Integer count){
+    public <T> Page<T> gets(MaterialType type, Integer offset, Integer count) {
         return gets(loadAccessToken(), type, offset, count);
     }
 
     /**
      * 获取素材列表
-     * @param type 素材类型
+     *
+     * @param type   素材类型
      * @param offset 从全部素材的该偏移位置开始返回，0表示从第一个素材返回
-     * @param count 返回素材的数量，取值在1到20之间
-     * @param <T> Material范型
-     * @param cb 回调
+     * @param count  返回素材的数量，取值在1到20之间
+     * @param <T>    Material范型
+     * @param cb     回调
      */
-    public <T> void gets(final MaterialType type, final Integer offset, final Integer count, Callback<Page<T>> cb){
+    public <T> void gets(final MaterialType type, final Integer offset, final Integer count, Callback<Page<T>> cb) {
         gets(loadAccessToken(), type, offset, count, cb);
     }
 
     /**
      * 获取素材列表
+     *
      * @param accessToken accessToken
-     * @param type 素材类型
-     * @param offset 从全部素材的该偏移位置开始返回，0表示从第一个素材返回
-     * @param count 返回素材的数量，取值在1到20之间
-     * @param <T> Material范型
-     * @param cb 回调
+     * @param type        素材类型
+     * @param offset      从全部素材的该偏移位置开始返回，0表示从第一个素材返回
+     * @param count       返回素材的数量，取值在1到20之间
+     * @param <T>         Material范型
+     * @param cb          回调
      */
-    public <T> void gets(final String accessToken, final MaterialType type, final Integer offset, final Integer count, Callback<Page<T>> cb){
+    public <T> void gets(final String accessToken, final MaterialType type, final Integer offset, final Integer count, Callback<Page<T>> cb) {
         doAsync(new AsyncFunction<Page<T>>(cb) {
             @Override
             public Page<T> execute() {
@@ -162,14 +171,15 @@ public final class Materials extends Component {
 
     /**
      * 获取素材列表
+     *
      * @param accessToken accessToken
-     * @param type 素材类型
-     * @param offset 从全部素材的该偏移位置开始返回，0表示从第一个素材返回
-     * @param count 返回素材的数量，取值在1到20之间
-     * @param <T> Material范型
+     * @param type        素材类型
+     * @param offset      从全部素材的该偏移位置开始返回，0表示从第一个素材返回
+     * @param count       返回素材的数量，取值在1到20之间
+     * @param <T>         Material范型
      * @return 素材分页对象，或抛WechatException
      */
-    public <T> Page<T> gets(String accessToken, MaterialType type, Integer offset, Integer count){
+    public <T> Page<T> gets(String accessToken, MaterialType type, Integer offset, Integer count) {
         checkNotNullAndEmpty(accessToken, "accessToken");
         checkNotNull(type, "material type can't be null");
 
@@ -184,15 +194,15 @@ public final class Materials extends Component {
     }
 
     private <T> Page<T> renderMaterialPage(MaterialType type, Map<String, Object> resp) {
-        Integer itemCount = (Integer)resp.get("item_count");
-        if (itemCount == null || itemCount <= 0){
+        Integer itemCount = (Integer) resp.get("item_count");
+        if (itemCount == null || itemCount <= 0) {
             return Page.empty();
         }
 
-        Integer itemTotal = (Integer)resp.get("total_count");
+        Integer itemTotal = (Integer) resp.get("total_count");
 
         JavaType materialType = MaterialType.NEWS == type ?
-                ARRAY_LIST_NEWS_MATERIAL_TYPE :ARRAY_LIST_COMMON_MATERIAL_TYPE ;
+                ARRAY_LIST_NEWS_MATERIAL_TYPE : ARRAY_LIST_COMMON_MATERIAL_TYPE;
         List<T> materials = Jsons.DEFAULT.fromJson(
                 Jsons.DEFAULT.toJson(resp.get("item")), materialType);
 
@@ -201,29 +211,32 @@ public final class Materials extends Component {
 
     /**
      * 删除永久素材
+     *
      * @param mediaId 永久素材mediaId
      * @return 删除成功返回true，或抛WechatException
      */
-    public Boolean delete(String mediaId){
+    public Boolean delete(String mediaId) {
         return delete(loadAccessToken(), mediaId);
     }
 
     /**
      * 删除永久素材
+     *
      * @param mediaId 永久素材mediaId
-     * @param cb 回调
+     * @param cb      回调
      */
-    public void delete(final String mediaId, Callback<Boolean> cb){
+    public void delete(final String mediaId, Callback<Boolean> cb) {
         delete(loadAccessToken(), mediaId, cb);
     }
 
     /**
      * 删除永久素材
+     *
      * @param accessToken accessToken
-     * @param mediaId 永久素材mediaId
-     * @param cb 回调
+     * @param mediaId     永久素材mediaId
+     * @param cb          回调
      */
-    public void delete(final String accessToken, final String mediaId, Callback<Boolean> cb){
+    public void delete(final String accessToken, final String mediaId, Callback<Boolean> cb) {
         doAsync(new AsyncFunction<Boolean>(cb) {
             @Override
             public Boolean execute() {
@@ -234,11 +247,12 @@ public final class Materials extends Component {
 
     /**
      * 删除永久素材
+     *
      * @param accessToken accessToken
-     * @param mediaId 永久素材mediaId
+     * @param mediaId     永久素材mediaId
      * @return 删除成功返回true，或抛WechatException
      */
-    public Boolean delete(String accessToken, String mediaId){
+    public Boolean delete(String accessToken, String mediaId) {
         checkNotNullAndEmpty(accessToken, "accessToken");
         checkNotNullAndEmpty(mediaId, "mediaId");
 
@@ -252,12 +266,13 @@ public final class Materials extends Component {
 
     /**
      * 上传临时素材:
-     图片（image）: 1M，bmp/png/jpeg/jpg/gif
-     语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
-     视频（video）：10MB，支持MP4格式
-     缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
-     媒体文件在后台保存时间为3天，即3天后media_id失效。
-     * @param type 文件类型
+     * 图片（image）: 1M，bmp/png/jpeg/jpg/gif
+     * 语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
+     * 视频（video）：10MB，支持MP4格式
+     * 缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     * 媒体文件在后台保存时间为3天，即3天后media_id失效。
+     *
+     * @param type     文件类型
      * @param fileName 文件名
      * @param fileData 文件数据
      * @return TempMaterial对象，或抛WechatException
@@ -268,15 +283,16 @@ public final class Materials extends Component {
 
     /**
      * 上传临时素材:
-     图片（image）: 1M，bmp/png/jpeg/jpg/gif
-     语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
-     视频（video）：10MB，支持MP4格式
-     缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
-     媒体文件在后台保存时间为3天，即3天后media_id失效。
+     * 图片（image）: 1M，bmp/png/jpeg/jpg/gif
+     * 语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
+     * 视频（video）：10MB，支持MP4格式
+     * 缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     * 媒体文件在后台保存时间为3天，即3天后media_id失效。
+     *
      * @param accessToken accessToken
-     * @param type 文件类型
-     * @param fileName 文件名
-     * @param fileData 文件数据
+     * @param type        文件类型
+     * @param fileName    文件名
+     * @param fileData    文件数据
      * @return TempMaterial对象，或抛WechatException
      */
     public TempMaterial uploadTemp(String accessToken, MaterialUploadType type, String fileName, byte[] fileData) {
@@ -285,12 +301,13 @@ public final class Materials extends Component {
 
     /**
      * 上传临时素材:
-     图片（image）: 1M，bmp/png/jpeg/jpg/gif
-     语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
-     视频（video）：10MB，支持MP4格式
-     缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
-     媒体文件在后台保存时间为3天，即3天后media_id失效。
-     * @param type 文件类型
+     * 图片（image）: 1M，bmp/png/jpeg/jpg/gif
+     * 语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
+     * 视频（video）：10MB，支持MP4格式
+     * 缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     * 媒体文件在后台保存时间为3天，即3天后media_id失效。
+     *
+     * @param type  文件类型
      * @param media 媒体文件输入流
      * @return TempMaterial对象，或抛WechatException
      */
@@ -300,14 +317,15 @@ public final class Materials extends Component {
 
     /**
      * 上传临时素材:
-     图片（image）: 1M，bmp/png/jpeg/jpg/gif
-     语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
-     视频（video）：10MB，支持MP4格式
-     缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
-     媒体文件在后台保存时间为3天，即3天后media_id失效。
+     * 图片（image）: 1M，bmp/png/jpeg/jpg/gif
+     * 语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
+     * 视频（video）：10MB，支持MP4格式
+     * 缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     * 媒体文件在后台保存时间为3天，即3天后media_id失效。
+     *
      * @param accessToken accessToken
-     * @param type 文件类型
-     * @param media 媒体文件输入流
+     * @param type        文件类型
+     * @param media       媒体文件输入流
      * @return TempMaterial对象，或抛WechatException
      */
     public TempMaterial uploadTemp(String accessToken, MaterialUploadType type, File media) {
@@ -320,16 +338,17 @@ public final class Materials extends Component {
 
     /**
      * 上传临时素材:
-     图片（image）: 1M，bmp/png/jpeg/jpg/gif
-     语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
-     视频（video）：10MB，支持MP4格式
-     缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
-     媒体文件在后台保存时间为3天，即3天后media_id失效。
-     * @param type 文件类型
+     * 图片（image）: 1M，bmp/png/jpeg/jpg/gif
+     * 语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
+     * 视频（video）：10MB，支持MP4格式
+     * 缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     * 媒体文件在后台保存时间为3天，即3天后media_id失效。
+     *
+     * @param type  文件类型
      * @param media 媒体文件输入流
-     * @param cb 回调
+     * @param cb    回调
      */
-    public void uploadTemp( MaterialUploadType type, File media, Callback<TempMaterial> cb) {
+    public void uploadTemp(MaterialUploadType type, File media, Callback<TempMaterial> cb) {
         try {
             uploadTemp(loadAccessToken(), type, media.getName(), new FileInputStream(media), cb);
         } catch (FileNotFoundException e) {
@@ -339,15 +358,16 @@ public final class Materials extends Component {
 
     /**
      * 上传临时素材:
-     图片（image）: 1M，bmp/png/jpeg/jpg/gif
-     语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
-     视频（video）：10MB，支持MP4格式
-     缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
-     媒体文件在后台保存时间为3天，即3天后media_id失效。
+     * 图片（image）: 1M，bmp/png/jpeg/jpg/gif
+     * 语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
+     * 视频（video）：10MB，支持MP4格式
+     * 缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     * 媒体文件在后台保存时间为3天，即3天后media_id失效。
+     *
      * @param accessToken accessToken
-     * @param type 文件类型
-     * @param media 媒体文件输入流
-     * @param cb 回调
+     * @param type        文件类型
+     * @param media       媒体文件输入流
+     * @param cb          回调
      */
     public void uploadTemp(String accessToken, MaterialUploadType type, File media, Callback<TempMaterial> cb) {
         try {
@@ -359,14 +379,15 @@ public final class Materials extends Component {
 
     /**
      * 上传临时素材:
-     图片（image）: 1M，bmp/png/jpeg/jpg/gif
-     语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
-     视频（video）：10MB，支持MP4格式
-     缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
-     媒体文件在后台保存时间为3天，即3天后media_id失效。
-     * @param type 文件类型
+     * 图片（image）: 1M，bmp/png/jpeg/jpg/gif
+     * 语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
+     * 视频（video）：10MB，支持MP4格式
+     * 缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     * 媒体文件在后台保存时间为3天，即3天后media_id失效。
+     *
+     * @param type     文件类型
      * @param fileName 文件名
-     * @param input 输入流
+     * @param input    输入流
      * @return TempMaterial对象，或抛WechatException
      */
     public TempMaterial uploadTemp(MaterialUploadType type, String fileName, InputStream input) {
@@ -375,15 +396,16 @@ public final class Materials extends Component {
 
     /**
      * 上传临时素材:
-     图片（image）: 1M，bmp/png/jpeg/jpg/gif
-     语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
-     视频（video）：10MB，支持MP4格式
-     缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
-     媒体文件在后台保存时间为3天，即3天后media_id失效。
-     * @param type 文件类型
+     * 图片（image）: 1M，bmp/png/jpeg/jpg/gif
+     * 语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
+     * 视频（video）：10MB，支持MP4格式
+     * 缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     * 媒体文件在后台保存时间为3天，即3天后media_id失效。
+     *
+     * @param type     文件类型
      * @param fileName 文件名
-     * @param input 输入流
-     * @param cb 回调
+     * @param input    输入流
+     * @param cb       回调
      */
     public void uploadTemp(final MaterialUploadType type, final String fileName, final InputStream input, Callback<TempMaterial> cb) {
         uploadTemp(loadAccessToken(), type, fileName, input, cb);
@@ -391,16 +413,17 @@ public final class Materials extends Component {
 
     /**
      * 上传临时素材:
-     图片（image）: 1M，bmp/png/jpeg/jpg/gif
-     语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
-     视频（video）：10MB，支持MP4格式
-     缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
-     媒体文件在后台保存时间为3天，即3天后media_id失效。
+     * 图片（image）: 1M，bmp/png/jpeg/jpg/gif
+     * 语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
+     * 视频（video）：10MB，支持MP4格式
+     * 缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     * 媒体文件在后台保存时间为3天，即3天后media_id失效。
+     *
      * @param accessToken accessToken
-     * @param type 文件类型
-     * @param fileName 文件名
-     * @param input 输入流
-     * @param cb 回调
+     * @param type        文件类型
+     * @param fileName    文件名
+     * @param input       输入流
+     * @param cb          回调
      */
     public void uploadTemp(final String accessToken, final MaterialUploadType type, final String fileName, final InputStream input, Callback<TempMaterial> cb) {
         doAsync(new AsyncFunction<TempMaterial>(cb) {
@@ -413,15 +436,16 @@ public final class Materials extends Component {
 
     /**
      * 上传临时素材:
-     图片（image）: 1M，bmp/png/jpeg/jpg/gif
-     语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
-     视频（video）：10MB，支持MP4格式
-     缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
-     媒体文件在后台保存时间为3天，即3天后media_id失效。
+     * 图片（image）: 1M，bmp/png/jpeg/jpg/gif
+     * 语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
+     * 视频（video）：10MB，支持MP4格式
+     * 缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     * 媒体文件在后台保存时间为3天，即3天后media_id失效。
+     *
      * @param accessToken accessToken
-     * @param type 文件类型
-     * @param fileName 文件名
-     * @param input 输入流
+     * @param type        文件类型
+     * @param fileName    文件名
+     * @param input       输入流
      * @return TempMaterial对象，或抛WechatException
      */
     public TempMaterial uploadTemp(String accessToken, MaterialUploadType type, String fileName, InputStream input) {
@@ -440,29 +464,32 @@ public final class Materials extends Component {
 
     /**
      * 下载临时素材
+     *
      * @param mediaId mediaId
      * @return 文件二进制数据
      */
-    public byte[] downloadTemp(String mediaId){
+    public byte[] downloadTemp(String mediaId) {
         return downloadTemp(loadAccessToken(), mediaId);
     }
 
     /**
      * 下载临时素材
+     *
      * @param mediaId mediaId
-     * @param cb 回调
+     * @param cb      回调
      */
-    public void downloadTemp(final String mediaId, Callback<byte[]> cb){
+    public void downloadTemp(final String mediaId, Callback<byte[]> cb) {
         downloadTemp(loadAccessToken(), mediaId, cb);
     }
 
     /**
      * 下载临时素材
+     *
      * @param accessToken accessToken
-     * @param mediaId mediaId
-     * @param cb 回调
+     * @param mediaId     mediaId
+     * @param cb          回调
      */
-    public void downloadTemp(final String accessToken, final String mediaId, Callback<byte[]> cb){
+    public void downloadTemp(final String accessToken, final String mediaId, Callback<byte[]> cb) {
         doAsync(new AsyncFunction<byte[]>(cb) {
             @Override
             public byte[] execute() {
@@ -473,11 +500,12 @@ public final class Materials extends Component {
 
     /**
      * 下载临时素材
+     *
      * @param accessToken accessToken
-     * @param mediaId mediaId
+     * @param mediaId     mediaId
      * @return 文件二进制数据
      */
-    public byte[] downloadTemp(String accessToken, String mediaId){
+    public byte[] downloadTemp(String accessToken, String mediaId) {
         checkNotNullAndEmpty(accessToken, "accessToken");
         checkNotNullAndEmpty(mediaId, "mediaId");
 
@@ -490,29 +518,32 @@ public final class Materials extends Component {
 
     /**
      * 添加永久图文素材
+     *
      * @param items 图文素材列表
      * @return mediaId
      */
-    public String uploadPermNews(List<NewsContentItem> items){
+    public String uploadPermNews(List<NewsContentItem> items) {
         return uploadPermNews(loadAccessToken(), items);
     }
 
     /**
      * 添加永久图文素材(其中内容中的外部图片链接会被过滤，所以需先用uploadPermNewsImage转换为微信内部图片)
+     *
      * @param items 图文素材列表
-     * @param cb 回调
+     * @param cb    回调
      */
-    public void uploadPermNews(final List<NewsContentItem> items, Callback<String> cb){
+    public void uploadPermNews(final List<NewsContentItem> items, Callback<String> cb) {
         uploadPermNews(loadAccessToken(), items, cb);
     }
 
     /**
      * 添加永久图文素材(其中内容中的外部图片链接会被过滤，所以需先用uploadPermNewsImage转换为微信内部图片)
+     *
      * @param accessToken accessToken
-     * @param items 图文素材列表
-     * @param cb 回调
+     * @param items       图文素材列表
+     * @param cb          回调
      */
-    public void uploadPermNews(final String accessToken, final List<NewsContentItem> items, Callback<String> cb){
+    public void uploadPermNews(final String accessToken, final List<NewsContentItem> items, Callback<String> cb) {
         doAsync(new AsyncFunction<String>(cb) {
             @Override
             public String execute() {
@@ -523,11 +554,12 @@ public final class Materials extends Component {
 
     /**
      * 添加永久图文素材(其中内容中的外部图片链接会被过滤，所以需先用uploadPermNewsImage转换为微信内部图片)
+     *
      * @param accessToken accessToken
-     * @param items 图文素材列表
+     * @param items       图文素材列表
      * @return mediaId
      */
-    public String uploadPermNews(String accessToken, List<NewsContentItem> items){
+    public String uploadPermNews(String accessToken, List<NewsContentItem> items) {
         checkNotNullAndEmpty(accessToken, "accessToken");
         checkNotNullAndEmpty(items, "items");
 
@@ -535,29 +567,31 @@ public final class Materials extends Component {
         Map<String, Object> params = Maps.newHashMapWithExpectedSize(1);
         params.put("articles", items);
         Map<String, Object> resp = doPost(url, params);
-        return (String)resp.get("media_id");
+        return (String) resp.get("media_id");
     }
 
     /**
      * 添加永久图文素材(其中内容中的外部图片链接会被过滤，所以需先用uploadPermNewsImage转换为微信内部图片)
-     * @param mediaId 图文mediaId
+     *
+     * @param mediaId   图文mediaId
      * @param itemIndex 对应图文素材中的第几个图文项，从0开始
-     * @param newItem 新的图文项
-     * @param cb 回调
+     * @param newItem   新的图文项
+     * @param cb        回调
      */
-    public void updatePermNews(final String mediaId, final Integer itemIndex, final NewsContentItem newItem, Callback<Boolean> cb){
+    public void updatePermNews(final String mediaId, final Integer itemIndex, final NewsContentItem newItem, Callback<Boolean> cb) {
         updatePermNews(loadAccessToken(), mediaId, itemIndex, newItem, cb);
     }
 
     /**
      * 添加永久图文素材(其中内容中的外部图片链接会被过滤，所以需先用uploadPermNewsImage转换为微信内部图片)
+     *
      * @param accessToken accessToken
-     * @param mediaId 图文mediaId
-     * @param itemIndex 对应图文素材中的第几个图文项，从0开始
-     * @param newItem 新的图文项
-     * @param cb 回调
+     * @param mediaId     图文mediaId
+     * @param itemIndex   对应图文素材中的第几个图文项，从0开始
+     * @param newItem     新的图文项
+     * @param cb          回调
      */
-    public void updatePermNews(final String accessToken, final String mediaId, final Integer itemIndex, final NewsContentItem newItem, Callback<Boolean> cb){
+    public void updatePermNews(final String accessToken, final String mediaId, final Integer itemIndex, final NewsContentItem newItem, Callback<Boolean> cb) {
         doAsync(new AsyncFunction<Boolean>(cb) {
             @Override
             public Boolean execute() {
@@ -568,13 +602,14 @@ public final class Materials extends Component {
 
     /**
      * 添加永久图文素材(其中内容中的外部图片链接会被过滤，所以需先用uploadPermNewsImage转换为微信内部图片)
+     *
      * @param accessToken accessToken
-     * @param mediaId 图文mediaId
-     * @param itemIndex 对应图文素材中的第几个图文项，从0开始
-     * @param newItem 新的图文项
+     * @param mediaId     图文mediaId
+     * @param itemIndex   对应图文素材中的第几个图文项，从0开始
+     * @param newItem     新的图文项
      * @return 更新成功返回true，反之false
      */
-    public Boolean updatePermNews(String accessToken, String mediaId, Integer itemIndex, NewsContentItem newItem){
+    public Boolean updatePermNews(String accessToken, String mediaId, Integer itemIndex, NewsContentItem newItem) {
         checkNotNullAndEmpty(accessToken, "accessToken");
         checkNotNullAndEmpty(mediaId, "mediaId");
         checkArgument(itemIndex != null && itemIndex > 0, "itemIndex can't be null and must > 0");
@@ -592,8 +627,9 @@ public final class Materials extends Component {
 
     /**
      * 上传永久图文素材内容中引用的图片
+     *
      * @param accessToken accessToken
-     * @param image 图片对象
+     * @param image       图片对象
      * @return 微信内部图片链接
      */
     public String uploadPermNewsImage(String accessToken, File image) {
@@ -606,8 +642,9 @@ public final class Materials extends Component {
 
     /**
      * 上传永久图文素材内容中引用的图片
+     *
      * @param image 图片对象
-     * @param cb 回调
+     * @param cb    回调
      */
     public void uploadPermNewsImage(File image, Callback<String> cb) {
         uploadPermNewsImage(loadAccessToken(), image, cb);
@@ -615,9 +652,10 @@ public final class Materials extends Component {
 
     /**
      * 上传永久图文素材内容中引用的图片
+     *
      * @param accessToken accessToken
-     * @param image 图片对象
-     * @param cb 回调
+     * @param image       图片对象
+     * @param cb          回调
      */
     public void uploadPermNewsImage(String accessToken, File image, Callback<String> cb) {
         try {
@@ -629,9 +667,10 @@ public final class Materials extends Component {
 
     /**
      * 上传永久图文素材内容中引用的图片
+     *
      * @param accessToken accessToken
-     * @param fileName 文件名
-     * @param data 文件二机制数据
+     * @param fileName    文件名
+     * @param data        文件二机制数据
      * @return 微信内部图片链接
      */
     public String uploadPermNewsImage(String accessToken, String fileName, byte[] data) {
@@ -640,9 +679,10 @@ public final class Materials extends Component {
 
     /**
      * 上传永久图文素材内容中引用的图片
+     *
      * @param fileName 文件名
-     * @param data 文件二机制数据
-     * @param cb 回调
+     * @param data     文件二机制数据
+     * @param cb       回调
      */
     public void uploadPermNewsImage(String fileName, byte[] data, Callback<String> cb) {
         uploadPermNewsImage(loadAccessToken(), fileName, new ByteArrayInputStream(data), cb);
@@ -650,10 +690,11 @@ public final class Materials extends Component {
 
     /**
      * 上传永久图文素材内容中引用的图片
+     *
      * @param accessToken accessToken
-     * @param fileName 文件名
-     * @param data 文件二机制数据
-     * @param cb 回调
+     * @param fileName    文件名
+     * @param data        文件二机制数据
+     * @param cb          回调
      */
     public void uploadPermNewsImage(String accessToken, String fileName, byte[] data, Callback<String> cb) {
         uploadPermNewsImage(accessToken, fileName, new ByteArrayInputStream(data), cb);
@@ -661,20 +702,22 @@ public final class Materials extends Component {
 
     /**
      * 上传永久图文素材内容中引用的图片
+     *
      * @param fileName 文件名
-     * @param in 文件输入流
-     * @param cb 回调
+     * @param in       文件输入流
+     * @param cb       回调
      */
-    public void uploadPermNewsImage(final String fileName, final InputStream in, Callback<String> cb){
+    public void uploadPermNewsImage(final String fileName, final InputStream in, Callback<String> cb) {
         uploadPermNewsImage(loadAccessToken(), fileName, in, cb);
     }
 
     /**
      * 上传永久图文素材内容中引用的图片
+     *
      * @param accessToken accessToken
-     * @param fileName 文件名
-     * @param in 文件输入流
-     * @param cb 回调
+     * @param fileName    文件名
+     * @param in          文件输入流
+     * @param cb          回调
      */
     public void uploadPermNewsImage(final String accessToken, final String fileName, final InputStream in, Callback<String> cb) {
         doAsync(new AsyncFunction<String>(cb) {
@@ -687,9 +730,10 @@ public final class Materials extends Component {
 
     /**
      * 上传永久图文素材内容中引用的图片
+     *
      * @param accessToken accessToken
-     * @param fileName 文件名
-     * @param in 文件输入流
+     * @param fileName    文件名
+     * @param in          文件输入流
      * @return 微信内部图片链接
      */
     public String uploadPermNewsImage(String accessToken, String fileName, InputStream in) {
@@ -699,18 +743,19 @@ public final class Materials extends Component {
 
         String url = UPLOAD_NEWS_IMAGE + accessToken;
         Map<String, Object> resp = doUpload(url, "media", fileName, in, Collections.<String, String>emptyMap());
-        return (String)resp.get("url");
+        return (String) resp.get("url");
     }
 
     /**
      * 上传永久(图片，语音，缩略图)素材
-     永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000
-     图片（image）: 1M，bmp/png/jpeg/jpg/gif
-     语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
-     缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     * 永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000
+     * 图片（image）: 1M，bmp/png/jpeg/jpg/gif
+     * 语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
+     * 缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     *
      * @param accessToken accessToken
-     * @param type 文件类型
-     * @param file 文件
+     * @param type        文件类型
+     * @param file        文件
      * @return PermMaterial对象，或抛WechatException
      */
     public PermMaterial uploadPerm(String accessToken, MaterialUploadType type, File file) {
@@ -723,14 +768,15 @@ public final class Materials extends Component {
 
     /**
      * 上传永久(图片，语音，缩略图)素材
-     永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000
-     图片（image）: 1M，bmp/png/jpeg/jpg/gif
-     语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
-     缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     * 永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000
+     * 图片（image）: 1M，bmp/png/jpeg/jpg/gif
+     * 语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
+     * 缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     *
      * @param accessToken accessToken
-     * @param type 文件类型
-     * @param fileName 文件名
-     * @param data 文件二进制数据
+     * @param type        文件类型
+     * @param fileName    文件名
+     * @param data        文件二进制数据
      * @return PermMaterial对象，或抛WechatException
      */
     public PermMaterial uploadPerm(String accessToken, MaterialUploadType type, String fileName, byte[] data) {
@@ -739,15 +785,16 @@ public final class Materials extends Component {
 
     /**
      * 上传永久(图片，语音，缩略图)素材
-     永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000
-     图片（image）: 1M，bmp/png/jpeg/jpg/gif
-     语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
-     缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     * 永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000
+     * 图片（image）: 1M，bmp/png/jpeg/jpg/gif
+     * 语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
+     * 缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     *
      * @param accessToken accessToken
-     * @param type 文件类型
-     * @param fileName 文件名
-     * @param data 文件二进制数据
-     * @param cb 回调
+     * @param type        文件类型
+     * @param fileName    文件名
+     * @param data        文件二进制数据
+     * @param cb          回调
      */
     public void uploadPerm(String accessToken, MaterialUploadType type, String fileName, byte[] data, Callback<PermMaterial> cb) {
         uploadPerm(accessToken, type, fileName, new ByteArrayInputStream(data), cb);
@@ -755,14 +802,15 @@ public final class Materials extends Component {
 
     /**
      * 上传永久(图片，语音，缩略图)素材
-     永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000
-     图片（image）: 1M，bmp/png/jpeg/jpg/gif
-     语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
-     缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
-     * @param type 文件类型
+     * 永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000
+     * 图片（image）: 1M，bmp/png/jpeg/jpg/gif
+     * 语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
+     * 缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     *
+     * @param type     文件类型
      * @param fileName 文件名
-     * @param data 文件二进制数据
-     * @param cb 回调
+     * @param data     文件二进制数据
+     * @param cb       回调
      */
     public void uploadPerm(MaterialUploadType type, String fileName, byte[] data, Callback<PermMaterial> cb) {
         uploadPerm(loadAccessToken(), type, fileName, new ByteArrayInputStream(data), cb);
@@ -770,28 +818,30 @@ public final class Materials extends Component {
 
     /**
      * 上传永久(图片，语音，缩略图)素材
-     永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000
-     图片（image）: 1M，bmp/png/jpeg/jpg/gif
-     语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
-     缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
-     * @param type 文件类型
+     * 永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000
+     * 图片（image）: 1M，bmp/png/jpeg/jpg/gif
+     * 语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
+     * 缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     *
+     * @param type     文件类型
      * @param fileName 文件名
-     * @param data 文件二进制数据
+     * @param data     文件二进制数据
      * @return PermMaterial对象，或抛WechatException
      */
-    public PermMaterial uploadPerm( MaterialUploadType type, String fileName, byte[] data) {
+    public PermMaterial uploadPerm(MaterialUploadType type, String fileName, byte[] data) {
         return uploadPerm(loadAccessToken(), type, fileName, new ByteArrayInputStream(data));
     }
 
     /**
      * 上传永久(图片，语音，缩略图)素材
-     永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000
-     图片（image）: 1M，bmp/png/jpeg/jpg/gif
-     语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
-     缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     * 永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000
+     * 图片（image）: 1M，bmp/png/jpeg/jpg/gif
+     * 语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
+     * 缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     *
      * @param type 文件类型
      * @param file 输入流
-     * @param cb 回调
+     * @param cb   回调
      */
     public void uploadPerm(final MaterialUploadType type, final File file, Callback<PermMaterial> cb) {
         uploadPerm(loadAccessToken(), type, file, cb);
@@ -799,14 +849,15 @@ public final class Materials extends Component {
 
     /**
      * 上传永久(图片，语音，缩略图)素材
-     永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000
-     图片（image）: 1M，bmp/png/jpeg/jpg/gif
-     语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
-     缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     * 永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000
+     * 图片（image）: 1M，bmp/png/jpeg/jpg/gif
+     * 语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
+     * 缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     *
      * @param accessToken accessToken
-     * @param type 文件类型
-     * @param file 输入流
-     * @param cb 回调
+     * @param type        文件类型
+     * @param file        输入流
+     * @param cb          回调
      */
     public void uploadPerm(String accessToken, final MaterialUploadType type, final File file, Callback<PermMaterial> cb) {
         try {
@@ -818,14 +869,15 @@ public final class Materials extends Component {
 
     /**
      * 上传永久(图片，语音，缩略图)素材
-     永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000
-     图片（image）: 1M，bmp/png/jpeg/jpg/gif
-     语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
-     缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
-     * @param type 文件类型
+     * 永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000
+     * 图片（image）: 1M，bmp/png/jpeg/jpg/gif
+     * 语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
+     * 缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     *
+     * @param type     文件类型
      * @param fileName 文件名
-     * @param input 输入流
-     * @param cb 回调
+     * @param input    输入流
+     * @param cb       回调
      */
     public void uploadPerm(final MaterialUploadType type, final String fileName, final InputStream input, Callback<PermMaterial> cb) {
         uploadPerm(loadAccessToken(), type, fileName, input, cb);
@@ -833,15 +885,16 @@ public final class Materials extends Component {
 
     /**
      * 上传永久(图片，语音，缩略图)素材
-     永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000
-     图片（image）: 1M，bmp/png/jpeg/jpg/gif
-     语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
-     缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     * 永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000
+     * 图片（image）: 1M，bmp/png/jpeg/jpg/gif
+     * 语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
+     * 缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     *
      * @param accessToken accessToken
-     * @param type 文件类型
-     * @param fileName 文件名
-     * @param input 输入流
-     * @param cb 回调
+     * @param type        文件类型
+     * @param fileName    文件名
+     * @param input       输入流
+     * @param cb          回调
      */
     public void uploadPerm(final String accessToken, final MaterialUploadType type, final String fileName, final InputStream input, Callback<PermMaterial> cb) {
         doAsync(new AsyncFunction<PermMaterial>(cb) {
@@ -854,14 +907,15 @@ public final class Materials extends Component {
 
     /**
      * 上传永久(图片，语音，缩略图)素材
-     永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000
-     图片（image）: 1M，bmp/png/jpeg/jpg/gif
-     语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
-     缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     * 永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000
+     * 图片（image）: 1M，bmp/png/jpeg/jpg/gif
+     * 语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
+     * 缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     *
      * @param accessToken accessToken
-     * @param type 文件类型
-     * @param fileName 文件名
-     * @param input 输入流
+     * @param type        文件类型
+     * @param fileName    文件名
+     * @param input       输入流
      * @return PermMaterial对象，或抛WechatException
      */
     public PermMaterial uploadPerm(String accessToken, MaterialUploadType type, String fileName, InputStream input) {
@@ -869,7 +923,7 @@ public final class Materials extends Component {
         checkNotNull(type, "material upload type can't be null");
         checkNotNullAndEmpty(fileName, "fileName");
         checkNotNull(input, "input can't be null");
-        if (MaterialUploadType.VIDEO == type){
+        if (MaterialUploadType.VIDEO == type) {
             throw new IllegalArgumentException("type must be image, voice, or thumb, you should use uploadPermVideo method.");
         }
 
@@ -883,10 +937,11 @@ public final class Materials extends Component {
 
     /**
      * 上传永久视频素材(10M大小)
+     *
      * @param accessToken accessToken
-     * @param video 视频文件
-     * @param title 标题
-     * @param desc 描述
+     * @param video       视频文件
+     * @param title       标题
+     * @param desc        描述
      * @return PermMaterial对象，或抛WechatException
      */
     public PermMaterial uploadPermVideo(String accessToken, File video, String title, String desc) {
@@ -899,9 +954,10 @@ public final class Materials extends Component {
 
     /**
      * 上传永久视频素材(10M大小)
+     *
      * @param video 视频文件
      * @param title 标题
-     * @param desc 描述
+     * @param desc  描述
      * @return PermMaterial对象，或抛WechatException
      */
     public PermMaterial uploadPermVideo(File video, String title, String desc) {
@@ -910,11 +966,12 @@ public final class Materials extends Component {
 
     /**
      * 上传永久视频素材(10M大小)
+     *
      * @param accessToken accessToken
-     * @param fileName 文件名
-     * @param data 二进制数据
-     * @param title 标题
-     * @param desc 描述
+     * @param fileName    文件名
+     * @param data        二进制数据
+     * @param title       标题
+     * @param desc        描述
      * @return PermMaterial对象，或抛WechatException
      */
     public PermMaterial uploadPermVideo(String accessToken, String fileName, byte[] data, String title, String desc) {
@@ -923,10 +980,11 @@ public final class Materials extends Component {
 
     /**
      * 上传永久视频素材(10M大小)
+     *
      * @param fileName 文件名
-     * @param data 二进制数据
-     * @param title 标题
-     * @param desc 描述
+     * @param data     二进制数据
+     * @param title    标题
+     * @param desc     描述
      * @return PermMaterial对象，或抛WechatException
      */
     public PermMaterial uploadPermVideo(String fileName, byte[] data, String title, String desc) {
@@ -935,12 +993,13 @@ public final class Materials extends Component {
 
     /**
      * 上传永久视频素材(10M大小)
+     *
      * @param accessToken accessToken
-     * @param fileName 文件名
-     * @param data 二进制数据
-     * @param title 标题
-     * @param desc 描述
-     * @param cb 回调
+     * @param fileName    文件名
+     * @param data        二进制数据
+     * @param title       标题
+     * @param desc        描述
+     * @param cb          回调
      */
     public void uploadPermVideo(String accessToken, String fileName, byte[] data, final String title, final String desc, Callback<PermMaterial> cb) {
         uploadPermVideo(accessToken, fileName, new ByteArrayInputStream(data), title, desc, cb);
@@ -948,11 +1007,12 @@ public final class Materials extends Component {
 
     /**
      * 上传永久视频素材(10M大小)
+     *
      * @param fileName 文件名
-     * @param data 二进制数据
-     * @param title 标题
-     * @param desc 描述
-     * @param cb 回调
+     * @param data     二进制数据
+     * @param title    标题
+     * @param desc     描述
+     * @param cb       回调
      */
     public void uploadPermVideo(String fileName, byte[] data, final String title, final String desc, Callback<PermMaterial> cb) {
         uploadPermVideo(loadAccessToken(), fileName, new ByteArrayInputStream(data), title, desc, cb);
@@ -960,10 +1020,11 @@ public final class Materials extends Component {
 
     /**
      * 上传永久视频素材(10M大小)
+     *
      * @param video 文件
      * @param title 标题
-     * @param desc 描述
-     * @param cb 回调
+     * @param desc  描述
+     * @param cb    回调
      */
     public void uploadPermVideo(final File video, final String title, final String desc, Callback<PermMaterial> cb) {
         uploadPermVideo(loadAccessToken(), video, title, desc, cb);
@@ -971,11 +1032,12 @@ public final class Materials extends Component {
 
     /**
      * 上传永久视频素材(10M大小)
+     *
      * @param accessToken accessToken
-     * @param video 文件
-     * @param title 标题
-     * @param desc 描述
-     * @param cb 回调
+     * @param video       文件
+     * @param title       标题
+     * @param desc        描述
+     * @param cb          回调
      */
     public void uploadPermVideo(final String accessToken, final File video, final String title, final String desc, Callback<PermMaterial> cb) {
         try {
@@ -987,11 +1049,12 @@ public final class Materials extends Component {
 
     /**
      * 上传永久视频素材(10M大小)
+     *
      * @param fileName 文件名
-     * @param input 输入流
-     * @param title 标题
-     * @param desc 描述
-     * @param cb 回调
+     * @param input    输入流
+     * @param title    标题
+     * @param desc     描述
+     * @param cb       回调
      */
     public void uploadPermVideo(final String fileName, final InputStream input, final String title, final String desc, Callback<PermMaterial> cb) {
         uploadPermVideo(loadAccessToken(), fileName, input, title, desc, cb);
@@ -999,12 +1062,13 @@ public final class Materials extends Component {
 
     /**
      * 上传永久视频素材(10M大小)
+     *
      * @param accessToken accessToken
-     * @param fileName 文件名
-     * @param input 输入流
-     * @param title 标题
-     * @param desc 描述
-     * @param cb 回调
+     * @param fileName    文件名
+     * @param input       输入流
+     * @param title       标题
+     * @param desc        描述
+     * @param cb          回调
      */
     public void uploadPermVideo(final String accessToken, final String fileName, final InputStream input, final String title, final String desc, Callback<PermMaterial> cb) {
         doAsync(new AsyncFunction<PermMaterial>(cb) {
@@ -1017,11 +1081,12 @@ public final class Materials extends Component {
 
     /**
      * 上传永久视频素材(10M大小)
+     *
      * @param accessToken accessToken
-     * @param fileName 文件名
-     * @param input 输入流
-     * @param title 标题
-     * @param desc 描述
+     * @param fileName    文件名
+     * @param input       输入流
+     * @param title       标题
+     * @param desc        描述
      * @return PermMaterial对象，或抛WechatException
      */
     public PermMaterial uploadPermVideo(String accessToken, String fileName, InputStream input, String title, String desc) {
