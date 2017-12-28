@@ -43,6 +43,8 @@ public final class Wechat {
     private static final String MATERIALS = "me.hao0.wechat.core.Materials";
     private static final String DATAS = "me.hao0.wechat.core.Datas";
     private static final String JSSDKS = "me.hao0.wechat.core.JsSdks";
+	private static final String CARDS = "me.hao0.wechat.core.Cards";
+    private static final String UPLOAD_IMG = "me.hao0.wechat.core.UploadImg";
     private static final AccessTokenLoader DEFAULT_ACCESS_TOKEN_LOADER = new DefaultAccessTokenLoader();
     private static final DefaultTicketLoader DEFAULT_TICKET_LOADER = new DefaultTicketLoader();
     private static final JavaType MAP_STRING_OBJ_TYPE = Jsons.DEFAULT.createCollectionType(Map.class, String.class, Object.class);
@@ -154,6 +156,15 @@ public final class Wechat {
     public JsSdks js() {
         return (JsSdks) components.getUnchecked(JSSDKS);
     }
+
+	public Cards card() {
+    	return (Cards)components.getUnchecked(CARDS);
+    }
+    
+    public UploadImg uploadImg() {
+    	return (UploadImg)components.getUnchecked(UPLOAD_IMG);
+    }
+
 
     private void injectWechat(Class clazz, Object comp) throws NoSuchFieldException {
         Field wechat = clazz.getSuperclass().getDeclaredField("wechat");
