@@ -93,7 +93,7 @@ public final class Wechat {
             CacheBuilder.newBuilder().build(new CacheLoader<String, Component>() {
                 @Override
                 public Component load(String classFullName) throws Exception {
-                    Class clazz = Class.forName(classFullName);
+                    Class<?> clazz = Class.forName(classFullName);
                     Object comp = clazz.newInstance();
                     injectWechat(clazz, comp);
                     return (Component) comp;
@@ -103,6 +103,10 @@ public final class Wechat {
     Wechat(String appId, String appSecret) {
         this.appId = appId;
         this.appSecret = appSecret;
+    }
+    
+    Wechat(String appId) {
+    	this.appId = appId;
     }
 
     public String getAppId() {
@@ -166,7 +170,7 @@ public final class Wechat {
     }
 
 
-    private void injectWechat(Class clazz, Object comp) throws NoSuchFieldException {
+    private void injectWechat(Class<?> clazz, Object comp) throws NoSuchFieldException {
         Field wechat = clazz.getSuperclass().getDeclaredField("wechat");
         Fields.put(comp, wechat, this);
     }

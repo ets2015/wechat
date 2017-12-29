@@ -7,7 +7,9 @@ package me.hao0.wechat.exception;
  */
 public class XmlException extends RuntimeException {
 
-    public XmlException() {
+	private static final long serialVersionUID = 9141154594779552322L;
+
+	public XmlException() {
         super();
     }
 

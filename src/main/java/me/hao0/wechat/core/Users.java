@@ -136,7 +136,7 @@ public final class Users extends Component {
         params.put("group", g);
 
         Map<String, Object> resp = doPost(url, params);
-        return (Integer) ((Map) resp.get("group")).get("id");
+        return (Integer) ((Map<?, ?>) resp.get("group")).get("id");
     }
 
     /**

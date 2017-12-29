@@ -35,6 +35,19 @@ public final class WechatBuilder {
         builder.wechat = new Wechat(appId, appSecret);
         return builder;
     }
+    
+    /**
+     * 根据appId创建Wechat 外部获取token
+     * @author zJun
+     * @date 2017年12月19日 下午4:32:07
+     */
+    public static WechatBuilder newBuilder(String appId) {
+    	checkNotNullAndEmpty(appId, "appId");
+
+        WechatBuilder builder = new WechatBuilder();
+        builder.wechat = new Wechat(appId);
+        return builder;
+    }
 
     /**
      * 配置微信APP令牌(Token)

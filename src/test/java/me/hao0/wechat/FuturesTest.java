@@ -13,6 +13,7 @@ import java.util.concurrent.Executors;
  * Email: haolin.h0@gmail.com
  * Date: 17/11/15
  */
+@SuppressWarnings("all")
 public class FuturesTest {
 
     @Test
@@ -20,7 +21,7 @@ public class FuturesTest {
 
         ListeningExecutorService service = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(10));
 
-        ListenableFuture future1 = service.submit(new Callable<Integer>() {
+        ListenableFuture<Integer> future1 = service.submit(new Callable<Integer>() {
             public Integer call() throws InterruptedException {
                 Thread.sleep(1000);
                 System.out.println("call future 1.");
@@ -28,7 +29,7 @@ public class FuturesTest {
             }
         });
 
-        ListenableFuture future2 = service.submit(new Callable<Integer>() {
+        ListenableFuture<Integer> future2 = service.submit(new Callable<Integer>() {
             public Integer call() throws InterruptedException {
                 Thread.sleep(1000);
                 System.out.println("call future 2.");
@@ -39,7 +40,7 @@ public class FuturesTest {
 
         final ListenableFuture allFutures = Futures.allAsList(future1, future2);
 
-        final ListenableFuture transform = Futures.transform(allFutures, new AsyncFunction<List<Integer>, Boolean>() {
+		final ListenableFuture transform = Futures.transform(allFutures, new AsyncFunction<List<Integer>, Boolean>() {
             @Override
             public ListenableFuture apply(List<Integer> results) throws Exception {
                 return Futures.immediateFuture(String.format("success future:%d", results.size()));

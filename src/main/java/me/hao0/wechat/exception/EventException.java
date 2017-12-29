@@ -11,7 +11,9 @@ package me.hao0.wechat.exception;
  */
 public class EventException extends RuntimeException {
 
-    public EventException() {
+	private static final long serialVersionUID = 4015715798535274592L;
+
+	public EventException() {
         super();
     }
 

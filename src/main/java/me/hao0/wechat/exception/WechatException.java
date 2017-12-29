@@ -12,7 +12,9 @@ import java.util.Map;
  */
 public class WechatException extends RuntimeException {
 
-    /**
+	private static final long serialVersionUID = 1895978005123791544L;
+	
+	/**
      * 微信返回的errcode
      */
     private Integer code;

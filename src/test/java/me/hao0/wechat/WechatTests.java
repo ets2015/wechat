@@ -53,6 +53,8 @@ public class WechatTests {
 
     private String openId = "o0PISt4RakRiy-2bwwY_NmYfQL2o";
 
+	private FileOutputStream out;
+
     @Before
     public void init() throws IOException {
         Properties props = new Properties();
@@ -490,7 +492,7 @@ public class WechatTests {
     public void testMediaDownload() throws IOException {
         File output = new File("/Users/haolin/temp/user_2.png");
         byte[] data = wechat.material().downloadTemp(accessToken, "IT1E7HIXw69AWFeEXOLj0si5ufyTbCBwF8PlAkvK3Nj765RAZLkOPJS0zfKwItzG");
-        FileOutputStream out = new FileOutputStream(output);
+        out = new FileOutputStream(output);
         out.write(data);
     }
 
@@ -742,6 +744,7 @@ public class WechatTests {
 
     @Test
     public void testBuildWechat() {
-        Wechat w = WechatBuilder.newBuilder(null, "").build();
+        @SuppressWarnings("unused")
+		Wechat w = WechatBuilder.newBuilder(null, "").build();
     }
 }

@@ -8,8 +8,9 @@ package me.hao0.wechat.model.message.receive.event;
  */
 public class RecvUnSubscribeEvent extends RecvEvent {
 
+	private static final long serialVersionUID = 6272803650682495855L;
 
-    public RecvUnSubscribeEvent(RecvEvent e) {
+	public RecvUnSubscribeEvent(RecvEvent e) {
         super(e);
         this.eventType = e.eventType;
     }

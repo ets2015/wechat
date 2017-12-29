@@ -11,7 +11,9 @@ package me.hao0.wechat.model.message.receive.event;
  */
 public class RecvTemplateSendJobFinishEvent extends RecvEvent {
 
-    /**
+	private static final long serialVersionUID = 2084146615757057301L;
+	
+	/**
      * 模版消息送达状态：
      * <p>
      * 1. 送达成功时：success <br/>
