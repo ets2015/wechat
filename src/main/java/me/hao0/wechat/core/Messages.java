@@ -62,7 +62,35 @@ public final class Messages extends Component {
      */
     private static final String GET_SEND = "https://api.weixin.qq.com/cgi-bin/message/mass/get?access_token=";
 
+    /**
+     * 客服接口-发消息
+     *
+     * @author guoq
+     * @date 2018年1月4日 15:02:45
+     */
+    private static final String CUSTOM_SEND = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=";
+
+
     Messages() {
+    }
+
+    /**
+     * 主动发送客服消息给用户
+     *
+     * @param accessToken accessToken
+     * @param msg         预览消息
+     * @return 发送成功返回true，或抛WechatException
+     * @author guoq
+     * @date 2018年1月4日 15:02:45
+     */
+    public Boolean customCardSend(String accessToken, SendPreviewMessage msg) {
+        checkNotNullAndEmpty(accessToken, "accessToken");
+        checkNotNull(msg, "msg can't be null");
+
+        String url = CUSTOM_SEND + accessToken;
+        Map<String, Object> params = buildPreviewParams(msg);
+        doPost(url, params);
+        return Boolean.TRUE;
     }
 
     /**
