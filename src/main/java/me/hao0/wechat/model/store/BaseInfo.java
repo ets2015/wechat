@@ -1,4 +1,4 @@
-package me.hao0.wechat.model.poi;
+package me.hao0.wechat.model.store;
 
 import lombok.Data;
 
@@ -18,7 +18,7 @@ public class BaseInfo {
 	private String longitude;
 	private String latitude;
 	// 门店服务信息字段
-	private Photo photo_list;
+	private Photo photo_list[];
 	private String recommend;
 	private String special;
 	private String introduction;
