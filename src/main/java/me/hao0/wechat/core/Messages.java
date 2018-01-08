@@ -83,7 +83,7 @@ public final class Messages extends Component {
      * @author guoq
      * @date 2018年1月4日 15:02:45
      */
-    public Boolean customCardSend(String accessToken, SendPreviewMessage msg) {
+    public Boolean customSend(String accessToken, SendPreviewMessage msg) {
         checkNotNullAndEmpty(accessToken, "accessToken");
         checkNotNull(msg, "msg can't be null");
 
