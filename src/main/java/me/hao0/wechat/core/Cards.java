@@ -1,7 +1,5 @@
 package me.hao0.wechat.core;
 
-import static me.hao0.common.util.Preconditions.checkNotNullAndEmpty;
-
 import java.util.Map;
 
 /**
@@ -39,6 +37,12 @@ public class Cards extends Component {
 	/** 设置卡券失效接口 */
 	private static final String UNAVAILABLE = "https://api.weixin.qq.com/card/code/unavailable?access_token=";
 	
+	/** 查询卡券详情 */
+	private static final String GET = "https://api.weixin.qq.com/card/get?access_token=";
+	
+	/** 查询卡券列表 */
+	private static final String BATCHGET = "https://api.weixin.qq.com/card/batchget?access_token=";
+	
 	/** 微信card_id */
 	private static final String CARD_ID = "card_id";
 	
@@ -71,17 +75,16 @@ public class Cards extends Component {
     /**
      * 创建卡券
      * @param accessToken	访问token
-     * @param jsonCard	卡券的JSON
+     * @param json	卡券的JSON
      * @author zJun
      * @return 返回card_id
      * @date 2017年12月11日 下午8:32:04
      */
-    public String create(String accessToken, String jsonCard){
-        checkNotNullAndEmpty(accessToken, "accessToken");
-        checkNotNullAndEmpty(jsonCard, "jsonCard");
+    public String create(String accessToken, String json){
+    	checkData(accessToken, json);
 
         String url = CREATE + accessToken;
-        Map<String, Object> result = doPost(url, jsonCard);
+        Map<String, Object> result = doPost(url, json);
         return result.get(CARD_ID).toString();
     }
     
@@ -110,8 +113,7 @@ public class Cards extends Component {
      * @date 2017年12月14日 上午10:52:04
      */
     public Map<String, Object>  createQrcode(String accessToken, String json){
-        checkNotNullAndEmpty(accessToken, "accessToken");
-        checkNotNullAndEmpty(json, "jsonCard");
+    	checkData(accessToken, json);
 
         String url = QRCODE + accessToken;
         return doPost(url, json);
@@ -168,8 +170,7 @@ public class Cards extends Component {
      * @date 2017年12月14日 下午6:54:01
      */
     public void paycellSet(String accessToken, String json) {
-		checkNotNullAndEmpty(accessToken, "accessToken");
-		checkNotNullAndEmpty(json, "json");
+    	checkData(accessToken, json);
 
 		String url = PAYCELL_SET + accessToken;
 		doPost(url, json);
@@ -193,8 +194,7 @@ public class Cards extends Component {
      * @date 2017年12月15日 上午10:56:43
      */
     public void selfConsumeCell(String accessToken, String json) {
-		checkNotNullAndEmpty(accessToken, "accessToken");
-		checkNotNullAndEmpty(json, "json");
+    	checkData(accessToken, json);
 
 		String url = SELF_CONSUME_CELL + accessToken;
 		doPost(url, json);
@@ -219,8 +219,7 @@ public class Cards extends Component {
      * @date 2017年12月18日 下午6:11:03
      */
     public void update(String accessToken, String json) {
-    	checkNotNullAndEmpty(accessToken, "accessToken");
-		checkNotNullAndEmpty(json, "json");
+    	checkData(accessToken, json);
 
 		String url = UPDATE + accessToken;
 		doPost(url, json);
@@ -245,9 +244,9 @@ public class Cards extends Component {
      * @date 2017年12月20日 上午11:41:00
      */
     public Map<String, Object> consume(String accessToken, String json) {
-    	checkNotNullAndEmpty(accessToken, "accessToken");
-		checkNotNullAndEmpty(json, "json");
-		String url = CONSUME + accessToken;
+    	checkData(accessToken, json);
+    	
+    	String url = CONSUME + accessToken;
 		return doPost(url, json);
     }
     
@@ -269,8 +268,8 @@ public class Cards extends Component {
      * @date 2017年12月20日 下午5:23:33
      */
     public void modifystock(String accessToken, String json) {
-    	checkNotNullAndEmpty(accessToken, "accessToken");
-		checkNotNullAndEmpty(json, "json");
+    	checkData(accessToken, json);
+    	
 		String url = MODIFYSTOCK + accessToken;
 		doPost(url, json);
     }
@@ -293,8 +292,8 @@ public class Cards extends Component {
      * @date 2017年12月26日 下午3:54:16
      */
     public void delete(String accessToken, String json) {
-    	checkNotNullAndEmpty(accessToken, "accessToken");
-		checkNotNullAndEmpty(json, "json");
+    	checkData(accessToken, json);
+    	
 		String url = DELETE + accessToken;
 		doPost(url, json);
     }
@@ -316,8 +315,8 @@ public class Cards extends Component {
      * @date 2017年12月26日 下午4:00:32
      */
     public void unavailable(String accessToken, String json) {
-    	checkNotNullAndEmpty(accessToken, "accessToken");
-		checkNotNullAndEmpty(json, "json");
+    	checkData(accessToken, json);
+    	
 		String url = UNAVAILABLE + accessToken;
 		doPost(url, json);
     }
@@ -331,4 +330,46 @@ public class Cards extends Component {
     public void unavailable(String json) {
     	unavailable(loadAccessToken(), json);
     }
+    
+    /**
+     * 批量查询卡券列表
+     * @author zJun
+     * @date 2018年1月8日 下午5:36:33
+     */
+    public Map<String, Object> batchget(String accessToken, String json) {
+		checkData(accessToken, json);
+		
+		String url = BATCHGET + accessToken;
+		return doPost(url, json);
+    }
+    
+    /**
+     * 批量查询卡券列表
+     * @author zJun
+     * @date 2018年1月8日 下午5:36:33
+     */
+    public Map<String, Object> batchget(String json) {
+		return batchget(loadAccessToken(), json);
+    }
+    
+    /**
+     * 查询卡券详情
+     * @author zJun
+     * @date 2018年1月8日 下午5:40:45
+     */
+    public Map<String, Object> get(String accessToken, String json) {
+		checkData(accessToken, json);
+		String url = GET + accessToken;
+		return doPost(url, json);
+    }
+    
+    /**
+     * 查询卡券详情
+     * @author zJun
+     * @date 2018年1月8日 下午5:40:45
+     */
+    public Map<String, Object> get(String json) {
+		return get(loadAccessToken(), json);
+    }
+    
 }
