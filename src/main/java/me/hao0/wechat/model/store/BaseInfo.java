@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class BaseInfo {
 	// 门店基础信息字段（重要）
+	private String poi_id;
 	private String sid;
 	private String business_name;
 	private String branch_name;
