@@ -21,6 +21,11 @@ public class RecvCardPassCheckEvent extends RecvEvent {
      */
     private String refuseReason;
 
+    protected RecvCardPassCheckEvent(){
+
+    }
+
+
     public RecvCardPassCheckEvent(RecvEvent e) {
         super(e);
         this.eventType = e.getEventType();

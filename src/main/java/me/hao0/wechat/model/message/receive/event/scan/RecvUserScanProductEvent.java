@@ -15,6 +15,9 @@ public class RecvUserScanProductEvent extends RecvUserScanEvent {
      */
     private String extInfo;
 
+    protected RecvUserScanProductEvent() {
+
+    }
     public RecvUserScanProductEvent(RecvUserScanEvent e) {
         super(e);
         this.eventType = e.getEventType();

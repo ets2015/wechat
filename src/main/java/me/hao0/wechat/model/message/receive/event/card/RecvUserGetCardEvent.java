@@ -52,6 +52,9 @@ public class RecvUserGetCardEvent extends RecvEvent {
      */
     private Boolean isRecommendByFriend;
 
+    private RecvUserGetCardEvent() {
+
+    }
     public RecvUserGetCardEvent(RecvEvent e) {
         super(e);
         this.eventType = e.getEventType();

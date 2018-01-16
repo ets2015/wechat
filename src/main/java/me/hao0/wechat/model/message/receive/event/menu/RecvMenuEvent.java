@@ -18,6 +18,10 @@ public class RecvMenuEvent extends RecvEvent {
      */
     private String eventKey;
 
+    protected RecvMenuEvent() {
+
+    }
+
     public RecvMenuEvent(RecvEvent e) {
         super(e);
         this.eventType = e.getEventType();

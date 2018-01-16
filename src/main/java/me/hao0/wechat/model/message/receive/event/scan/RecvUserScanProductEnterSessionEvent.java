@@ -11,6 +11,9 @@ public class RecvUserScanProductEnterSessionEvent extends RecvUserScanProductEve
 
     private static final long serialVersionUID = 3174415356023181767L;
 
+    private RecvUserScanProductEnterSessionEvent() {
+
+    }
     public RecvUserScanProductEnterSessionEvent(RecvUserScanProductEvent e) {
         super(e);
         this.eventType = e.getEventType();

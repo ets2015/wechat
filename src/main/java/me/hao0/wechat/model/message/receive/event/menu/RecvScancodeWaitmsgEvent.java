@@ -12,6 +12,9 @@ public class RecvScancodeWaitmsgEvent extends RecvScancodePushEvent {
 
     private static final long serialVersionUID = -8881891637226006093L;
 
+    private RecvScancodeWaitmsgEvent() {
+
+    }
     public RecvScancodeWaitmsgEvent(RecvScancodePushEvent e) {
         super(e);
         this.eventType = e.getEventType();

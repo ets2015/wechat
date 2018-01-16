@@ -40,6 +40,9 @@ public class RecvUserPayFromPayCellEvent extends RecvEvent {
      */
     private Integer originalFee;
 
+    private RecvUserPayFromPayCellEvent() {
+
+    }
     public RecvUserPayFromPayCellEvent(RecvEvent e) {
         super(e);
         this.eventType = e.getEventType();

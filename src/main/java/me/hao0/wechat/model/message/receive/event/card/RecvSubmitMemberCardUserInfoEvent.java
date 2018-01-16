@@ -22,6 +22,9 @@ public class RecvSubmitMemberCardUserInfoEvent extends RecvEvent {
      */
     private String userCardCode;
 
+    private RecvSubmitMemberCardUserInfoEvent() {
+    }
+
     public RecvSubmitMemberCardUserInfoEvent(RecvEvent e) {
         super(e);
         this.eventType = e.getEventType();

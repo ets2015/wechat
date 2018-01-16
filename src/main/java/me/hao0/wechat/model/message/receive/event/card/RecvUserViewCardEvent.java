@@ -24,6 +24,9 @@ public class RecvUserViewCardEvent extends RecvEvent {
      */
     private String outerStr;
 
+    private RecvUserViewCardEvent() {
+
+    }
     public RecvUserViewCardEvent(RecvEvent e) {
         super(e);
         this.eventType = e.getEventType();

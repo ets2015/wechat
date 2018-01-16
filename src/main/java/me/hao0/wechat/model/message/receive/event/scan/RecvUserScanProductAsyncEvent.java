@@ -17,6 +17,10 @@ public class RecvUserScanProductAsyncEvent extends RecvUserScanEvent {
      */
     private String regionCode;
 
+    private RecvUserScanProductAsyncEvent() {
+
+    }
+
     public RecvUserScanProductAsyncEvent(RecvUserScanEvent e) {
         super(e);
         this.eventType = e.getEventType();

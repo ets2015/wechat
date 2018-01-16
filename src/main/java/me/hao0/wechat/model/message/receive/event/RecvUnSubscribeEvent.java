@@ -10,7 +10,11 @@ public class RecvUnSubscribeEvent extends RecvEvent {
 
 	private static final long serialVersionUID = 6272803650682495855L;
 
-	public RecvUnSubscribeEvent(RecvEvent e) {
+    private RecvUnSubscribeEvent() {
+
+    }
+
+    public RecvUnSubscribeEvent(RecvEvent e) {
         super(e);
         this.eventType = e.eventType;
     }

@@ -21,6 +21,9 @@ public class RecvUserScanProductVerifyActionEvent extends RecvEvent {
      */
     private String reasonMsg;
 
+    private RecvUserScanProductVerifyActionEvent() {
+
+    }
     public RecvUserScanProductVerifyActionEvent(RecvEvent e) {
         super(e);
         this.eventType = e.getEventType();

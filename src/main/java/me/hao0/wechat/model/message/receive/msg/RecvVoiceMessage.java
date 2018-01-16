@@ -27,6 +27,10 @@ public class RecvVoiceMessage extends RecvMsg {
      */
     private String recognition;
 
+
+    private RecvVoiceMessage() {
+
+    }
     public RecvVoiceMessage(RecvMsg m) {
         super(m);
         this.msgId = m.msgId;

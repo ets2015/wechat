@@ -23,6 +23,9 @@ public class RecvTemplateSendJobFinishEvent extends RecvEvent {
      */
     private String status;
 
+    private RecvTemplateSendJobFinishEvent() {
+
+    }
     public RecvTemplateSendJobFinishEvent(RecvEvent e) {
         super(e);
         this.eventType = e.eventType;

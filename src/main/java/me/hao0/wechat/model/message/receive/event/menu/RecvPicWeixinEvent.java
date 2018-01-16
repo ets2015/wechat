@@ -12,6 +12,9 @@ public class RecvPicWeixinEvent extends RecvPicSysphotoEvent {
 
     private static final long serialVersionUID = 2554094154386208113L;
 
+    private RecvPicWeixinEvent() {
+
+    }
     public RecvPicWeixinEvent(RecvPicSysphotoEvent e) {
         super(e);
         this.eventType = e.getEventType();

@@ -20,6 +20,9 @@ public class RecvScanEvent extends RecvEvent {
      */
     private String ticket;
 
+    private RecvScanEvent() {
+
+    }
     public RecvScanEvent(RecvEvent e) {
         super(e);
         this.eventType = e.eventType;

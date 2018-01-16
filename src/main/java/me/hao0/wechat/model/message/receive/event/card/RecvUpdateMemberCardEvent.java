@@ -28,6 +28,9 @@ public class RecvUpdateMemberCardEvent extends RecvEvent {
      */
     private Integer modifyBalance;
 
+    private RecvUpdateMemberCardEvent() {
+    }
+
     public RecvUpdateMemberCardEvent(RecvEvent e) {
         super(e);
         this.eventType = e.getEventType();

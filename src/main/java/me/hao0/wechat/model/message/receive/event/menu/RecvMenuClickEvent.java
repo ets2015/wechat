@@ -17,6 +17,9 @@ public class RecvMenuClickEvent extends RecvEvent {
      */
     private String eventKey;
 
+    private RecvMenuClickEvent() {
+
+    }
     public RecvMenuClickEvent(RecvEvent e) {
         super(e);
         this.eventType = e.getEventType();

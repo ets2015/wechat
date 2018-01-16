@@ -11,7 +11,11 @@ public class RecvUnknownEvent extends RecvEvent {
 
 	private static final long serialVersionUID = 8467705767316035053L;
 
-	public RecvUnknownEvent(RecvEvent e) {
+    private RecvUnknownEvent() {
+
+    }
+
+    public RecvUnknownEvent(RecvEvent e) {
         super(e);
         this.eventType = e.eventType;
     }

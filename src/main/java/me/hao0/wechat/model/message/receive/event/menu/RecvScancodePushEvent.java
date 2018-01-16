@@ -20,6 +20,9 @@ public class RecvScancodePushEvent extends RecvMenuEvent {
      */
     private String eventKey;
 
+    protected RecvScancodePushEvent() {
+
+    }
     public RecvScancodePushEvent(RecvMenuEvent e) {
         super(e);
         this.eventType = e.getEventType();

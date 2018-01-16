@@ -12,6 +12,9 @@ public class RecvPicPhotoOrAlbumEvent extends RecvPicSysphotoEvent {
 
     private static final long serialVersionUID = 2554094154386208113L;
 
+    private RecvPicPhotoOrAlbumEvent() {
+
+    }
     public RecvPicPhotoOrAlbumEvent(RecvPicSysphotoEvent e) {
         super(e);
         this.eventType = e.getEventType();

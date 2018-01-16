@@ -28,6 +28,9 @@ public class RecvWifiConnectedEvent extends RecvEvent {
      */
     private String deviceNo;
 
+    private RecvWifiConnectedEvent() {
+
+    }
     public RecvWifiConnectedEvent(RecvEvent e) {
         super(e);
         this.eventType = e.getEventType();

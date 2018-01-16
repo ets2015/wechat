@@ -16,6 +16,9 @@ public class RecvLocationSelectEvent extends RecvMenuEvent {
      */
     private SendLocationInfo sendLocationInfo;
 
+    private RecvLocationSelectEvent() {
+
+    }
     public RecvLocationSelectEvent(RecvMenuEvent e) {
         super(e);
         this.eventType = e.getEventType();

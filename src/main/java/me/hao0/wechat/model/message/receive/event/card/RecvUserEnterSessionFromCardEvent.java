@@ -20,6 +20,9 @@ public class RecvUserEnterSessionFromCardEvent extends RecvEvent {
      */
     private String userCardCode;
 
+    private RecvUserEnterSessionFromCardEvent() {
+
+    }
     public RecvUserEnterSessionFromCardEvent(RecvEvent e) {
         super(e);
         this.eventType = e.getEventType();
