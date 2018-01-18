@@ -10,7 +10,15 @@ package me.hao0.wechat.model.js;
  */
 public class CardConfig extends Config {
 
-    private static final long serialVersionUID = -8266857663686622616L;
+    private static final long serialVersionUID = -8266857663696622616L;
+
+
+    /**
+     * 卡券ID
+     */
+    private String cardId;
+
+
     /**
      * 卡券code
      */
@@ -32,16 +40,24 @@ public class CardConfig extends Config {
      */
     private String outerStr;
 
-    public CardConfig(String appId, Long timestamp, String nonStr, String signature, String code, Long fixedBegintimestamp, String openid, String outerStr) {
-        super(appId, timestamp, nonStr, signature);
-        this.code = code;
-        this.openid = openid;
-        this.fixedBegintimestamp = fixedBegintimestamp;
-        this.outerStr = outerStr;
-    }
+    /**
+     * 门店ID
+     */
+    private String locationId;
+
+    /**
+     * 优惠券类型
+     */
+    private String cardType;
+
+    /**
+     * 红包类型卡券专属
+     */
+    private String balance;
 
     public CardConfig() {
     }
+
 
     public String getCode() {
         return code;
@@ -75,17 +91,36 @@ public class CardConfig extends Config {
         this.outerStr = outerStr;
     }
 
-    @Override
-    public String toString() {
-        return "Config{" +
-                "appId='" + super.getAppId() + '\'' +
-                ", timestamp=" + super.getTimestamp() +
-                ", nonStr='" + super.getNonStr() + '\'' +
-                ", code='" + code + '\'' +
-                ", openid='" + openid + '\'' +
-                ", fixedBegintimestamp='" + fixedBegintimestamp + '\'' +
-                ", outerStr='" + outerStr + '\'' +
-                ", signature='" + super.getSignature() + '\'' +
-                '}';
+    public String getLocationId() {
+        return locationId;
     }
+
+    public void setLocationId(String locationId) {
+        this.locationId = locationId;
+    }
+
+    public String getCardType() {
+        return cardType;
+    }
+
+    public void setCardType(String cardType) {
+        this.cardType = cardType;
+    }
+
+    public String getBalance() {
+        return balance;
+    }
+
+    public String getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(String cardId) {
+        this.cardId = cardId;
+    }
+
+    public void setBalance(String balance) {
+        this.balance = balance;
+    }
+
 }

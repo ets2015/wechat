@@ -1,5 +1,7 @@
 package me.hao0.wechat.model.js;
 
+import java.util.Objects;
+
 /**
  * 临时凭证类型
  */
@@ -23,5 +25,14 @@ public enum TicketType {
 
     public String type() {
         return type;
+    }
+
+    public static TicketType from(String type) {
+        for (TicketType t : TicketType.values()) {
+            if (Objects.equals(t.type(), type)) {
+                return t;
+            }
+        }
+        throw new  RuntimeException("Ticket type "+ type + " not found");
     }
 }

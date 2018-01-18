@@ -2,13 +2,10 @@ package me.hao0.wechat.core;
 
 import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
-import me.hao0.wechat.model.js.CardConfig;
-import me.hao0.wechat.model.js.Config;
-import me.hao0.wechat.model.js.Ticket;
-import me.hao0.wechat.model.js.TicketType;
+import me.hao0.wechat.model.js.*;
 
-import java.util.Arrays;
 import java.util.Map;
+import java.util.TreeSet;
 
 import static me.hao0.common.util.Preconditions.checkNotNull;
 import static me.hao0.common.util.Preconditions.checkNotNullAndEmpty;
@@ -150,70 +147,98 @@ public final class JsSdks extends Component {
     }
 
     /**
-     * 获取JSSDK-wxcard卡券调用前的配置信息
-     *
-     * @param apiTicket jsapi凭证
-     * @param nonceStr  随机字符串
-     * @param cardId    卡券id
-     * @param outerStr   领取渠道参数
-     * @return
-     * @auth guoq
+     * 获取JSSDK-卡券签名
+     * @param apiTicket
+     * @param cardConfig
+     * @param cardSignType
+     * @return CardConfig
+     * @Auth Shinez
      */
-    public CardConfig getCardConfig(String apiTicket, String nonceStr, String cardId, String outerStr) {
-        return getCardConfig(apiTicket, nonceStr, cardId, null, null, outerStr);
+    public CardConfig getCardConfig(String apiTicket, CardConfig cardConfig, CardSignType cardSignType){
+        if(CardSignType.CHOOSE.equals(cardSignType)){
+            return getCardConfigByChooseCard(apiTicket,cardConfig);
+        }
+        return getCardConfigByAddCard(apiTicket,cardConfig);
     }
 
     /**
-     * 获取JSSDK-wxcard卡券调用前的配置信息
+     * 获取JSSDK-addCard 签名
      *
-     * @param apiTicket jsapi凭证
-     * @param nonceStr  随机字符串
-     * @param cardId    卡券id
-     * @param openid     用户openid
-     * @param code       卡券code
-     * @param outerStr   领取渠道参数
-     * @return
+     * @param apiTicket  jsapi凭证
+     * @param cardConfig 卡券签名配置
+     * @return CardConfig
      * @auth guoq
      */
-    public CardConfig getCardConfig(String apiTicket, String nonceStr, String cardId, String openid, String code, String outerStr) {
-        return getCardConfig(apiTicket, nonceStr, System.currentTimeMillis() / 1000, cardId, openid, code, outerStr, null);
-    }
+    public CardConfig getCardConfigByAddCard(String apiTicket, CardConfig cardConfig) {
+        checkNotNull(apiTicket, "api_ticket can't be null");
+        checkNotNull(cardConfig.getCardId(), "card_id can't be null");
+        checkNotNull(cardConfig.getNonStr(), "nonce_str can't be null");
+        checkNotNull(cardConfig.getTimestamp(), "timestamp can't be null");
 
-    /**
-     * 获取JSSDK-wxcard卡券调用前的配置信息
-     *
-     * @param apiTicket          jsapi凭证
-     * @param nonceStr           随机字符串
-     * @param timestamp           时间戳(s)
-     * @param cardId             卡券id
-     * @param openid              用户openid
-     * @param code                卡券code
-     * @param outerStr            领取渠道参数
-     * @param fixedBegintimestamp 卡券在第三方系统的实际领取时间戳（秒）
-     * @return
-     * @auth guoq
-     */
-    public CardConfig getCardConfig(String apiTicket, String nonceStr, Long timestamp, String cardId, String openid, String code, String outerStr, Long fixedBegintimestamp) {
-        checkNotNull(apiTicket, "apiTicket can't be null");
-        checkNotNullAndEmpty(nonceStr, "nonStr");
-        checkNotNull(timestamp, "timestamp can't be null");
-        checkNotNull(cardId, "cardId can't be null");
+        String code = cardConfig.getCode();
+        code = code == null ? "" : code;
 
-        //将value进行字典排序
-        int signValLen = 6;
-        String[] signStrs = new String[signValLen];
-        signStrs[0] = apiTicket;
-        signStrs[1] = nonceStr;
-        signStrs[2] = timestamp.toString();
-        signStrs[3] = cardId;
-        signStrs[4] = openid != null ? openid : "";
-        signStrs[5] = code != null ? code : "";
-        Arrays.sort(signStrs);
-        StringBuilder signStr = new StringBuilder();
-        for (int i = 0; i < signValLen; i++) {
-            signStr.append(signStrs[i]);
+        String openid = cardConfig.getOpenid();
+        openid = openid == null ? "" : openid;
+
+        String balance = cardConfig.getBalance();
+        balance = balance == null ? "" : balance;
+
+        TreeSet<String> treeSet =new TreeSet<>();
+        treeSet.add(apiTicket);
+        treeSet.add(String.valueOf(cardConfig.getTimestamp()));
+        treeSet.add(cardConfig.getNonStr());
+        treeSet.add(cardConfig.getCardId());
+        treeSet.add(code);
+        treeSet.add(openid);
+        treeSet.add(balance);
+
+        StringBuilder signStr = new StringBuilder("");
+        for (String s : treeSet) {
+            signStr.append(s);
         }
         String sign = Hashing.sha1().hashString(signStr.toString(), Charsets.UTF_8).toString().toLowerCase();
-        return new CardConfig(wechat.getAppId(), timestamp, nonceStr, sign, code, fixedBegintimestamp, openid, outerStr);
+        cardConfig.setSignature(sign);
+        return cardConfig;
     }
+    /**
+     * 获取JSSDK-chooseCard 签名
+     *
+     * @param apiTicket  jsapi凭证
+     * @param cardConfig 卡券签名配置
+     * @return CardConfig
+     * @auth Shinez
+     */
+    public CardConfig getCardConfigByChooseCard(String apiTicket, CardConfig cardConfig) {
+        checkNotNull(apiTicket, "api_ticket can't be null");
+        checkNotNull(cardConfig.getCardId(), "card_id can't be null");
+        checkNotNull(cardConfig.getNonStr(), "nonce_str can't be null");
+        checkNotNull(cardConfig.getTimestamp(), "timestamp can't be null");
+        checkNotNull(cardConfig.getAppId(), "appid can't be null");
+        checkNotNull(cardConfig.getLocationId(), "location_id can't be null");
+        checkNotNull(cardConfig.getCardType(), "card_type can't be null");
+
+
+        TreeSet<String> treeSet =new TreeSet<>();
+        treeSet.add(apiTicket);
+        treeSet.add(String.valueOf(cardConfig.getTimestamp()));
+        treeSet.add(cardConfig.getNonStr());
+        treeSet.add(cardConfig.getCardId());
+        treeSet.add(cardConfig.getAppId());
+        treeSet.add(cardConfig.getLocationId());
+        treeSet.add(cardConfig.getCardType());
+
+        StringBuilder signStr = new StringBuilder("");
+        for (String s : treeSet) {
+            signStr.append(s);
+        }
+        String sign = Hashing.sha1().hashString(signStr.toString(), Charsets.UTF_8).toString().toLowerCase();
+        cardConfig.setSignature(sign);
+        return cardConfig;
+    }
+
+
+
+
+
 }
