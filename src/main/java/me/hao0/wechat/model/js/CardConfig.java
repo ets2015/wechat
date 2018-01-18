@@ -1,16 +1,16 @@
 package me.hao0.wechat.model.js;
 
-import java.io.Serializable;
 
 /**
  * 调用JSSDK前需要加载的配置对象(http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html)
- * Author: guoq
- * Email: guo_daqian@qq.com
- * Date: 18/1/18
+ *
+ * @author guoq
+ * @Email: guo_daqian@qq.com
+ * @Date: 18/1/18
  */
-public class WxCardConfig extends Config {
+public class CardConfig extends Config {
 
-    private static final long serialVersionUID = -8263857663686622616L;
+    private static final long serialVersionUID = -8266857663686622616L;
     /**
      * 卡券code
      */
@@ -32,7 +32,7 @@ public class WxCardConfig extends Config {
      */
     private String outerStr;
 
-    public WxCardConfig(String appId, Long timestamp, String nonStr, String signature, String code, Long fixedBegintimestamp, String openid, String outerStr) {
+    public CardConfig(String appId, Long timestamp, String nonStr, String signature, String code, Long fixedBegintimestamp, String openid, String outerStr) {
         super(appId, timestamp, nonStr, signature);
         this.code = code;
         this.openid = openid;
@@ -40,7 +40,7 @@ public class WxCardConfig extends Config {
         this.outerStr = outerStr;
     }
 
-    public WxCardConfig() {
+    public CardConfig() {
     }
 
     public String getCode() {

@@ -2,13 +2,13 @@ package me.hao0.wechat.core;
 
 import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
-import javafx.collections.transformation.SortedList;
+import me.hao0.wechat.model.js.CardConfig;
 import me.hao0.wechat.model.js.Config;
 import me.hao0.wechat.model.js.Ticket;
 import me.hao0.wechat.model.js.TicketType;
-import me.hao0.wechat.model.js.WxCardConfig;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Map;
 
 import static me.hao0.common.util.Preconditions.checkNotNull;
 import static me.hao0.common.util.Preconditions.checkNotNullAndEmpty;
@@ -152,40 +152,40 @@ public final class JsSdks extends Component {
     /**
      * 获取JSSDK-wxcard卡券调用前的配置信息
      *
-     * @param api_ticket jsapi凭证
-     * @param nonce_str  随机字符串
-     * @param card_id    卡券id
+     * @param apiTicket jsapi凭证
+     * @param nonceStr  随机字符串
+     * @param cardId    卡券id
      * @param outerStr   领取渠道参数
      * @return
      * @auth guoq
      */
-    public WxCardConfig getWxCardConfig(String api_ticket, String nonce_str, String card_id, String outerStr) {
-        return getWxCardConfig(api_ticket, nonce_str, card_id, null, null, outerStr);
+    public CardConfig getCardConfig(String apiTicket, String nonceStr, String cardId, String outerStr) {
+        return getCardConfig(apiTicket, nonceStr, cardId, null, null, outerStr);
     }
 
     /**
      * 获取JSSDK-wxcard卡券调用前的配置信息
      *
-     * @param api_ticket jsapi凭证
-     * @param nonce_str  随机字符串
-     * @param card_id    卡券id
+     * @param apiTicket jsapi凭证
+     * @param nonceStr  随机字符串
+     * @param cardId    卡券id
      * @param openid     用户openid
      * @param code       卡券code
      * @param outerStr   领取渠道参数
      * @return
      * @auth guoq
      */
-    public WxCardConfig getWxCardConfig(String api_ticket, String nonce_str, String card_id, String openid, String code, String outerStr) {
-        return getWxCardConfig(api_ticket, nonce_str, System.currentTimeMillis() / 1000, card_id, openid, code, outerStr, null);
+    public CardConfig getCardConfig(String apiTicket, String nonceStr, String cardId, String openid, String code, String outerStr) {
+        return getCardConfig(apiTicket, nonceStr, System.currentTimeMillis() / 1000, cardId, openid, code, outerStr, null);
     }
 
     /**
      * 获取JSSDK-wxcard卡券调用前的配置信息
      *
-     * @param api_ticket          jsapi凭证
-     * @param nonce_str           随机字符串
+     * @param apiTicket          jsapi凭证
+     * @param nonceStr           随机字符串
      * @param timestamp           时间戳(s)
-     * @param card_id             卡券id
+     * @param cardId             卡券id
      * @param openid              用户openid
      * @param code                卡券code
      * @param outerStr            领取渠道参数
@@ -193,27 +193,27 @@ public final class JsSdks extends Component {
      * @return
      * @auth guoq
      */
-    public WxCardConfig getWxCardConfig(String api_ticket, String nonce_str, Long timestamp, String card_id, String openid, String code, String outerStr, Long fixedBegintimestamp) {
-        checkNotNull(api_ticket, "api_ticket can't be null");
-        checkNotNullAndEmpty(nonce_str, "nonStr");
+    public CardConfig getCardConfig(String apiTicket, String nonceStr, Long timestamp, String cardId, String openid, String code, String outerStr, Long fixedBegintimestamp) {
+        checkNotNull(apiTicket, "apiTicket can't be null");
+        checkNotNullAndEmpty(nonceStr, "nonStr");
         checkNotNull(timestamp, "timestamp can't be null");
-        checkNotNull(card_id, "card_id can't be null");
+        checkNotNull(cardId, "cardId can't be null");
 
         //将value进行字典排序
         int signValLen = 6;
         String[] signStrs = new String[signValLen];
-        signStrs[0] = api_ticket;
-        signStrs[1] = nonce_str;
+        signStrs[0] = apiTicket;
+        signStrs[1] = nonceStr;
         signStrs[2] = timestamp.toString();
-        signStrs[3] = card_id;
+        signStrs[3] = cardId;
         signStrs[4] = openid != null ? openid : "";
         signStrs[5] = code != null ? code : "";
         Arrays.sort(signStrs);
-        StringBuffer signStr = new StringBuffer();
+        StringBuilder signStr = new StringBuilder();
         for (int i = 0; i < signValLen; i++) {
             signStr.append(signStrs[i]);
         }
         String sign = Hashing.sha1().hashString(signStr.toString(), Charsets.UTF_8).toString().toLowerCase();
-        return new WxCardConfig(wechat.getAppId(), timestamp, nonce_str, sign, code, fixedBegintimestamp, openid, outerStr);
+        return new CardConfig(wechat.getAppId(), timestamp, nonceStr, sign, code, fixedBegintimestamp, openid, outerStr);
     }
 }

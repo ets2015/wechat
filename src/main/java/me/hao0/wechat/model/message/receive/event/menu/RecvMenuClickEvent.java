@@ -20,6 +20,7 @@ public class RecvMenuClickEvent extends RecvEvent {
     private RecvMenuClickEvent() {
 
     }
+
     public RecvMenuClickEvent(RecvEvent e) {
         super(e);
         this.eventType = e.getEventType();

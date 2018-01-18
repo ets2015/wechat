@@ -21,9 +21,10 @@ public class RecvCardSkuRemindEvent extends RecvEvent {
     private String detail;
 
 
-    private RecvCardSkuRemindEvent(){
+    private RecvCardSkuRemindEvent() {
 
     }
+
     public RecvCardSkuRemindEvent(RecvEvent e) {
         super(e);
         this.eventType = e.getEventType();

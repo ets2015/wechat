@@ -20,6 +20,7 @@ public class RecvTextMessage extends RecvMsg {
     private RecvTextMessage() {
 
     }
+
     public RecvTextMessage(RecvMsg m) {
         super(m);
         this.msgId = m.msgId;

@@ -21,7 +21,7 @@ public class RecvCardPassCheckEvent extends RecvEvent {
      */
     private String refuseReason;
 
-    protected RecvCardPassCheckEvent(){
+    protected RecvCardPassCheckEvent() {
 
     }
 

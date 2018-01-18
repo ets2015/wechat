@@ -12,9 +12,9 @@ import java.util.Arrays;
  */
 public class UserInfo implements Serializable {
 
-	private static final long serialVersionUID = 3369595877567671741L;
+    private static final long serialVersionUID = 3369595877567671741L;
 
-	@JsonProperty("openid")
+    @JsonProperty("openid")
     private String openId;
 
     @JsonProperty("nickname")

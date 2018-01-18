@@ -13,11 +13,6 @@ import java.util.Date;
  */
 public class RecvCardPayOrderEvent extends RecvEvent {
     private static final long serialVersionUID = -57254023737174302L;
-
-    private RecvCardPayOrderEvent() {
-
-    }
-
     /**
      * 本次推送对应的订单号
      */
@@ -80,6 +75,9 @@ public class RecvCardPayOrderEvent extends RecvEvent {
      * 所开发票的详情
      */
     private String receiptInfo;
+    private RecvCardPayOrderEvent() {
+
+    }
 
     public RecvCardPayOrderEvent(RecvEvent e) {
         super(e);

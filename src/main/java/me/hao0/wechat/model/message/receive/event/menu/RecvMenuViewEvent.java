@@ -21,6 +21,7 @@ public class RecvMenuViewEvent extends RecvEvent {
     private RecvMenuViewEvent() {
 
     }
+
     public RecvMenuViewEvent(RecvEvent e) {
         super(e);
         this.eventType = e.getEventType();

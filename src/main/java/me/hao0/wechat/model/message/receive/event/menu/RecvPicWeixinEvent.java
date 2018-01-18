@@ -15,6 +15,7 @@ public class RecvPicWeixinEvent extends RecvPicSysphotoEvent {
     private RecvPicWeixinEvent() {
 
     }
+
     public RecvPicWeixinEvent(RecvPicSysphotoEvent e) {
         super(e);
         this.eventType = e.getEventType();

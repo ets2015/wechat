@@ -9,7 +9,7 @@ package me.hao0.wechat.model.message.receive.event;
  */
 public class RecvUnknownEvent extends RecvEvent {
 
-	private static final long serialVersionUID = 8467705767316035053L;
+    private static final long serialVersionUID = 8467705767316035053L;
 
     private RecvUnknownEvent() {
 

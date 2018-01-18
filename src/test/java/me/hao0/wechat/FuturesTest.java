@@ -40,7 +40,7 @@ public class FuturesTest {
 
         final ListenableFuture allFutures = Futures.allAsList(future1, future2);
 
-		final ListenableFuture transform = Futures.transform(allFutures, new AsyncFunction<List<Integer>, Boolean>() {
+        final ListenableFuture transform = Futures.transform(allFutures, new AsyncFunction<List<Integer>, Boolean>() {
             @Override
             public ListenableFuture apply(List<Integer> results) throws Exception {
                 return Futures.immediateFuture(String.format("success future:%d", results.size()));

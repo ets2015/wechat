@@ -31,6 +31,7 @@ public class RecvVoiceMessage extends RecvMsg {
     private RecvVoiceMessage() {
 
     }
+
     public RecvVoiceMessage(RecvMsg m) {
         super(m);
         this.msgId = m.msgId;

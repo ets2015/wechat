@@ -15,6 +15,7 @@ public class RecvPicPhotoOrAlbumEvent extends RecvPicSysphotoEvent {
     private RecvPicPhotoOrAlbumEvent() {
 
     }
+
     public RecvPicPhotoOrAlbumEvent(RecvPicSysphotoEvent e) {
         super(e);
         this.eventType = e.getEventType();

@@ -15,6 +15,7 @@ public class RecvShortVideoMessage extends RecvVideoMessage {
     private RecvShortVideoMessage() {
 
     }
+
     public RecvShortVideoMessage(RecvMsg m) {
         super(m);
         this.msgId = m.msgId;

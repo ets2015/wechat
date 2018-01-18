@@ -15,6 +15,7 @@ public class RecvScancodeWaitmsgEvent extends RecvScancodePushEvent {
     private RecvScancodeWaitmsgEvent() {
 
     }
+
     public RecvScancodeWaitmsgEvent(RecvScancodePushEvent e) {
         super(e);
         this.eventType = e.getEventType();

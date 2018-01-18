@@ -23,6 +23,7 @@ public class RecvUserScanEvent extends RecvEvent {
     protected RecvUserScanEvent() {
 
     }
+
     public RecvUserScanEvent(RecvEvent e) {
         super(e);
         this.eventType = e.getEventType();

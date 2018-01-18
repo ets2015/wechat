@@ -23,6 +23,7 @@ public class RecvUserDelCardEvent extends RecvEvent {
 
     private RecvUserDelCardEvent() {
     }
+
     public RecvUserDelCardEvent(RecvEvent e) {
         super(e);
         this.eventType = e.getEventType();

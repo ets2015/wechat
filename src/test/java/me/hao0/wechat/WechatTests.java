@@ -53,7 +53,7 @@ public class WechatTests {
 
     private String openId = "o0PISt4RakRiy-2bwwY_NmYfQL2o";
 
-	private FileOutputStream out;
+    private FileOutputStream out;
 
     @Before
     public void init() throws IOException {
@@ -745,6 +745,6 @@ public class WechatTests {
     @Test
     public void testBuildWechat() {
         @SuppressWarnings("unused")
-		Wechat w = WechatBuilder.newBuilder(null, "").build();
+        Wechat w = WechatBuilder.newBuilder(null, "").build();
     }
 }

@@ -25,6 +25,7 @@ public class RecvImageMessage extends RecvMsg {
     private RecvImageMessage() {
 
     }
+
     public RecvImageMessage(RecvMsg m) {
         super(m);
         this.msgId = m.msgId;

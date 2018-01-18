@@ -12,31 +12,16 @@ import java.util.Map;
  */
 public class WechatException extends RuntimeException {
 
-	private static final long serialVersionUID = 1895978005123791544L;
-	
-	/**
+    private static final long serialVersionUID = 1895978005123791544L;
+
+    /**
      * 微信返回的errcode
      */
     private Integer code;
-    
-    /**
-     * 返回中文提示异常
-     * @param errMap
-     * @author zJun
-     * @date 2018年1月3日 下午2:04:34
-     */
-    public static WechatException getInstance(Map<String, ?> errMap) {
-    	Integer code = (Integer) errMap.get("errcode");
-    	String message = ErrorMessage.tips.get(code);
-    	if(message != null) 
-    		return new WechatException(message);
-    	else
-    		return new WechatException(errMap);
-    }
 
     public WechatException(Map<String, ?> errMap) {
-    	super("[" + errMap.get("errcode") + "]" + errMap.get("errmsg"));
-    	code = (Integer) errMap.get("errcode");
+        super("[" + errMap.get("errcode") + "]" + errMap.get("errmsg"));
+        code = (Integer) errMap.get("errcode");
     }
 
     public WechatException() {
@@ -57,6 +42,22 @@ public class WechatException extends RuntimeException {
 
     protected WechatException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
+    }
+
+    /**
+     * 返回中文提示异常
+     *
+     * @param errMap
+     * @author zJun
+     * @date 2018年1月3日 下午2:04:34
+     */
+    public static WechatException getInstance(Map<String, ?> errMap) {
+        Integer code = (Integer) errMap.get("errcode");
+        String message = ErrorMessage.tips.get(code);
+        if (message != null)
+            return new WechatException(message);
+        else
+            return new WechatException(errMap);
     }
 
     public Integer getCode() {

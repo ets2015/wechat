@@ -8,9 +8,9 @@ package me.hao0.wechat.model.message.receive.event;
  */
 public class RecvSubscribeEvent extends RecvEvent {
 
-	private static final long serialVersionUID = -7325516552201687962L;
+    private static final long serialVersionUID = -7325516552201687962L;
 
-	/**
+    /**
      * 事件KEY值，是一个32位无符号整数，即创建二维码时的二维码scene_id
      */
     private String eventKey;
@@ -20,7 +20,7 @@ public class RecvSubscribeEvent extends RecvEvent {
      */
     private String ticket;
 
-    private RecvSubscribeEvent(){
+    private RecvSubscribeEvent() {
     }
 
     public RecvSubscribeEvent(RecvEvent e) {

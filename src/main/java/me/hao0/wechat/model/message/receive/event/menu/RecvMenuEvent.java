@@ -10,9 +10,9 @@ import me.hao0.wechat.model.message.receive.event.RecvEvent;
  */
 public class RecvMenuEvent extends RecvEvent {
 
-	private static final long serialVersionUID = -1710547515580409653L;
-	
-	/**
+    private static final long serialVersionUID = -1710547515580409653L;
+
+    /**
      * eventType为CLICK时: 与自定义菜单接口中KEY值对应
      * eventType为VIEW时: 设置的跳转URL
      */

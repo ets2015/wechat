@@ -15,9 +15,9 @@ import java.util.Date;
  */
 public abstract class Material implements Serializable {
 
-	private static final long serialVersionUID = 3882699370687026433L;
+    private static final long serialVersionUID = 3882699370687026433L;
 
-	@JsonProperty("media_id")
+    @JsonProperty("media_id")
     protected String mediaId;
 
     @JsonProperty("update_time")

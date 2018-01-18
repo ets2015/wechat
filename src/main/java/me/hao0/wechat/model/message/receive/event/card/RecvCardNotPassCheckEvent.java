@@ -13,7 +13,7 @@ public class RecvCardNotPassCheckEvent extends RecvCardPassCheckEvent {
 
     private static final long serialVersionUID = -9078108698373641810L;
 
-    private RecvCardNotPassCheckEvent(){
+    private RecvCardNotPassCheckEvent() {
     }
 
     public RecvCardNotPassCheckEvent(RecvEvent e) {

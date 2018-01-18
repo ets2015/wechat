@@ -8,9 +8,9 @@ package me.hao0.wechat.model.message.receive.event;
  */
 public class RecvLocationEvent extends RecvEvent {
 
-	private static final long serialVersionUID = -5786007629715392878L;
+    private static final long serialVersionUID = -5786007629715392878L;
 
-	/**
+    /**
      * 纬度
      */
     private String latitude;
@@ -28,6 +28,7 @@ public class RecvLocationEvent extends RecvEvent {
     private RecvLocationEvent() {
 
     }
+
     public RecvLocationEvent(RecvEvent e) {
         super(e);
         this.eventType = e.eventType;

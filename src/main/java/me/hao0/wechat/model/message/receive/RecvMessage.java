@@ -10,9 +10,9 @@ import java.io.Serializable;
  */
 public class RecvMessage implements Serializable {
 
-	private static final long serialVersionUID = -3647434602412814983L;
+    private static final long serialVersionUID = -3647434602412814983L;
 
-	/**
+    /**
      * 开发者微信号
      */
     protected String toUserName;

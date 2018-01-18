@@ -30,6 +30,7 @@ public class RecvLinkMessage extends RecvMsg {
     private RecvLinkMessage() {
 
     }
+
     public RecvLinkMessage(RecvMsg m) {
         super(m);
         this.msgId = m.msgId;

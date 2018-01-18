@@ -14,6 +14,7 @@ public class RecvUserScanProductEnterSessionEvent extends RecvUserScanProductEve
     private RecvUserScanProductEnterSessionEvent() {
 
     }
+
     public RecvUserScanProductEnterSessionEvent(RecvUserScanProductEvent e) {
         super(e);
         this.eventType = e.getEventType();

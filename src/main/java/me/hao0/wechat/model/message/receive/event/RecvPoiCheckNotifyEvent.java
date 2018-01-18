@@ -28,6 +28,7 @@ public class RecvPoiCheckNotifyEvent extends RecvEvent {
     private RecvPoiCheckNotifyEvent() {
 
     }
+
     public RecvPoiCheckNotifyEvent(RecvEvent e) {
         super(e);
         this.eventType = e.getEventType();

@@ -20,6 +20,7 @@ public class RecvPicSysphotoEvent extends RecvMenuEvent {
     protected RecvPicSysphotoEvent() {
 
     }
+
     public RecvPicSysphotoEvent(RecvMenuEvent e) {
         super(e);
         this.eventType = e.getEventType();

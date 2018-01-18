@@ -1,10 +1,10 @@
 package me.hao0.wechat.core;
 
-import static me.hao0.common.util.Preconditions.checkNotNullAndEmpty;
-
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.Map;
+
+import static me.hao0.common.util.Preconditions.checkNotNullAndEmpty;
 
 /**
  * 微信组件需要继承该类
@@ -95,16 +95,17 @@ public abstract class Component {
     protected <T> void doAsync(AsyncFunction<T> af) {
         wechat.doAsync(af);
     }
-    
+
     /**
      * 检查参数
+     *
      * @param accessToken
      * @param json
      * @author zJun
      * @date 2018年1月5日 上午10:26:13
      */
     protected void checkData(String accessToken, String json) {
-    	checkNotNullAndEmpty(accessToken, "accessToken");
+        checkNotNullAndEmpty(accessToken, "accessToken");
         checkNotNullAndEmpty(json, "json");
     }
 }

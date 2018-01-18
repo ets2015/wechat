@@ -55,6 +55,7 @@ public class RecvUserGetCardEvent extends RecvEvent {
     private RecvUserGetCardEvent() {
 
     }
+
     public RecvUserGetCardEvent(RecvEvent e) {
         super(e);
         this.eventType = e.getEventType();
