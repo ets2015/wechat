@@ -368,7 +368,9 @@ public final class Messages extends Component {
                 recvUserConsumeCardEvent.setVerifyCode(readers.getNodeStr("VerifyCode"));
                 recvUserConsumeCardEvent.setRemarkAmount(readers.getNodeStr("RemarkAmount"));
                 recvUserConsumeCardEvent.setOuterStr(readers.getNodeStr("OuterStr"));
+
                 return recvUserConsumeCardEvent;
+
 
             //买单事件
             case USER_PAY_FROM_PAY_CELL:
@@ -390,11 +392,27 @@ public final class Messages extends Component {
                 recvUpdateMemberCardEvent.setModifyBonus(Integer.valueOf(readers.getNodeStr("ModifyBonus")));
                 return recvUpdateMemberCardEvent;
 
+
+            //激活事件
             case SUBMIT_MEMBER_CARD_USER_INFO:
                 RecvSubmitMemberCardUserInfoEvent recvSubmitMemberCardUserInfoEvent = new RecvSubmitMemberCardUserInfoEvent(event);
                 recvSubmitMemberCardUserInfoEvent.setCardId(readers.getNodeStr("CardId"));
                 recvSubmitMemberCardUserInfoEvent.setUserCardCode(readers.getNodeStr("UserCardCode"));
                 return recvSubmitMemberCardUserInfoEvent;
+
+            //通过审核事件
+            case CARD_PASS_CHECK:
+                RecvCardPassCheckEvent recvCardPassCheckEvent = new RecvCardPassCheckEvent(event);
+                recvCardPassCheckEvent.setCardId(readers.getNodeStr("CardId"));
+                return recvCardPassCheckEvent;
+
+            //不通过审核事件
+            case CARD_NOT_PASS_CHECK:
+                RecvCardNotPassCheckEvent recvCardNotPassCheckEvent = new RecvCardNotPassCheckEvent(event);
+                recvCardNotPassCheckEvent.setCardId(readers.getNodeStr("CardId"));
+                recvCardNotPassCheckEvent.setRefuseReason(readers.getNodeStr("RefuseReason"));
+                return recvCardNotPassCheckEvent;
+
 
             /** 卡券事件 end **/
 
@@ -416,7 +434,7 @@ public final class Messages extends Component {
                 return new RecvUnknownEvent(event);
 
             default:
-                throw new IllegalArgumentException("unknown event msg");
+                throw new IllegalArgumentException(type.value() + " event is not support by system ");
         }
     }
 
