@@ -25,6 +25,12 @@ public class BaseInfo {
      * CODE_TYPE_NONE:不显示code和条形码类型
      **/
     private String code_type;
+    
+    /**
+     * (会员卡字段)支付功能结构体，swipe_card结构 （结构复杂不想吐槽）
+     */
+    private PayInfo pay_info;
+    
     /**
      * 商户名字,字数上限为12个汉字。
      */
@@ -82,6 +88,11 @@ public class BaseInfo {
     private Integer use_limit;
     private Boolean can_share;
     private Boolean can_give_friend;
+    
+    /**
+     * (会员卡字段)填写true为用户点击进入会员卡时推送事件，默认为false。详情见 进入会员卡事件推送 
+     */
+    private Boolean need_push_on_view;
 
     @Data
     public static class Sku {
@@ -119,5 +130,25 @@ public class BaseInfo {
          */
         private Long fixed_begin_term;
 
+    }
+    
+    @Data
+    public static class SwipeCard {
+    	/**
+    	 * 是否设置该会员卡支持拉出微信支付刷卡界面
+    	 */
+    	private Boolean is_swipe_card;
+    }
+    
+    @Data
+    public static class PayInfo {
+    	/**
+    	 * 支付功能结构体，swipe_card结构（微信脑子不好，文档不确定is_pay_and_qrcode是否在SwipeCard内）
+    	 */
+    	private SwipeCard swipe_card;
+    	/**
+    	 * 是否设置该会员卡中部的按钮同时支持微信支付刷卡和会员卡二维码
+    	 */
+    	private Boolean is_pay_and_qrcode;
     }
 }
