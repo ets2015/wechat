@@ -30,5 +30,10 @@ public class CardInfo {
      * 兑换券
      */
     private Gift gift;
+    
+    /**
+     * 会员卡
+     */
+    private Member member_card;
 
 }

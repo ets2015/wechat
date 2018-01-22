@@ -65,6 +65,11 @@ public class Cards extends Component {
      * 查询卡券列表
      */
     private static final String BATCHGET = "https://api.weixin.qq.com/card/batchget?access_token=";
+    
+    /**
+     * 创建会员卡接口
+     */
+    private static final String MEMBER_CREATE = "https://api.weixin.qq.com/card/create?access_token=";
 
     /**
      * 微信card_id
@@ -422,4 +427,24 @@ public class Cards extends Component {
         return get(loadAccessToken(), json);
     }
 
+    /**
+     * 创建会员卡接口
+     * @author zJun
+     * @date 2018年1月19日 下午5:21:21
+     */
+    public String memberCreate(String accessToken, String json) {
+        checkData(accessToken, json);
+        String url = MEMBER_CREATE + accessToken;
+        Map<String, Object> result = doPost(url, json);
+        return result.get(CARD_ID).toString();
+    }
+    
+    /**
+     * 创建会员卡接口
+     * @author zJun
+     * @date 2018年1月19日 下午5:21:27
+     */
+    public String memberCreate(String json) {
+        return memberCreate(loadAccessToken(), json);
+    }
 }
