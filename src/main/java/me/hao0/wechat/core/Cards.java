@@ -1,6 +1,12 @@
 package me.hao0.wechat.core;
 
+import me.hao0.common.json.Jsons;
+import me.hao0.wechat.model.base.WechatResponse;
+import me.hao0.wechat.model.card.MemberCardActivateDTO;
+
 import java.util.Map;
+
+import static me.hao0.common.util.Preconditions.checkNotNullAndEmpty;
 
 /**
  * 微信卡券
@@ -70,6 +76,12 @@ public class Cards extends Component {
      * 微信card_id
      */
     private static final String CARD_ID = "card_id";
+
+
+    /**
+     * 接口激活会员卡
+     */
+    private static final String MEMBERCARD_ACTIVATE = "https://api.weixin.qq.com/card/membercard/activate?access_token=";
 
 
     /**
@@ -265,7 +277,6 @@ public class Cards extends Component {
     /**
      * 更改卡券信息接口
      *
-     * @param accessToken
      * @param json
      * @author zJun
      * @date 2017年12月18日 下午6:11:03
@@ -422,4 +433,33 @@ public class Cards extends Component {
         return get(loadAccessToken(), json);
     }
 
+
+    /**
+     * 接口激活会员卡
+     *
+     * @param accessToken
+     * @param memberCardActivateDTO
+     * @return
+     * @author Shinez
+     * @data 2018年1月20日 21:21:42
+     */
+    public void memberCardActivate(String accessToken, MemberCardActivateDTO memberCardActivateDTO) {
+        checkNotNullAndEmpty(accessToken, "accessToken");
+        assert memberCardActivateDTO != null;
+        String url = MEMBERCARD_ACTIVATE + accessToken;
+        doPost(url, memberCardActivateDTO);
+    }
+
+
+    /**
+     * 接口激活会员卡
+     *
+     * @param memberCardActivateDTO
+     * @return
+     * @author Shinez
+     * @data 2018年1月20日 21:21:42
+     */
+    public void memberCardActivate(MemberCardActivateDTO memberCardActivateDTO) {
+        memberCardActivate(loadAccessToken(), memberCardActivateDTO);
+    }
 }

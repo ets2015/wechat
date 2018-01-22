@@ -1,5 +1,8 @@
 package me.hao0.wechat.exception;
 
+import com.alibaba.fastjson.JSONObject;
+import me.hao0.wechat.model.base.WechatResponse;
+
 import java.util.Map;
 
 /**
@@ -40,8 +43,16 @@ public class WechatException extends RuntimeException {
         super(cause);
     }
 
-    protected WechatException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    protected <T extends WechatResponse> WechatException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
+    }
+
+    public static <T extends WechatResponse>  WechatException getInstance(T resp) {
+        String errmsg = resp.getErrmsg();
+        if (errmsg != null) {
+            return new WechatException(errmsg);
+        }
+        return new WechatException(JSONObject.toJSONString(resp));
     }
 
     /**
@@ -54,10 +65,11 @@ public class WechatException extends RuntimeException {
     public static WechatException getInstance(Map<String, ?> errMap) {
         Integer code = (Integer) errMap.get("errcode");
         String message = ErrorMessage.tips.get(code);
-        if (message != null)
+        if (message != null) {
             return new WechatException(message);
-        else
+        } else {
             return new WechatException(errMap);
+        }
     }
 
     public Integer getCode() {

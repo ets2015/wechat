@@ -1,5 +1,8 @@
 package me.hao0.wechat.core;
 
+import me.hao0.common.json.Jsons;
+import me.hao0.wechat.model.base.WechatResponse;
+
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.Map;
@@ -48,6 +51,35 @@ public abstract class Component {
     protected Map<String, Object> doPost(String url, String body) {
         return wechat.doPost(url, body);
     }
+
+    /**
+     * POST 请求
+     *
+     * @param url
+     * @param params
+     * @param respClass
+     * @param <T>
+     * @return
+     * @author Shinez
+     * @date 2018年1月20日 21:44:30
+     */
+    protected <T extends WechatResponse> T doPost(String url, Object params, Class<T> respClass) {
+        return wechat.doPost(url, Jsons.DEFAULT.toJson(params), respClass);
+    }
+
+    /**
+     * POST 请求
+     *
+     * @param url
+     * @param params
+     * @return
+     * @author Shinez
+     * @date 2018年1月20日 21:44:30
+     */
+    protected void doPost(String url, Object params) {
+        wechat.doPost(url, Jsons.DEFAULT.toJson(params));
+    }
+
 
     /**
      * GET请求

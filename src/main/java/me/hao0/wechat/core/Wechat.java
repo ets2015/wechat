@@ -1,6 +1,8 @@
 package me.hao0.wechat.core;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -14,6 +16,7 @@ import me.hao0.wechat.loader.DefaultAccessTokenLoader;
 import me.hao0.wechat.loader.DefaultTicketLoader;
 import me.hao0.wechat.loader.TicketLoader;
 import me.hao0.wechat.model.base.AccessToken;
+import me.hao0.wechat.model.base.WechatResponse;
 import me.hao0.wechat.model.js.Ticket;
 import me.hao0.wechat.model.js.TicketType;
 
@@ -60,6 +63,12 @@ public final class Wechat {
      * 微信错误码变量
      */
     private final String ERROR_CODE = "errcode";
+
+    /**
+     * 微信错误码信息
+     */
+    private final String ERROR_MSG = "errmsg";
+
     /**
      * 微信APP (令牌)Token
      */
@@ -236,6 +245,28 @@ public final class Wechat {
         Map<String, Object> resp = http.request(MAP_STRING_OBJ_TYPE);
         Integer errcode = (Integer) resp.get(ERROR_CODE);
         if (errcode != null && errcode != 0) {
+            throw WechatException.getInstance(resp);
+        }
+        return resp;
+    }
+
+    <T extends WechatResponse> T doPost(String url, Object body, Class<T> responseClass) {
+        Http http = Http.post(url);
+        if (body != null) {
+            http.body(Jsons.DEFAULT.toJson(body));
+        }
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        JavaType javaType = objectMapper.constructType(responseClass);
+
+        T resp = http.request(javaType);
+        if (resp == null) {
+            throw new WechatException("can not get anything from this request,the response is null");
+        }
+
+        Integer errCode = resp.getErrcode();
+        if (errCode != null && errCode != 0) {
             throw WechatException.getInstance(resp);
         }
         return resp;
