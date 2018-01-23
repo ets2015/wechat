@@ -1,12 +1,13 @@
 package me.hao0.wechat.core;
 
-import me.hao0.common.json.Jsons;
-import me.hao0.wechat.model.base.WechatResponse;
-import me.hao0.wechat.model.card.MemberCardActivateDTO;
+import static me.hao0.common.util.Preconditions.checkNotNullAndEmpty;
 
 import java.util.Map;
 
-import static me.hao0.common.util.Preconditions.checkNotNullAndEmpty;
+import me.hao0.wechat.model.card.MemberCardActivateDTO;
+import me.hao0.wechat.model.card.TestWhiteListDTO;
+import me.hao0.wechat.model.card.UpdateUserDTO;
+import me.hao0.wechat.model.card.UpdateUserResponse;
 
 /**
  * 微信卡券
@@ -20,7 +21,7 @@ public class Cards extends Component {
     /**
      * 创建卡券
      */
-    private static final String CREATE = " https://api.weixin.qq.com/card/create?access_token=";
+    private static final String CREATE = "https://api.weixin.qq.com/card/create?access_token=";
 
     /**
      * 创建卡券二维码
@@ -88,6 +89,15 @@ public class Cards extends Component {
      */
     private static final String MEMBERCARD_ACTIVATE = "https://api.weixin.qq.com/card/membercard/activate?access_token=";
 
+    /**
+     * 设置测试白名单
+     */
+    private static final String TEST_WHITE_LIST_SET = "https://api.weixin.qq.com/card/testwhitelist/set?access_token=";
+    
+    /**
+     * 更新会员信息
+     */
+    private static final String UPDATEUSER ="https://api.weixin.qq.com/card/membercard/updateuser?access_token=";
 
     /**
      * 创建卡券
@@ -488,4 +498,45 @@ public class Cards extends Component {
     public String memberCreate(String json) {
         return memberCreate(loadAccessToken(), json);
     }
+    
+    /**
+     * 设置测试白名单
+     * @author zJun
+     * @date 2018年1月22日 下午6:06:58
+     */
+    public void testWhiteListSet(String accessToken, TestWhiteListDTO param) {
+    	checkNotNullAndEmpty(accessToken, "accessToken");
+        String url = TEST_WHITE_LIST_SET + accessToken;
+        doPost(url, param);
+    }
+    
+    /**
+     * 设置测试白名单
+     * @author zJun
+     * @date 2018年1月22日 下午6:07:36
+     */
+    public void testWhiteListSet(TestWhiteListDTO param) {
+    	testWhiteListSet(loadAccessToken(), param);
+    }
+    
+    /**
+     * 更新会员信息
+     * @author zJun
+     * @date 2018年1月23日 下午3:12:06
+     */
+    public UpdateUserResponse updateuser(String accessToken, UpdateUserDTO param) {
+    	checkNotNullAndEmpty(accessToken, "accessToken");
+        String url = UPDATEUSER + accessToken;
+        return doPost(url, param, UpdateUserResponse.class);
+    }
+    
+    /**
+     * 更新会员信息
+     * @author zJun
+     * @date 2018年1月23日 下午3:12:06
+     */
+    public UpdateUserResponse updateuser(UpdateUserDTO param) {
+        return updateuser(loadAccessToken(), param);
+    }
+    
 }

@@ -67,7 +67,8 @@ public final class Wechat {
     /**
      * 微信错误码信息
      */
-    private final String ERROR_MSG = "errmsg";
+    @SuppressWarnings("unused")
+	private final String ERROR_MSG = "errmsg";
 
     /**
      * 微信APP (令牌)Token
