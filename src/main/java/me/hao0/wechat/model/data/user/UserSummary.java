@@ -27,8 +27,6 @@ public class UserSummary implements Serializable {
      *
      * @see UserSource
      */
-    @JsonProperty("user_source")
-    @JsonDeserialize(using = UserSourceDeserializer.class)
     private UserSource source;
 
     /**
