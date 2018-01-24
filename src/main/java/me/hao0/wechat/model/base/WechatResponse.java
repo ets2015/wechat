@@ -5,7 +5,7 @@ package me.hao0.wechat.model.base;
  * @author Shinez
  * @date 2018/1/20.
  */
-public class WechatResponse {
+public  class WechatResponse {
 
 
     /**
