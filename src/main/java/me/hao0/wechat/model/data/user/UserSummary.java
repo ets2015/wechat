@@ -32,6 +32,12 @@ public class UserSummary implements Serializable {
     private UserSource source;
 
     /**
+     * 用户渠道源值
+     */
+    @JsonProperty("user_source")
+    private Integer userSource;
+
+    /**
      * 新增的用户数量
      */
     @JsonProperty("new_user")
@@ -83,6 +89,14 @@ public class UserSummary implements Serializable {
      */
     public Integer getIncrement() {
         return newCount - cancelCount;
+    }
+
+    public Integer getUserSource() {
+        return userSource;
+    }
+
+    public void setUserSource(Integer userSource) {
+        this.userSource = userSource;
     }
 
     @Override
