@@ -25,8 +25,9 @@ public class RecvPoiCheckNotifyEvent extends RecvEvent {
      */
     private String msg;
 
-    private RecvPoiCheckNotifyEvent() {
-
+    @SuppressWarnings("unused")
+	private RecvPoiCheckNotifyEvent() {
+    	
     }
 
     public RecvPoiCheckNotifyEvent(RecvEvent e) {

@@ -282,11 +282,12 @@ public class Cards extends Component {
      * @author zJun
      * @date 2017年12月18日 下午6:11:03
      */
-    public void update(String accessToken, String json) {
+    public Map<String, Object> update(String accessToken, String json) {
         checkData(accessToken, json);
 
         String url = UPDATE + accessToken;
-        doPost(url, json);
+        Map<String, Object> map = doPost(url, json);
+        return map;
     }
 
     /**
@@ -296,8 +297,8 @@ public class Cards extends Component {
      * @author zJun
      * @date 2017年12月18日 下午6:11:03
      */
-    public void update(String json) {
-        update(loadAccessToken(), json);
+    public Map<String, Object> update(String json) {
+       return update(loadAccessToken(), json);
     }
 
     /**

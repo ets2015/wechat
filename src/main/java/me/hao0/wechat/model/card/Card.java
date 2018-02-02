@@ -40,6 +40,8 @@ public class Card {
             return card.getDiscount().getBase_info();
         else if (card.getCard_type().equals("GIFT"))
             return card.getGift().getBase_info();
+        else if (card.getCard_type().equals("MEMBER_CARD"))
+            return card.getMember_card().getBase_info();
         else
             throw new RuntimeException("类型错误");
     }

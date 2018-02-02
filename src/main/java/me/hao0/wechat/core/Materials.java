@@ -831,6 +831,22 @@ public final class Materials extends Component {
     public PermMaterial uploadPerm(MaterialUploadType type, String fileName, byte[] data) {
         return uploadPerm(loadAccessToken(), type, fileName, new ByteArrayInputStream(data));
     }
+    
+    /**
+     * 上传永久(图片，语音，缩略图)素材
+     * 永久素材的数量是有上限的，请谨慎新增。图文消息素材和图片素材的上限为5000，其他类型为1000
+     * 图片（image）: 1M，bmp/png/jpeg/jpg/gif
+     * 语音（voice）：2M，播放长度不超过60s，mp3/wma/wav/amr
+     * 缩略图（thumb）：64KB，bmp/png/jpeg/jpg/gif
+     * @param type	文件类型
+     * @param fileName	文件名
+     * @param is	你懂得
+     * @author zJun
+     * @date 2018年2月1日 下午4:17:27
+     */
+    public PermMaterial uploadPerm(MaterialUploadType type, String fileName, InputStream is) {
+        return uploadPerm(loadAccessToken(), type, fileName, is);
+    }
 
     /**
      * 上传永久(图片，语音，缩略图)素材

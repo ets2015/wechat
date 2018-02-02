@@ -246,7 +246,6 @@ public final class Wechat {
         Map<String, Object> resp = http.request(MAP_STRING_OBJ_TYPE);
         Integer errcode = (Integer) resp.get(ERROR_CODE);
         if (errcode != null && errcode != 0) {
-        	System.out.println(resp.get("errmsg"));
             throw WechatException.getInstance(resp);
         }
         return resp;
