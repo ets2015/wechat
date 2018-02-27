@@ -624,6 +624,19 @@ public final class Materials extends Component {
         doPost(url, params);
         return Boolean.TRUE;
     }
+    
+    /**
+     * 修改图文
+     * @param mediaId     图文mediaId
+     * @param itemIndex   对应图文素材中的第几个图文项，从0开始
+     * @param newItem     新的图文项
+     * @return 更新成功返回true，反之false
+     * @author zJun
+     * @date 2018年2月2日 下午4:34:05
+     */
+    public Boolean updatePermNews(String mediaId, Integer itemIndex, NewsContentItem newItem) {
+        return updatePermNews(loadAccessToken(), mediaId, itemIndex, newItem);
+    }
 
     /**
      * 上传永久图文素材内容中引用的图片
