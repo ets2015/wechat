@@ -92,6 +92,17 @@ public final class Messages extends Component {
         doPost(url, params);
         return Boolean.TRUE;
     }
+    
+    /**
+     * 主动发送客服消息给用户
+     * @param msg 预览消息
+     * @return
+     * @author zJun
+     * @date 2018年3月5日 下午3:38:59
+     */
+    public Boolean customSend(SendPreviewMessage msg) {
+        return customSend(loadAccessToken(), msg);
+    }
 
     /**
      * 被动回复微信服务器文本消息

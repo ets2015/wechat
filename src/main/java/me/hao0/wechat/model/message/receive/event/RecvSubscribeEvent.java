@@ -20,6 +20,7 @@ public class RecvSubscribeEvent extends RecvEvent {
      */
     private String ticket;
 
+    @SuppressWarnings("unused")
     private RecvSubscribeEvent() {
     }
 

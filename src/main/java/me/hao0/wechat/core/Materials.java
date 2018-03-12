@@ -612,7 +612,7 @@ public final class Materials extends Component {
     public Boolean updatePermNews(String accessToken, String mediaId, Integer itemIndex, NewsContentItem newItem) {
         checkNotNullAndEmpty(accessToken, "accessToken");
         checkNotNullAndEmpty(mediaId, "mediaId");
-        checkArgument(itemIndex != null && itemIndex > 0, "itemIndex can't be null and must > 0");
+        checkArgument(itemIndex != null && itemIndex >= 0, "itemIndex can't be null and must > 0");
         checkNotNull(newItem, "newItem can't be null");
 
         String url = UPDATE_NEWS + accessToken;
