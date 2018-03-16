@@ -17,6 +17,7 @@ public class RecvTextMessage extends RecvMsg {
      */
     private String content;
 
+    @SuppressWarnings("unused")
     private RecvTextMessage() {
 
     }
@@ -37,6 +38,16 @@ public class RecvTextMessage extends RecvMsg {
     @Override
     public String getMsgType() {
         return RecvMessageType.TEXT.value();
+    }
+    
+    /**
+     * 调用父类的get函数
+     * @return
+     * @author zJun
+     * @date 2018年3月12日 下午4:05:27
+     */
+    public String getSuperMsgType() {
+        return super.getMsgType();
     }
 
     @Override
