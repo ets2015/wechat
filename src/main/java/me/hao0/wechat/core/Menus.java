@@ -2,6 +2,7 @@ package me.hao0.wechat.core;
 
 import com.fasterxml.jackson.databind.JavaType;
 import me.hao0.common.json.Jsons;
+import me.hao0.wechat.exception.WechatException;
 import me.hao0.wechat.model.menu.Menu;
 
 import java.util.ArrayList;
@@ -34,6 +35,15 @@ public final class Menus extends Component {
      * 删除菜单
      */
     private static final String DELETE = "https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=";
+    
+    /** 创建个性化菜单 */
+    private static final String ADDCONDITIONAL = "https://api.weixin.qq.com/cgi-bin/menu/addconditional?access_token=";
+    
+    /** 删除个性化菜单 */
+    private static final String DELCONDITIONAL = "https://api.weixin.qq.com/cgi-bin/menu/delconditional?access_token=";
+    
+    /** 测试个性化菜单匹配结果 */
+    private static final String TRYMATCH = "https://api.weixin.qq.com/cgi-bin/menu/trymatch?access_token=";
 
     private static final JavaType ARRAY_LIST_MENU_TYPE = Jsons.DEFAULT.createCollectionType(ArrayList.class, Menu.class);
 
@@ -185,5 +195,92 @@ public final class Menus extends Component {
         String url = DELETE + accessToken;
         doGet(url);
         return Boolean.TRUE;
+    }
+    
+    /**
+     * 创建个性化菜单
+     * @param jsonMenu
+     * @return
+     * @author zJun
+     * @date 2018年3月16日 下午6:07:38
+     */
+    public String createGX(String jsonMenu) {
+        return createGX(loadAccessToken(), jsonMenu);
+    }
+    
+    /**
+     * 创建个性化菜单
+     * @param accessToken
+     * @param jsonMenu
+     * @return
+     * @author zJun
+     * @date 2018年3月16日 下午6:11:00
+     */
+    public String createGX(String accessToken, String jsonMenu) {
+        checkNotNullAndEmpty(accessToken, "accessToken");
+        checkNotNullAndEmpty(jsonMenu, "jsonMenu");
+
+        String url = ADDCONDITIONAL + accessToken;
+        Map<String, Object> result = doPost(url, jsonMenu);
+        Object menuid = result.get("menuid");
+        if(menuid == null) {
+            throw new WechatException("创建个性化菜单失败");
+        }
+        return menuid.toString();
+    }
+    
+    /**
+     * 删除个性化菜单
+     * @param accessToken
+     * @param jsonMenu
+     * @author zJun
+     * @date 2018年3月19日 下午2:17:03
+     */
+    public Boolean deleteGX(String accessToken, String jsonMenu) {
+        checkNotNullAndEmpty(accessToken, "accessToken");
+        checkNotNullAndEmpty(jsonMenu, "jsonMenu");
+        
+        String url = DELCONDITIONAL + accessToken;
+        doPost(url, jsonMenu);
+        return Boolean.TRUE;
+    }
+    
+    /**
+     * 删除个性化菜单
+     * @param accessToken
+     * @param jsonMenu
+     * @author zJun
+     * @date 2018年3月19日 下午2:17:03
+     */
+    public Boolean deleteGX(String jsonMenu) {
+        return deleteGX(loadAccessToken(), jsonMenu);
+    }
+    
+    /**
+     * 测试匹配菜单
+     * @param accessToken
+     * @param jsonMenu
+     * @return
+     * @author zJun
+     * @date 2018年3月19日 下午2:25:17
+     */
+    public Map<String, Object> trymatch(String accessToken, String jsonMenu) {
+        checkNotNullAndEmpty(accessToken, "accessToken");
+        checkNotNullAndEmpty(jsonMenu, "jsonMenu");
+        
+        String url = TRYMATCH + accessToken;
+        return doPost(url, jsonMenu);
+    }
+    
+    /**
+     * 测试匹配菜单
+     * @param accessToken
+     * @param jsonMenu
+     * @return
+     * @author zJun
+     * @date 2018年3月19日 下午2:25:17
+     */
+    public Map<String, Object> trymatch(String jsonMenu) {
+        return trymatch(loadAccessToken(), jsonMenu);
     }
 }
