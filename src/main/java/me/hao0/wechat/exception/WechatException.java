@@ -66,7 +66,7 @@ public class WechatException extends RuntimeException {
         Integer code = (Integer) errMap.get("errcode");
         String message = ErrorMessage.tips.get(code);
         if (message != null) {
-            return new WechatException(message);
+            return new WechatException(String.format("%s:%s", code, message));
         } else {
             return new WechatException(errMap);
         }
