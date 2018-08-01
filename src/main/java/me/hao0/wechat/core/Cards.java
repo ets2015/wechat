@@ -4,6 +4,7 @@ import static me.hao0.common.util.Preconditions.checkNotNullAndEmpty;
 
 import java.util.Map;
 
+import me.hao0.wechat.model.card.CardSet;
 import me.hao0.wechat.model.card.MemberCardActivateDTO;
 import me.hao0.wechat.model.card.TestWhiteListDTO;
 import me.hao0.wechat.model.card.UpdateUserDTO;
@@ -98,6 +99,9 @@ public class Cards extends Component {
      * 更新会员信息
      */
     private static final String UPDATEUSER ="https://api.weixin.qq.com/card/membercard/updateuser?access_token=";
+    
+    /** 步骤二：设置开卡字段接口 */
+    private static final String CARD_SET = "https://api.weixin.qq.com/card/membercard/activateuserform/set?access_token=";
 
     /**
      * 创建卡券
@@ -540,4 +544,26 @@ public class Cards extends Component {
         return updateuser(loadAccessToken(), param);
     }
     
+    /**
+     * 步骤二：设置开卡字段接口
+     * @param accessToken
+     * @param cardSet
+     * @author zJun
+     * @date 2018年8月1日 下午5:20:27
+     */
+    public void cardSet(String accessToken, CardSet cardSet) {
+        checkNotNullAndEmpty(accessToken, "accessToken");
+        String url = CARD_SET + accessToken;
+        doPost(url, cardSet);
+    }
+    
+    /**
+     * 步骤二：设置开卡字段接口
+     * @param cardSet
+     * @author zJun
+     * @date 2018年8月1日 下午5:21:32
+     */
+    public void cardSet( CardSet cardSet) {
+        cardSet(loadAccessToken(), cardSet);
+    }
 }
