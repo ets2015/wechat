@@ -4,6 +4,8 @@ import static me.hao0.common.util.Preconditions.checkNotNullAndEmpty;
 
 import java.util.Map;
 
+import me.hao0.wechat.model.card.CardGet;
+import me.hao0.wechat.model.card.CardGetResult;
 import me.hao0.wechat.model.card.CardSet;
 import me.hao0.wechat.model.card.MemberCardActivateDTO;
 import me.hao0.wechat.model.card.TestWhiteListDTO;
@@ -102,6 +104,9 @@ public class Cards extends Component {
     
     /** 步骤二：设置开卡字段接口 */
     private static final String CARD_SET = "https://api.weixin.qq.com/card/membercard/activateuserform/set?access_token=";
+    
+    /** 步骤五：拉取会员信息接口 */
+    private static final String CARD_GET = "https://api.weixin.qq.com/card/membercard/userinfo/get?access_token=";
 
     /**
      * 创建卡券
@@ -565,5 +570,31 @@ public class Cards extends Component {
      */
     public void cardSet( CardSet cardSet) {
         cardSet(loadAccessToken(), cardSet);
+    }
+    
+    /**
+     * 步骤五：拉取会员信息接口
+     * @param accessToken
+     * @param cardGet
+     * @return
+     * @author zJun
+     * @date 2018年8月1日 下午8:13:59
+     */
+    public CardGetResult cardGet(String accessToken, CardGet cardGet) {
+        checkNotNullAndEmpty(accessToken, "accessToken");
+        String url = CARD_GET + accessToken;
+        return doPost(url, cardGet, CardGetResult.class);
+    }
+    
+    /**
+     * 步骤五：拉取会员信息接口
+     * @param accessToken
+     * @param cardGet
+     * @return
+     * @author zJun
+     * @date 2018年8月1日 下午8:13:59
+     */
+    public CardGetResult cardGet(CardGet cardGet) {
+        return cardGet(loadAccessToken(), cardGet);
     }
 }
